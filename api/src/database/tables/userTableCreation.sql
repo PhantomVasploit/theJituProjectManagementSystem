@@ -1,3 +1,7 @@
+USE ThejituProjectManagementDatabase;
+GO
+
+
 CREATE TABLE usersTable(
     id INT IDENTITY(1, 1) PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
@@ -15,3 +19,4 @@ CREATE TABLE usersTable(
 -- SELECT * FROM usersTable;
 
 -- DROP TABLE usersTable;
+

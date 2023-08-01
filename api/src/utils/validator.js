@@ -30,7 +30,7 @@ module.exports.registrationSchema = Joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net']}})
     .required()
     .messages({
-        'string.email': `email field must be an email`,
+        'string.email': `enter correct email format`,
         'any.required': `email filed is required`
     }),
 
@@ -49,7 +49,7 @@ module.exports.loginSchema = Joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net']}})
     .required()
     .messages({
-        'string.email': `email field must be an email`,
+        'string.email': `enter correct email format`,
         'any.required': `email filed is required`
     }),
 

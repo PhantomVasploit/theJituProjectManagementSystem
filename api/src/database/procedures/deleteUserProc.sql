@@ -1,3 +1,7 @@
+USE ThejituProjectManagementDatabase;
+GO
+
+
 CREATE OR ALTER PROCEDURE deleteUserProc(@id INT)
 AS
 BEGIN
