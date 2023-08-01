@@ -3,7 +3,7 @@ GO
 
 -- procedure to create a new project
 
-CREATE OR ALTER PROCEDURE createProject
+CREATE OR ALTER PROCEDURE sp_createProject
     @id VARCHAR(255),
     @project_name VARCHAR(255),
     @project_description VARCHAR(255),
@@ -20,7 +20,7 @@ END
 GO
 
 -- procedure to get all projects
-CREATE OR ALTER PROCEDURE getAllProjects
+CREATE OR ALTER PROCEDURE sp_getAllProjects
 AS
 BEGIN
     SELECT * FROM projectsTable
@@ -37,7 +37,7 @@ END
 GO
 
 -- procedure to update a project
-CREATE OR ALTER PROCEDURE updateProject
+CREATE OR ALTER PROCEDURE sp_updateProject
     @id VARCHAR(255),
     @project_name VARCHAR(255),
     @project_description VARCHAR(255),
