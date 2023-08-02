@@ -1,5 +1,7 @@
 USE ThejituProjectManagementDatabase;
 
+DROP TABLE IF EXISTS projectsTable;
+
 BEGIN TRY
     CREATE TABLE projectsTable (
         id VARCHAR(255) PRIMARY KEY,
@@ -18,6 +20,8 @@ BEGIN CATCH
     PRINT 'Error while creating projectsTable';
 END CATCH;
 GO
+
+DROP TABLE IF EXISTS projectUserTable;
 
 BEGIN TRY
     CREATE TABLE projectUserTable (

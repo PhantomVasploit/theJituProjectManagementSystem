@@ -1,21 +1,7 @@
 USE ThejituProjectManagementDatabase;
 GO
 
-<<<<<<< HEAD
-BEGIN TRY
-    CREATE TABLE usersTable(
-        id INT IDENTITY(1, 1) PRIMARY KEY,
-        first_name VARCHAR(255) NOT NULL,
-        last_name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        is_verified BIT DEFAULT 0,
-        is_admin BIT DEFAULT 0
-    )
-END TRY
-BEGIN CATCH
-    PRINT 'Error while creating usersTable';
-END CATCH;
-=======
+DROP TABLE IF EXISTS usersTable;
 
 CREATE TABLE usersTable(
     id INT IDENTITY(1, 1) PRIMARY KEY,
@@ -26,7 +12,10 @@ CREATE TABLE usersTable(
     is_verified BIT DEFAULT 0,
     is_admin BIT DEFAULT 0
 )
->>>>>>> 5135f9c057e15895db2ef4e473fa4103a936df85
+
+ALTER TABLE usersTable
+ADD CONSTRAINT unique_email UNIQUE(email);
+
 
 -- Creating admin
 -- INSERT INTO usersTable(first_name, last_name, email, is_verified, is_admin)

@@ -17,7 +17,7 @@ module.exports.employeeRegister=(req, res)=>{
        .then((pool)=>{
             pool.request()
             .input('email', email)
-            .execute('fetchUserByEmailPROC')
+            .execute('getUserByEmailProc')
             .then((result)=>{
                 if(result.recordset.length > 0){
                     return res.status(400).json({error: 'Account creation failed! This email is already registered'})

@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { employeeRegister, employeeLogin, adminLogin, adminRegister } = require('../controller/auth.controller');
+const { get_projects } = require('../controller/projectsController');
 
 const router = Router();
 
@@ -9,6 +10,8 @@ router.post('/employee/register', employeeRegister)
 
 router.post('/admin/login', adminLogin)
 router.post('/admin/register', adminRegister)
+
+router.get('/projects', get_projects)
 
 
 
