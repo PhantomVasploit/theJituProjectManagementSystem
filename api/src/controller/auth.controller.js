@@ -58,7 +58,7 @@ module.exports.employeeLogin = (req, res)=>{
     const {email, password} = req.body
     const {error} = loginSchema.validate({email, password})
     if(error){
-        return res.status(400).json({error: error.message})
+        return res.status(422).json({error: error.message})
     }else{
         // check if email is registered
         mssql.connect(sqlConfig)
