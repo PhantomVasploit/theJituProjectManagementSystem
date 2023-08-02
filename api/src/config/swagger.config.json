@@ -1,0 +1,162 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the jitu project management application's API server documentation",
+        "version": "1.0.0",
+        "title": "The jitu project management API server",
+        "contact": [
+            {
+                "name": "Rachael Muga",
+                "email": "rachael.muga@thejitu.com"
+            },
+            {
+                "name": "Gift Mwasighe",
+                "email": "gift.mwasighe@thejitu.com"
+            },
+            {
+                "name": "Paul Sanga",
+                "email": "paul.nyamawi@thejitu.com"
+            }
+        ],
+        "licence": {
+            "name": "TheJitu",
+            "url": "www.thejitu.com"
+        }
+    },
+    "host": "http:127.0.0.1:3000",
+    "basePath": "/api/v1",
+    "schemes": ["http"],
+    "paths": {
+        "/employee/register": {
+            "post": {
+                "tags": ["Employee"],
+                "summary": "Creates a new employee account",
+                "description": "Takes employee's data in JSON format and create a new employee instance in the database",
+                "operationId": "newEmployeeAccount",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Employee object that needs to be added to the database",
+                        "required": true,
+                        "schema": {"$ref": "#/definations/User"}
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Account created successfully",
+                        "schema": {"$ref":"#/definations/201APIResponse"}
+                    },
+                    "422": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+
+        "/employee/login": {
+            "post": {
+                "tags": ["Employee"],
+                "summary": "Log employee to his/her account",
+                "description": "Takes employee's login credentials in JSON format and create a new token",
+                "operationId": "employeeLogin",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Employee login credentials",
+                        "required": true,
+                        "schema": {"$ref": "#/definations/UserLogin"}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "422": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "definations": {
+
+        "201APIResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 200
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Employee account created successfully"
+                },
+                "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBoYW50b21AZ21haWwuY29tIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTY5MDk3ODc1MiwiZXhwIjoxNjkxMDY1MTUyfQ.gjtMib45O_C-aElDQfLaT1_OJF8E5xXG2nqZoxKMJrc"
+                }
+            }
+        },
+
+        "User":{
+            "type": "object",
+            "required": ["firstName", "lastName", "email", "password"],
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "description": "Employee's first name",
+                    "example": "Tanjiro"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "Employee's first name",
+                    "example": "Kamado"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Employee's first name",
+                    "example": "tanjiro@gmail.com",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Employee's first name",
+                    "example": "KimestuN0Yaiba3"
+                }
+            }
+        },
+
+        "UserLogin":{
+            "type": "object",
+            "required": ["email", "password"],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "Employee's first name",
+                    "example": "tanjiro@gmail.com",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Employee's first name",
+                    "example": "KimestuN0Yaiba3"
+                }
+            }
+        }
+        
+        
+    }
+}
