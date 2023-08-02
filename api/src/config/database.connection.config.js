@@ -1,12 +1,12 @@
 module.exports.sqlConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PWD,
-    databse: process.env.DB_NAME,
+    database: process.env.DB_NAME,
     server: 'localhost',
-    pool:{
+    pool: {
         max: 10,
         min: 0,
-        idleTimeoutMillis: 3000
+        idleTimeoutMillis: 30000
     },
     options: {
         encrypt: false,
