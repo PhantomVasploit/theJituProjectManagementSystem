@@ -58,7 +58,7 @@ module.exports.employeeLogin = (req, res)=>{
     const {email, password} = req.body
     const {error} = loginSchema.validate({email, password})
     if(error){
-        return res.status(400).json({error: error.message})
+        return res.status(422).json({error: error.message})
     }else{
         // check if email is registered
         mssql.connect(sqlConfig)
@@ -74,7 +74,7 @@ module.exports.employeeLogin = (req, res)=>{
                     .then((valid)=>{
                         if(valid){
                             const token = createToken({email, is_admin: result.recordset[0].is_admin})
-                            const {password, is_verified, is_assigned, is_admin, ...user} = result.recordset[0]
+                            const {password, is_verified, is_assigned, ...user} = result.recordset[0]
                             return res.status(200).json({message: 'Login successful', token, user})
                         }else{
                             return res.status(400).json({error: 'Invalid login credentials'})
@@ -184,3 +184,4 @@ module.exports.adminRegister = (req, res)=>{
        })
     }
 }
+

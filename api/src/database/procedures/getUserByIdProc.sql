@@ -1,10 +1,5 @@
-USE ThejituProjectManagementDatabase;
-GO
-
-CREATE OR ALTER PROCEDURE getUserByIDProc(@id INT)
+CREATE PROCEDURE fetchUserByIdPROC(@id INT)
 AS
 BEGIN
-    SELECT first_name, last_name, email
-    FROM usersTable
-    WHERE id = @id
-END;
+    SELECT * FROM user_table WHERE id = @id AND is_admin = 0
+END

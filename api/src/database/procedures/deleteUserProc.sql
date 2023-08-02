@@ -1,11 +1,5 @@
-USE ThejituProjectManagementDatabase;
-GO
-
-
-CREATE OR ALTER PROCEDURE deleteUserProc(@id INT)
+CREATE PROCEDURE deleteUserAccount(@id INT)
 AS
 BEGIN
-    DELETE
-    FROM usersTable
-    WHERE id = @id
+    DELETE FROM user_table WHERE id = @id
 END;
