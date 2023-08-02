@@ -1,3 +1,6 @@
+USE ThejituProjectManagementDatabase;
+GO
+
 CREATE TABLE user_table(
     id INT IDENTITY(1, 1) PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,

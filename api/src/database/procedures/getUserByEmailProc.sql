@@ -1,3 +1,6 @@
+USE ThejituProjectManagementDatabase;
+GO
+
 CREATE PROCEDURE fetchUserByEmailPROC(@email VARCHAR(255))
 AS
 BEGIN

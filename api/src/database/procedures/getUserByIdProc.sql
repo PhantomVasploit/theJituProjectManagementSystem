@@ -1,3 +1,6 @@
+USE ThejituProjectManagementDatabase;
+GO
+
 CREATE PROCEDURE fetchUserByIdPROC(@id INT)
 AS
 BEGIN
