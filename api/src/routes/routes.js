@@ -4,6 +4,7 @@ const { adminAuthorization } = require('../middleware/admin.authorization');
 const { authorization } = require('../middleware/authorization.middleware');
 const { getAllEmployees, getEmployeeById, updateEmployeeAccount, deleteEmployeeAccount } = require('../controller/employee.controller');
 const { employeeRegister, employeeLogin, adminLogin, adminRegister } = require('../controller/auth.controller');
+const { get_projects } = require('../controller/projectsController');
 
 const router = Router();
 
@@ -13,6 +14,10 @@ router.post('/employee/register', employeeRegister)
 
 router.post('/admin/login', adminLogin)
 router.post('/admin/register', adminRegister)
+
+router.get('/projects', get_projects)
+
+
 
 
 // employee routes

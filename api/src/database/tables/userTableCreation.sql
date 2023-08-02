@@ -1,4 +1,10 @@
-CREATE TABLE user_table(
+
+USE ThejituProjectManagementDatabase;
+GO
+
+DROP TABLE IF EXISTS usersTable;
+
+CREATE TABLE usersTable(
     id INT IDENTITY(1, 1) PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
