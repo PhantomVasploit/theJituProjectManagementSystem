@@ -1,0 +1,202 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navbar{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .logo-icons{
+    width: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.content{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content .sidebar{
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+ .top-links{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content .sidebar .top-links .link{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.content .sidebar .link .url a{
+    color: black;
+    text-decoration: none;
+}
+
+.bottom-links{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid black;
+}
+
+.bottom-links .link{
+    
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.content .info{
+    gap: 20px;
+    width: 85%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #D9D9D9;
+}
+
+.info .profile{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.profile .profile-card{
+    gap: 10px;
+    width: 30rem;
+    padding: 10px;
+    display: flex;
+    text-align: center;
+    border-radius: 10px;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid black;
+    justify-content: space-evenly;
+}
+
+.profile-card .social-media{
+    gap: 10px;
+    display: flex;
+}
+
+.profile-card .profile-image{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid pink;
+}
+
+.profile-card .profile-image img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.edit-profile{
+    width: 40rem;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.edit-profile h4{
+    padding: 15px;
+}
+.edit-profile .name{
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.name .fname, .lname{
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-profile .email{
+    width: 45%;
+    padding: 15px;
+}
+
+.submit-btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="submit"]{
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #0B63F8;
+}
+
+.email .email-field{
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"]{
+    padding: 10px 30px;
+}
+
