@@ -123,6 +123,23 @@ body {
     content: "*";
     color: red;
   }
+ 
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .success-message {
+    color: green;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .error input {
+    border-color: red;
+  }
+  
+  
 
 /* login Page */
 .loginContainer{
@@ -424,3 +441,95 @@ label input {
 .forgotpwdContainer2 p a:hover{
     color: #8bb0f1;
 }
+
+
+@media screen and (min-width: 768px) {
+    .signupContainer, .loginContainer, .forgotpwdContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background-color: none;
+      border: none;
+      padding-top: 70px;
+      margin-bottom: 10px;
+      margin-left: 200px;
+      margin-right: 200px;
+
+    }
+  
+    .signupContainer2, .loginContainer1, .forgotpwdContainer2 {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      background-color: none;
+      border: none;
+      flex-basis: 50%;
+      height: auto;
+      padding: 12px 30px;
+    }
+  
+    .signupContainer1 img, .loginContainer2 img, .forgotpwdContainer1 img {
+      width: 40vw;
+      flex-basis: 50%;
+      height:80vh;
+    }
+  
+    .signuplogo, .loginlogo, .forgotpwdlogo {
+      display: flex;
+      width: 120px;
+      height: 65px;
+      margin-top: 0;
+      align-self: flex-end;
+    }
+  
+    .signupContainer2 article, .loginContainer1 article, .forgotpwdContainer2 article {
+      width: 100%;
+      padding: 0 20px;
+    }
+  }
+  
+  /* For mobile and tablet view */
+  @media screen and (max-width: 767px) {
+    .signupContainer, .loginContainer, .forgotpwdContainer, .landingpagecontainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: none;
+      border: none;
+      padding-top: 70px;
+      margin-bottom: 10px;
+      margin-left: 30px;
+      margin-right: 30px;
+    }
+  
+    .signupContainer1, .loginContainer2, .forgotpwdContainer1, .landingpagecontainer2 {
+      display: none; /* Hide the div with the image on mobile and tablet */
+    }
+  
+    .signupContainer2, .loginContainer1, .forgotpwdContainer2, .landingpagecontainer1{
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      background-color: #FFFFFF;
+      border: none;
+      height: auto;
+      padding: 12px 30px;
+      flex-basis: 100%;
+    }
+
+    .signuplogo, .loginlogo, .forgotpwdlogo, .landingpagelogo {
+      display: flex;
+      width: 120px;
+      height: 65px;
+      margin-top: 0;
+      align-self: center;
+    }
+  
+    .signupContainer2 article, .loginContainer1 article, .forgotpwdContainer2 article, .landing-article1 {
+      width: 100%;
+      padding: 0 20px;
+    }
+  }
+  
