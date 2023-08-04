@@ -67,7 +67,7 @@ module.exports.updateEmployeeAccount = (req, res)=>{
                     .input('email', email)
                     .execute('updateUserAccountPROC')
                     .then((update)=>{
-                        return res.status(200).json({message: 'Update successful', update})
+                        return res.status(200).json({message: 'Update successful'})
                     })
                     .catch((e)=>{
                         return res.status(500).json({error: e.message})
@@ -100,7 +100,7 @@ module.exports.deleteEmployeeAccount = (req, res)=>{
                 .input('id', id)
                 .execute('deleteUserAccount')
                 .then((result)=>{
-                    res.status(200).json({})
+                    res.status(200).json({message: `Account deleted successfully`})
                 })
                 .catch((e)=>{
                     return res.status(500).json({error: e.message})        
