@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', function () {
     errorMessage.innerText = '';
     successMessage.innerText = '';
 
-    // Helper function to display error messages
+    // checking error messages
     function showError(input, message) {
       const errorElement = input.parentElement.querySelector('.error-message');
       errorElement.innerText = message;
       input.classList.add('error');
     }
 
-    // Helper function to remove error messages
+    // removing error messages
     function removeError(input) {
       const errorElement = input.parentElement.querySelector('.error-message');
       errorElement.innerText = '';
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let isValid = true;
 
-    // Validation checks for full name
+    // checking if fullname validates
     if (fullName.value.trim().split(' ').length < 2) {
       showError(fullName, 'Full name must contain at least two names');
       isValid = false;
@@ -37,25 +37,25 @@ document.addEventListener('DOMContentLoaded', function () {
       removeError(fullName);
     }
 
-    // Validation checks for email
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    if (!emailRegex.test(email.value)) {
+    // checking if email is in the right format
+    const emailReg = /^\S+@\S+\.\S+$/;
+    if (!emailReg.test(email.value)) {
       showError(email, 'Invalid email format');
       isValid = false;
     } else {
       removeError(email);
     }
 
-    // Validation checks for password
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(password.value)) {
+    // Checking if password passes the required validation
+    const passwordReg= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordReg.test(password.value)) {
       showError(password, 'Password must contain at least 8 characters with a combination of uppercase, lowercase, numbers, and special characters');
       isValid = false;
     } else {
       removeError(password);
     }
 
-    // Validation checks for re-entered password
+    // Checking if re-entered password matches the password
     if (password.value !== reEnterPassword.value) {
       showError(reEnterPassword, 'Passwords do not match');
       isValid = false;
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       removeError(reEnterPassword);
     }
 
-    // If all inputs are valid, store the user data in the local storage
+    //checking if all fields are filled 
     if (isValid) {
       const userData = {
         fullName: fullName.value.trim(),
@@ -72,10 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
       };
       localStorage.setItem('user', JSON.stringify(userData));
 
-      // Handle successful signup
       successMessage.innerText = 'Account created successfully!';
-
-      // Reset the form fields after successful signup
+      
       form.reset();
     }
   });

@@ -505,7 +505,7 @@ label input {
     }
   
     .signupContainer1, .loginContainer2, .forgotpwdContainer1, .landingpagecontainer2 {
-      display: none; /* Hide the div with the image on mobile and tablet */
+      display: none; 
     }
   
     .signupContainer2, .loginContainer1, .forgotpwdContainer2, .landingpagecontainer1{
