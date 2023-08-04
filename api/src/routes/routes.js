@@ -15,6 +15,7 @@ router.post('/employee/register', employeeRegister)
 router.post('/admin/login', adminLogin)
 router.post('/admin/register', adminRegister)
 
+//project routes
 router.get('/projects', get_projects)
 
 
