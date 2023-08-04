@@ -201,7 +201,7 @@ const deleteProject = async (req, res) => {
         const pool = await mssql.connect(sqlConfig);
         const deleted_project = await pool.request()
             .input('id', mssql.VarChar, id)
-            .execute('sp_deleteProject');
+            .execute('deleteProjectProc');
 
         return res.status(200).json({
             message: 'Project deleted successfully'
@@ -214,6 +214,7 @@ const deleteProject = async (req, res) => {
     }
 }
 
+// assign user to project
 const assignUserProject = async (req, res) => {
     try {
         const { is_admin } = req.user;
@@ -231,7 +232,7 @@ const assignUserProject = async (req, res) => {
         // check if user exists
         const user = await pool.request()
             .input('id', mssql.VarChar, user_id)
-            .execute('sp_getUserById');
+            .execute('fetchUserByIdPROC');
 
         if (user.recordset.length === 0) {
             return res.status(404).json({
@@ -254,7 +255,7 @@ const assignUserProject = async (req, res) => {
         const user_project = await pool.request()
             .input('user_id', mssql.VarChar, user_id)
             .input('project_id', mssql.VarChar, id)
-            .execute('sp_getUserProject');
+            .execute('checkUserAllocation');
 
         if (user_project.recordset.length > 0) {
             return res.status(400).json({
@@ -266,7 +267,7 @@ const assignUserProject = async (req, res) => {
         const assigned_user_project = await pool.request()
             .input('user_id', mssql.VarChar, user_id)
             .input('project_id', mssql.VarChar, id)
-            .execute('sp_assignUserProject');
+            .execute('assignUserToProject');
 
         return res.status(200).json({
             message: 'User assigned to project successfully',
@@ -280,6 +281,57 @@ const assignUserProject = async (req, res) => {
     }
 }
 
+// get all users assigned to a project
+const getProjectUsers = async (req, res) => {
+    try {
+        const { is_admin } = req.user;
+        // check if user is member of project
+        const { id } = req.params;
+        const { user_id } = req.user;
+
+        const pool = await mssql.connect(sqlConfig);
+
+        // check if project exists
+        const project = await pool.request()
+            .input('id', mssql.VarChar, id)
+            .execute('getProjectById');
+
+        if (project.recordset.length === 0) {
+            return res.status(404).json({
+                message: 'Project not found'
+            });
+        }
+
+        // check if user is member of project
+        const user_project = await pool.request()
+            .input('project_id', mssql.VarChar, id)
+            .execute('getProjectUsers');
+
+        if (user_project.recordset.length === 0 || is_admin === false) {
+            return res.status(401).json({
+                message: 'Access denied'
+            });
+        }
+
+        // get all users assigned to project
+        const project_users = await pool.request()
+            .input('project_id', mssql.VarChar, id)
+            .execute('getAllUsersOfProject');
+
+        return res.status(200).json({
+            message: 'Users retrieved successfully',
+            project_users: project_users.recordset
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Error retrieving users',
+            error: error
+        });
+    }
+}
+
+
+
 
 
 module.exports = {
@@ -288,5 +340,6 @@ module.exports = {
     projectDetails,
     updateProject,
     deleteProject,
-    assignUserProject
+    assignUserProject,
+    getProjectUsers
 }

@@ -53,7 +53,7 @@ END
 GO
 
 -- procedure to delete a project
-CREATE OR ALTER PROCEDURE deleteProject
+CREATE OR ALTER PROCEDURE deleteProjectProc
     @id VARCHAR(255)
 AS
 BEGIN
@@ -63,23 +63,41 @@ GO
 
 
 -- procedure to allocate a user to a project
-
 CREATE OR ALTER PROCEDURE assignUserToProject
-    @id VARCHAR(255),
     @project_id VARCHAR(255),
     @user_id INT
 AS
 BEGIN
-    INSERT INTO projectUserTable (id, project_id, user_id)
-    VALUES (@id, @project_id, @user_id)
+    INSERT INTO projectUserTable (project_id, user_id) VALUES (@project_id, @user_id)
 END
 GO
 
+-- procedure to get all users allocated to a project
 CREATE OR ALTER PROCEDURE getProjectUsers
     @project_id VARCHAR(255)
 AS
 BEGIN
     SELECT * FROM projectUserTable WHERE project_id = @project_id
+END
+GO
+
+-- procedure check if a user is allocated to a project
+CREATE OR ALTER PROCEDURE checkUserAllocation
+    @project_id VARCHAR(255),
+    @user_id INT
+AS
+BEGIN
+    SELECT * FROM projectUserTable WHERE project_id = @project_id AND user_id = @user_id
+END
+GO
+
+-- procedure to get all users of a project
+CREATE OR ALTER PROCEDURE getAllUsersOfProject
+    @project_id VARCHAR(255)
+AS
+BEGIN
+    SELECT * FROM usersTable WHERE id IN (
+        SELECT user_id FROM projectUserTable WHERE project_id = @project_id)
 END
 GO
 
