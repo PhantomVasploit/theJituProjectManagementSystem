@@ -17,7 +17,7 @@ module.exports.employeeRegister=(req, res)=>{
        .then((pool)=>{
             pool.request()
             .input('email', email)
-            .execute('getUserByEmailProc')
+            .execute('fetchUserByEmailPROC')
             .then((result)=>{
                 if(result.recordset.length > 0){
                     return res.status(400).json({error: 'Account creation failed! This email is already registered'})
@@ -32,7 +32,7 @@ module.exports.employeeRegister=(req, res)=>{
                         .execute('createNewUserPROC')
                         .then((result)=>{
                             const token = createToken({email, is_admin: 0})
-                            return res.status(201).json({message: 'Account created successfully', token})
+                            return res.status(201).json({message: 'Account created successfully', token, result})
                         })
                         .catch((e)=>{
                             return res.status(500).json({error: `Internal server error, ${e.message}`})

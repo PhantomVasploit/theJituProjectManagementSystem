@@ -200,3 +200,71 @@ input[type="text"]{
     padding: 10px 30px;
 }
 
+.projects{
+    width: 75rem;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.projects .title{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.projects .title p{
+    color: #ED2590;
+}
+
+.projects .content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.projects .content .title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+}
+
+.projects .records{
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.project-section{
+    gap: 20px;
+    width: 85%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #D9D9D9;   
+}
+
+.project-info{
+    display: grid;
+
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 300px);
+}
+
+.project-card{
+    width: 30rem;
+    background-color: white;
+}
