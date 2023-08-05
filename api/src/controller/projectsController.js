@@ -4,12 +4,16 @@ const { sqlConfig } = require('../config/database.connection.config');
 
 const createProject = async (req, res) => {
     try {
-        const {
-            project_name, project_description, project_status,
-            start_date, end_date
-        } = req.body;
+        // verify if user is admin given the token provided
+        const { is_admin } = req.user;
+        if (is_admin === 0) {
+            return res.status(401).json({
+                message: 'Access denied'
+            });
+        }
 
-        const id = v4();
+
+        const { project_name, project_description, project_status, start_date, end_date } = req.body;
 
         // validate if project name is not empty
         if (project_name === '') {
@@ -32,6 +36,8 @@ const createProject = async (req, res) => {
             });
         }
 
+        const id = v4();
+
         const pool = await mssql.connect(sqlConfig);
         const new_project = await pool.request()
             .input('id', mssql.VarChar, id)
@@ -42,7 +48,7 @@ const createProject = async (req, res) => {
             .input('end_date', mssql.Date, end_date)
             .execute('sp_createProject');
 
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'Project created successfully',
             project: new_project.recordset[0]
         });
@@ -57,6 +63,14 @@ const createProject = async (req, res) => {
 
 const get_projects = async (req, res) => {
     try {
+        const { is_admin } = req.user;
+        if (is_admin === false) {
+            return res.status(401).json({
+                message: 'Access denied',
+                status: 401
+            });
+        }
+
         const pool = await mssql.connect(sqlConfig);
         const projects = await pool.request()
             .execute('sp_getAllProjects');
@@ -75,6 +89,14 @@ const get_projects = async (req, res) => {
 
 const projectDetails = async (req, res) => {
     try {
+
+        const { is_admin } = req.user;
+        if (is_admin === false) {
+            return res.status(401).json({
+                message: 'Access denied'
+            });
+        }
+
         const { id } = req.params;
 
         const pool = await mssql.connect(sqlConfig);
@@ -106,6 +128,13 @@ const projectDetails = async (req, res) => {
 
 const updateProject = async (req, res) => {
     try {
+        const { is_admin } = req.user;
+        if (is_admin === false) {
+            return res.status(401).json({
+                message: 'Access denied'
+            });
+        }
+        
         const { id } = req.params;
         const {
             project_name, 
@@ -158,10 +187,106 @@ const updateProject = async (req, res) => {
     }
 }
 
+const deleteProject = async (req, res) => {
+    try {
+        const { is_admin } = req.user;
+        if (is_admin === false) {
+            return res.status(401).json({
+                message: 'Access denied'
+            });
+        }
+
+        const { id } = req.params;
+
+        const pool = await mssql.connect(sqlConfig);
+        const deleted_project = await pool.request()
+            .input('id', mssql.VarChar, id)
+            .execute('sp_deleteProject');
+
+        return res.status(200).json({
+            message: 'Project deleted successfully'
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Error deleting project',
+            error: error
+        });
+    }
+}
+
+const assignUserProject = async (req, res) => {
+    try {
+        const { is_admin } = req.user;
+        if (is_admin === false) {
+            return res.status(401).json({
+                message: 'Access denied'
+            });
+        }
+
+        const { id } = req.params;
+        const { user_id } = req.body;
+
+        const pool = await mssql.connect(sqlConfig);
+
+        // check if user exists
+        const user = await pool.request()
+            .input('id', mssql.VarChar, user_id)
+            .execute('sp_getUserById');
+
+        if (user.recordset.length === 0) {
+            return res.status(404).json({
+                message: 'User not found'
+            });
+        }
+
+        // check if project exists
+        const project = await pool.request()
+            .input('id', mssql.VarChar, id)
+            .execute('getProjectById');
+
+        if (project.recordset.length === 0) {
+            return res.status(404).json({
+                message: 'Project not found'
+            });
+        }
+
+        // check if user is already assigned to project
+        const user_project = await pool.request()
+            .input('user_id', mssql.VarChar, user_id)
+            .input('project_id', mssql.VarChar, id)
+            .execute('sp_getUserProject');
+
+        if (user_project.recordset.length > 0) {
+            return res.status(400).json({
+                message: 'User is already assigned to this project'
+            });
+        }
+
+        // assign user to project
+        const assigned_user_project = await pool.request()
+            .input('user_id', mssql.VarChar, user_id)
+            .input('project_id', mssql.VarChar, id)
+            .execute('sp_assignUserProject');
+
+        return res.status(200).json({
+            message: 'User assigned to project successfully',
+            user_project: assigned_user_project.recordset[0]
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Error assigning user to project',
+            error: error
+        });
+    }
+}
+
+
 
 module.exports = {
     createProject,
     get_projects,
     projectDetails,
-    updateProject
+    updateProject,
+    deleteProject,
+    assignUserProject
 }

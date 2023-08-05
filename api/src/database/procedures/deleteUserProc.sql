@@ -1,3 +1,6 @@
+USE ThejituProjectManagementDatabase;
+GO
+
 CREATE PROCEDURE deleteUserAccount(@id INT)
 AS
 BEGIN

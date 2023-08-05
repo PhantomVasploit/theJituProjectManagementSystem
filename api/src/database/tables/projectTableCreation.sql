@@ -30,7 +30,7 @@ BEGIN TRY
         user_id INT NOT NULL,
         date_allocated DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (project_id) REFERENCES projectsTable(id),
-        FOREIGN KEY (user_id) REFERENCES usersTable(id)
+        FOREIGN KEY (user_id) REFERENCES user_table(id)
     )
 END TRY
 BEGIN CATCH

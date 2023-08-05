@@ -4,7 +4,8 @@ const { adminAuthorization } = require('../middleware/admin.authorization');
 const { authorization } = require('../middleware/authorization.middleware');
 const { getAllEmployees, getEmployeeById, updateEmployeeAccount, deleteEmployeeAccount } = require('../controller/employee.controller');
 const { employeeRegister, employeeLogin, adminLogin, adminRegister } = require('../controller/auth.controller');
-const { get_projects } = require('../controller/projectsController');
+const { get_projects, createProject, projectDetails, updateProject, deleteProject, assignUserProject } = require('../controller/projectsController');
+const { verifyToken } = require('../middleware/verifyToken');
 
 const router = Router();
 
@@ -15,11 +16,12 @@ router.post('/employee/register', employeeRegister)
 router.post('/admin/login', adminLogin)
 router.post('/admin/register', adminRegister)
 
-//project routes
-router.get('/projects', get_projects)
-
-
-
+router.get('/projects', verifyToken, get_projects)
+router.post('/projects', verifyToken, createProject)
+router.get('/project/:id', verifyToken, projectDetails)
+router.put('/project/:id', verifyToken, updateProject)
+router.delete('/project/:id', verifyToken, deleteProject)
+router.put('/project/:id/assign', verifyToken, assignUserProject)
 
 // employee routes
 router.get('/employees', adminAuthorization, getAllEmployees)
