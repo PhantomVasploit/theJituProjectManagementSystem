@@ -1,0 +1,426 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #F5F5F5;
+    height: 100vh;
+    margin: auto;
+}
+
+
+/* Landing Page */
+ .landingpagelogo {
+    width: 120px;
+    height: 65px;
+    margin-left: 10px;
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+.landingpagecontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+    background-color: none;
+    border: none;
+    padding-top:70px;;
+    margin-bottom: 10px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.landingpagecontainer1 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: none;
+    border: none;
+    flex-basis: 50%;
+    height: 70vh;
+    padding:12px 30px;
+    
+    
+}
+
+.landingpagecontainer2 img{
+    width: 40vw;
+    flex-basis: 50%;
+    height: 74vh;
+    
+    
+}
+.landing-article1{
+    background-color: #FFFFFF;
+    padding: 10px;
+    width: 80%;
+}
+
+.landing-article1 h1 {
+    font-size: 50px;
+    font-weight: bolder;
+    color: #000000;
+}
+
+.landing-article1 h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.landing-article2 h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0B63F8;
+    padding-bottom: 5px;
+}
+
+.landing-article2 p {
+    font-size: 15px;
+    font-weight: 400;
+    color: #1B1A19;
+    padding-bottom: 10px;
+}
+
+.landing-btn {
+    background-color: #0B63F8;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 8px 16px;
+    max-width: 150px;
+    cursor: pointer;
+}
+
+.landing-btn:hover {
+    background-color: #6091e7;
+}
+
+/* -- */
+
+.nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.nav a{
+    color: #0B63F8;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    align-self: center;
+}
+.nav a:hover{
+    color: #8bb0f1;
+    text-decoration: underline;
+}
+
+.aste::after {
+    content: "*";
+    color: red;
+  }
+
+/* login Page */
+.loginContainer{
+    display: flex;
+    background-color: none;
+    border: none;
+    padding-top:70px;;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 10px;
+    margin-left: 200px;
+    margin-right: 200px;
+    
+}
+.loginlogo{
+    width: 120px;
+    height: 65px;
+    margin-left: 10px;
+    margin-top: 0;
+}
+.loginContainer1{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #FFFFFF;
+    border: none;
+    height: 70vh;
+    padding:12px 30px;
+
+}
+.loginContainer1 h1{
+    font-size: 40px;
+    font-weight: 600px;
+}
+.loginContainer1 p{
+    font-size: 10px;
+    font-weight: 400px;
+    flex-basis: 50%;
+
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    padding: 3px;
+}
+label p {
+    font-size: 10px;
+    font-weight: bold;
+    color: #000000;
+    padding: 3px;
+}
+label input {
+    font-size: 10px;
+    font-weight: 400;
+    padding: 3px 5px;
+    border: 1px solid #ACA6A6;
+    border-radius: 3px;
+    width: 100%;
+    height: 30px;
+}
+.loginContainer2 img{
+    width: 40vw;
+    height: 74vh;
+    flex-basis: 50%;
+}
+.ForgotPWD{
+    display: flex;
+    color: #0B63F8;
+    font-size: 10px;
+   justify-content: flex-end;
+}
+.ForgotPWD:hover{
+    color: #8bb0f1;
+}
+.registerHere{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    align-self: center;
+}
+.registerHere a{
+    color: #0B63F8 ;
+}
+.registerHere a:hover{
+    color: #8bb0f1;
+}
+.loginBtn{
+    background-color: #0B63F8 ;
+    border: 2px solid #ACA6A6;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.loginBtn:hover{
+    background-color: #8bb0f1;
+   
+}
+
+
+
+
+
+/* Signup Page */
+.signupContainer{
+    display: flex;
+    background-color: none;
+    border: none;
+    padding-top:70px;;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 10px;
+    margin-left: 200px;
+    margin-right: 200px;
+    
+}
+.signupContainer1 img{
+    width: 40vw;
+    height: 74vh;
+    flex-basis: 50%;
+}
+.signuplogo{
+    display: flex;
+    width: 120px;
+    height: 65px;
+    margin-top: 0;
+    align-self: flex-end;
+   
+}
+.signupContainer2{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #FFFFFF;
+    border: none;
+    height: 70vh;
+    padding:12px 30px;
+    flex-basis: 50%;
+}
+.signupContainer2 h1{
+    font-size: 40px;
+    font-weight: 600px;
+}
+.signupContainer2 p{
+    font-size: 15px;
+    font-weight: 200px;
+
+}
+.signupContainer2 form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.signupContainer input{
+    font-size: 15px;
+    font-weight: 400;
+    padding: 3px 5px;
+    border: none;
+    border-bottom: 2px solid #ACA6A6;
+    width: 100%;
+    height: 30px;
+}
+.signupContainer input:focus{
+    outline: none;
+}
+
+.createaccBtn{
+    background-color: #0B63F8 ;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.createaccBtn:hover{
+    background-color: #8bb0f1;
+   
+}
+.loginhere{
+    display: flex;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+}
+.loginhere a{
+    color: #0B63F8 ;
+}
+.loginhere a:hover{
+    color: #8bb0f1;
+}
+
+
+
+
+
+/* forgot password page */
+.forgotpwdContainer{
+    display: flex;
+    background-color: none;
+    border: none;
+    padding-top:70px;;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 10px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+.forgotpwdContainer1 img{
+    width: 40vw;
+    height: 74vh;
+    flex-basis: 50%;
+}
+.forgotpwdContainer2{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #FFFFFF;
+    border: none;
+    height: 70vh;
+    padding:12px 30px;
+    flex-basis: 50%;
+}
+.forgotpwdlogo{
+    display: flex;
+    width: 120px;
+    height: 65px;
+    margin-top: 0;
+    align-self: flex-end;
+   
+}
+.forgotpwdContainer2 h1{
+    font-size: 50px;
+    font-weight: 900px;
+}
+.forgotpwdContainer2 h6{
+    font-size: 15px;
+}
+  
+.forgotpwdContainer2 form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.forgotpwdContainer2 input{
+    font-size: 17px;
+    font-weight: 400;
+    padding: 3px 5px;
+    border-radius: 5px;
+    border: 2px solid #ACA6A6;
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+}
+.forgotpwdContainer2 input:hover{
+    border: 2px solid #0e0f0f;
+}
+.forgotpwdContainer2 input:focus{
+    outline: none;
+}
+.resetPwdBtn{
+    background-color: #0B63F8 ;
+    width: 60%;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+.resetPwdBtn:hover{
+    background-color: #8bb0f1;
+}
+.forgotpwdContainer2 p{
+    font-size: 15px;
+    font-weight: 800;
+}
+.forgotpwdContainer2 p a{
+    color: #0B63F8 ;
+}
+.forgotpwdContainer2 p a:hover{
+    color: #8bb0f1;
+}
