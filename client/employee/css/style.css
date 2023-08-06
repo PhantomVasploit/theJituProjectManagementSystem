@@ -115,7 +115,7 @@ main{
 
 .profile .profile-card{
     gap: 10px;
-    width: 30rem;
+    width: 20rem;
     padding: 10px;
     display: flex;
     text-align: center;
@@ -133,8 +133,8 @@ main{
 }
 
 .profile-card .profile-image{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     border: 3px solid pink;
 }
@@ -235,7 +235,7 @@ input[type="text"]{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
 }
 
 .projects .records{
@@ -268,3 +268,13 @@ input[type="text"]{
     width: 30rem;
     background-color: white;
 }
+
+.record{
+    width: 100%;
+}
+
+.no-project{
+    font-size: 20px;
+    font-weight: lighter;
+}
+

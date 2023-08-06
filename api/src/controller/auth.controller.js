@@ -32,7 +32,7 @@ module.exports.employeeRegister=(req, res)=>{
                         .execute('createNewUserPROC')
                         .then((result)=>{
                             const token = createToken({email, is_admin: 0})
-                            return res.status(201).json({message: 'Account created successfully', token, result})
+                            return res.status(201).json({message: 'Account created successfully', token, user: {firstName, lastName, email, is_admin: 0}})
                         })
                         .catch((e)=>{
                             return res.status(500).json({error: `Internal server error, ${e.message}`})
@@ -54,7 +54,7 @@ module.exports.employeeRegister=(req, res)=>{
 }
 
 
-module.exports.employeeLogin = (req, res)=>{
+module.exports.login = (req, res)=>{
     const {email, password} = req.body
     const {error} = loginSchema.validate({email, password})
     if(error){
@@ -67,7 +67,7 @@ module.exports.employeeLogin = (req, res)=>{
             .input('email', email)
             .execute('fetchUserByEmailPROC')
             .then((result)=>{
-                if(result.recordset <= 0){
+                if(result.recordset.length <= 0){
                     return res.status(400).json({error: 'This email is not registred'})
                 }else{
                     bcrypt.compare(password, result.recordset[0].password)
@@ -96,46 +96,7 @@ module.exports.employeeLogin = (req, res)=>{
 }
 
 
-module.exports.adminLogin = (req, res)=>{
-    const {email, password} = req.body
-    const {error} = loginSchema.validate({email, password})
-    if(error){
-        return res.status(400).json({error: error.message})
-    }else{
-        // check if email is registered
-        mssql.connect(sqlConfig)
-        .then((pool)=>{
-            pool.request()
-            .input('email', email)
-            .execute('loginAdmin')
-            .then((result)=>{
-                if(result.recordset <= 0){
-                    return res.status(400).json({error: 'This email is not registred'})
-                }else{
-                    bcrypt.compare(password, result.recordset[0].password)
-                    .then((valid)=>{
-                        if(valid){
-                            const token = createToken({email, is_admin: result.recordset[0].is_admin})
-                            const {password, is_verified, is_assigned, ...user} = result.recordset[0]
-                            return res.status(200).json({message: 'Login successful', token, user})
-                        }else{
-                            return res.status(400).json({error: 'Invalid login credentials'})
-                        }
-                    })
-                    .catch((e)=>{
-                        return res.status(500).json({error: `Internal server error, ${e.message}`})        
-                    })
-                }
-            })
-            .catch((e)=>{
-                return res.status(500).json({error: `Internal server error, ${e.message}`})    
-            })
-        })
-        .catch((e)=>{
-            return res.status(500).json({error: `Internal server error, ${e.message}`})
-        })
-    }
-}
+
 
 
 module.exports.adminRegister = (req, res)=>{

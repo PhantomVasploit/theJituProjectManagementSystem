@@ -22,14 +22,28 @@ document.querySelector('form').addEventListener('submit', function(event) {
   if (email.value.trim() === '' || password.value.trim() === '') {
     showError('Please fill in all fields');
     return;
-  }
-
-  if (!userData || email.value.trim() !== userData.email || password.value !== userData.password) {
-    showError('Invalid email or password');
-  } else {
-    removeError();
-    const successElement = document.getElementById('loginSuccessMessage');
-    successElement.innerText = 'Logged in successfully!';
-    window.location.href = './htmlParts/dashboard.html';
+  }else{
+    axios.post(
+      'http://127.0.0.1:3000/api/v1/login', 
+      {
+        email: email.value.trim(),
+        password: password.value.trim()
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((result)=>{
+        removeError()
+        localStorage.setItem('token', result.data.token)
+        localStorage.setItem('user', JSON.stringify(result.data.user))
+        const successElement = document.getElementById('loginSuccessMessage');
+        successElement.innerText = result.data.message;
+        window.location.href = result.data.user.is_admin == 0 ? '../employee/html/dashboard.html' : './dashboard.html'
+      })
+      .catch((e)=>{
+        showError(e.response.data.error)
+      }) 
   }
 });
