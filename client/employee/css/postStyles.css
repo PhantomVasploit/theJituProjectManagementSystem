@@ -184,3 +184,11 @@ main{
 .project-section .title h2{
     padding: 20px;
 }
+
+.project-info{
+    display: none;
+}
+
+.error{
+    color: red;
+}
