@@ -67,7 +67,16 @@ module.exports.updateEmployeeAccount = (req, res)=>{
                     .input('email', email)
                     .execute('updateUserAccountPROC')
                     .then((update)=>{
-                        return res.status(200).json({message: 'Update successful'})
+                        pool.request()
+                        .input('email', email)
+                        .execute('fetchUserByEmailPROC')
+                        .then((result)=>{
+                            const {password, is_verified, is_assigned, ...user} = result.recordset[0]
+                            return res.status(200).json({message: 'Update successful',user})
+                        })
+                        .catch((e)=>{
+                            return res.status(500).json({error: e.message})    
+                        })
                     })
                     .catch((e)=>{
                         return res.status(500).json({error: e.message})
