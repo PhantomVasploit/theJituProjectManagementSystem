@@ -23,9 +23,9 @@ const loadAllProjects = async () => {
         const tr = document.createElement('tr')
         tr.innerHTML = `
             <td>${project.project_name}</td>
-            <td>0</td>
+            <td>${project.project_status}</td>
             <td>${project.end_date.split('T')[0]}</td>
-            <td><a href="project.html?id=${project.id}" class="btn btn-primary">View</a></td>
+            <td><a href="project.html?id=${project.id}" class="btn btn-primary">Mark Complete</a></td>
         `
         projects_table.appendChild(tr)
     })
@@ -135,9 +135,9 @@ const loadDashboardStats = async () => {
         const tr = document.createElement('tr')
         tr.innerHTML = `
             <td>${project.project_name}</td>
-            <td>0</td>
+            <td>${project.project_status}</td>
             <td>${project.end_date.split('T')[0]}</td>
-            <td><a href="project.html?id=${project.id}" class="btn btn-primary">View</a></td>
+            <td><a href="project.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
         `
         recent_projects_table.appendChild(tr)
     }

@@ -97,3 +97,11 @@ BEGIN
 END
 GO
 
+
+CREATE OR ALTER PROCEDURE markProjectAsCompleted
+    @id VARCHAR(255)
+AS
+BEGIN
+    UPDATE projectsTable SET is_completed = 1, project_status = 'Completed' WHERE id = @id
+END
+GO
