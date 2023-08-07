@@ -46,7 +46,7 @@ const createProject = async (req, res) => {
             .input('project_status', mssql.VarChar, project_status)
             .input('start_date', mssql.Date, start_date)
             .input('end_date', mssql.Date, end_date)
-            .execute('sp_createProject');
+            .execute('sp_createProjectProc');
 
         return res.status(201).json({
             message: 'Project created successfully'
@@ -72,7 +72,7 @@ const get_projects = async (req, res) => {
 
         const pool = await mssql.connect(sqlConfig);
         const projects = await pool.request()
-            .execute('sp_getAllProjects');
+            .execute('sp_getAllProjectsProc');
 
         return res.status(200).json({
             message: 'Projects retrieved successfully',
@@ -172,7 +172,7 @@ const updateProject = async (req, res) => {
             .input('project_status', mssql.VarChar, project_status)
             .input('start_date', mssql.Date, start_date)
             .input('end_date', mssql.Date, end_date)
-            .execute('sp_updateProject');
+            .execute('sp_updateProjectProc');
 
         return res.status(200).json({
             message: 'Project updated successfully',

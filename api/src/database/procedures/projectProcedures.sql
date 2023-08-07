@@ -1,10 +1,7 @@
-USE project_managment_database;
+USE ThejituProjectManagementDatabase;
 GO
 
--- procedure to create a new project
-USE project_managment_database;
-GO
-CREATE OR ALTER PROCEDURE sp_createProject
+CREATE OR ALTER PROCEDURE sp_createProjectProc
     @id VARCHAR(255),
     @project_name VARCHAR(255),
     @project_description VARCHAR(255),
@@ -19,12 +16,13 @@ END
 GO
 
 -- procedure to get all projects
-CREATE OR ALTER PROCEDURE sp_getAllProjects
+CREATE OR ALTER PROCEDURE sp_getAllProjectsProc
 AS
 BEGIN
     SELECT * FROM projectsTable
 END
 GO
+
 
 -- procedure to get a project by id
 CREATE OR ALTER PROCEDURE getProjectById
@@ -36,7 +34,7 @@ END
 GO
 
 -- procedure to update a project
-CREATE OR ALTER PROCEDURE sp_updateProject
+CREATE OR ALTER PROCEDURE sp_updateProjectProc
     @id VARCHAR(255),
     @project_name VARCHAR(255),
     @project_description VARCHAR(255),
