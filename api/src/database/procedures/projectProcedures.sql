@@ -1,21 +1,20 @@
-USE ThejituProjectManagementDatabase;
+USE project_managment_database;
 GO
 
 -- procedure to create a new project
-
+USE project_managment_database;
+GO
 CREATE OR ALTER PROCEDURE sp_createProject
     @id VARCHAR(255),
     @project_name VARCHAR(255),
     @project_description VARCHAR(255),
     @project_status VARCHAR(255),
-    @is_allocated BIT,
-    @is_completed BIT,
     @start_date DATETIME,
     @end_date DATETIME
 AS
 BEGIN
-    INSERT INTO projectsTable (id, project_name, project_description, project_status, is_allocated, is_completed, start_date, end_date)
-    VALUES (@id, @project_name, @project_description, @project_status, @is_allocated, @is_completed, @start_date, @end_date)
+    INSERT INTO projectsTable (id, project_name, project_description, project_status, start_date, end_date)
+    VALUES (@id, @project_name, @project_description, @project_status, @start_date, @end_date)
 END
 GO
 

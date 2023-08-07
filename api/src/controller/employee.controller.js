@@ -10,7 +10,7 @@ module.exports.getAllEmployees = (req, res)=>{
         .execute('fetchAllUser')
         .then((result)=>{
             const {password, is_admin, ...employees} = result.recordset[0]
-            return res.status(200).json({employees})
+            return res.status(200).json({employees: result.recordset})
         })
         .catch((e)=>{
             return res.status(500).json({error: e.message})
