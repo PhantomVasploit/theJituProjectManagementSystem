@@ -1,5 +1,5 @@
 const token = localStorage.token 
-const user = JSON.parse(localStorage.user)
+let user = localStorage.user
 
 function checkData(){
     if(!user || !token){
@@ -9,7 +9,7 @@ function checkData(){
 
 window.onload = checkData
 
-
+user = JSON.parse(localStorage.user)
 const profileInfo = document.querySelector('.profile-info')
 profileInfo.innerHTML = `
     <p>${user.email}</p>

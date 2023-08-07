@@ -1,5 +1,5 @@
 const token = localStorage.token 
-const user = JSON.parse(localStorage.user)
+let user = localStorage.user
 
 function checkData(){
     if(!user || !token){
@@ -8,7 +8,7 @@ function checkData(){
 }
 
 window.onload = checkData
-
+user = JSON.parse(localStorage.user)
 
 function loadData(){
     axios.get('http://127.0.0.1:3000/api/v1/projects', {
