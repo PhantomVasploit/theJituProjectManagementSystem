@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let isValid = true;
     
     const emailReg = /^\S+@\S+\.\S+$/;
-    const passwordReg= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordReg= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
     // checking if fullname validates
     if (fullName.value.trim().split(' ').length < 2) {
       console.log("reached here");
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then((response)=>{
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('user', JSON.stringify(response.data.user))
-        window.location.href('./dashboard.html')
+        window.location.href('../employee/html/dashboard.html')
       })
       .catch((e)=>{
         showError(e.response.data.error)

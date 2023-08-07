@@ -1,3 +1,4 @@
+
 document.querySelector('form').addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -40,10 +41,11 @@ document.querySelector('form').addEventListener('submit', function(event) {
         localStorage.setItem('user', JSON.stringify(result.data.user))
         const successElement = document.getElementById('loginSuccessMessage');
         successElement.innerText = result.data.message;
-        window.location.href = result.data.user.is_admin == 0 ? '../employee/html/dashboard.html' : './dashboard.html'
+        window.location.href = result.data.user.is_admin == 0 ? '../employee/html/dashboard.html' : '../admin/html/dashboard.html';
       })
       .catch((e)=>{
         showError(e.response.data.error)
       }) 
   }
 });
+
