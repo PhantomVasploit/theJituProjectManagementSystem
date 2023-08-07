@@ -1,5 +1,13 @@
-const token = localStorage.token
+const token = localStorage.token 
 const user = JSON.parse(localStorage.user)
+
+function checkData(){
+    if(!user || !token){
+        window.location.href = '../../index.html'
+    }
+}
+
+window.onload = checkData
 
 
 function loadData(){
@@ -62,6 +70,12 @@ function loadData(){
 loadData()
 
 
-function toggleProjectDone(id){
-    axios.p
+function logOut(){
+    localStorage.setItem('user', '')
+    localStorage.setItem('token', '')
+    window.location.href='../../index.html'
 }
+
+document.querySelector('.logout').addEventListener('click', ()=>{
+    logOut()
+})

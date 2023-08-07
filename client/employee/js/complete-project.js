@@ -1,8 +1,8 @@
-const token = localStorage.token == null || undefined ? localStorage.setItem('token', null) : localStorage.token
-const user = JSON.parse(localStorage.user) == null || undefined ? localStorage.setItem('user', null) : JSON.parse(localStorage.user)
+const token = localStorage.token 
+const user = JSON.parse(localStorage.user)
 
 function checkData(){
-    if(user == undefined  || token == undefined || user == null || token || null ){
+    if(!user || !token){
         window.location.href = '../../index.html'
     }
 }
@@ -12,7 +12,7 @@ window.onload = checkData
 function loadData(){
     axios.get('http://127.0.0.1:3000/api/v1/projects', {
         headers: {
-            'Authorization': 'application/json',
+            'Content-Type': 'application/json',
             'authorization_token': token
         }
     })
@@ -65,9 +65,9 @@ loadData()
 
 
 function logOut(){
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    window.location.href('../../index.html')
+    localStorage.setItem('user', '')
+    localStorage.setItem('token', '')
+    window.location.href='../../index.html'
 }
 
 document.querySelector('.logout').addEventListener('click', ()=>{

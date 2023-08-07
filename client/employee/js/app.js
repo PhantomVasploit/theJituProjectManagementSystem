@@ -1,7 +1,16 @@
-const profileInfo = document.querySelector('.profile-info')
-
+const token = localStorage.token 
 const user = JSON.parse(localStorage.user)
 
+function checkData(){
+    if(!user || !token){
+        window.location.href = '../../index.html'
+    }
+}
+
+window.onload = checkData
+
+
+const profileInfo = document.querySelector('.profile-info')
 profileInfo.innerHTML = `
     <p>${user.email}</p>
     <p>${user.first_name ?? user.firstName} ${user.lastName ?? user.last_name}</p>
@@ -82,3 +91,13 @@ const noProject = document.querySelector('.no-project')
 }
 
 loadData()
+
+function logOut(){
+    localStorage.setItem('user', '')
+    localStorage.setItem('token', '')
+    window.location.href='../../index.html'
+}
+
+document.querySelector('.logout').addEventListener('click', ()=>{
+    logOut()
+})
