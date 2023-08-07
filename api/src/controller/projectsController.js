@@ -49,13 +49,12 @@ const createProject = async (req, res) => {
             .execute('sp_createProject');
 
         return res.status(201).json({
-            message: 'Project created successfully',
-            project: new_project.recordset[0]
+            message: 'Project created successfully'
         });
     } catch (error) {
         return res.status(500).json({
             message: 'Error creating project',
-            error: error
+            error: error.message
         });
     }
 }

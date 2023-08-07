@@ -31,10 +31,10 @@
                     
                     <div class="link">
                         <div class="icon">
-                            <img width="20px" height="20px" src="../assests/to-do-list.png" alt="">
+                            <iconify-icon width="20px" height="20px" icon="clarity:dashboard-line"></iconify-icon>
                         </div>
                         <div class="url">
-                            <a href="../html/post.html">Projects</a>
+                            <a href="#">Dashboard</a>
                         </div>
                     </div>
 
@@ -89,11 +89,23 @@
                 </div>
             </div>
 
+
             <div class="project-section">
-                <div class="title">
-                    <h2>Projects</h2>
+                
+                <div class="error">
+                    <div class="error-sign">
+                    </div>
+                    <div class="error-info">
+                        <div class="error-icon">
+                            <img width="40px" height="40px" src="../assests/close.png" alt="">
+                        </div>
+                        <div class="error-text">
+                            <h4>Error</h4>
+                            <p class="error-message"></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="error"></div>
+
                 <div class="project-info">
                     
                     <div class="project-card">
@@ -109,14 +121,14 @@
                             </p>
                         </div>
                         <div class="bottom">
+                            <div class="right">
+                                <small>Issues</small>
+                            </div>
                             <div class="left">
                                 <div class="icon">
                                     <iconify-icon icon="eos-icons:hourglass"></iconify-icon>
                                 </div>
                                 <small class="icon-text">05 April 2023</small>
-                            </div>
-                            <div class="right">
-                                <small>Issues</small>
                             </div>
                         </div>
                     </div>
@@ -202,6 +214,7 @@
             </div>
         </section>
     </main>
+    <script src="../js/post.js" defer></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
 </body>
 </html>
