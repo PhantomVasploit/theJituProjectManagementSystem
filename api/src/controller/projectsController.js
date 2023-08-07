@@ -1,6 +1,7 @@
 const mssql = require('mssql');
 const {v4} = require('uuid');
 const { sqlConfig } = require('../config/database.connection.config');
+const e = require('express');
 
 const createProject = async (req, res) => {
     try {
@@ -334,6 +335,51 @@ const getAllProjectEverAssigned = async (req, res) => {
     }
 }
 
+
+const markProjectAsCompleted = async (req, res) => {
+    try {
+        const { is_admin } = req.user;
+        if (is_admin === false) {
+            return res.status(401).json({
+                message: 'Access denied'
+            });
+        }
+
+        const { id } = req.params;
+
+        const pool = await mssql.connect(sqlConfig);
+        const project = await pool.request()
+            .input('id', mssql.VarChar, id)
+            .execute('getProjectById');
+
+        if (project.recordset.length === 0) {
+            return res.status(404).json({
+                message: 'Project not found'
+            });
+        }
+
+        const updated_project = await pool.request()
+            .input('id', mssql.VarChar, id)
+            .execute('markProjectAsCompleted');
+
+        if (updated_project.recordset.length === 0) {
+            return res.status(404).json({
+                message: 'Project not found'
+            });
+        } else {
+            return res.status(200).json({
+                message: 'Project marked as completed successfully'
+            });
+        }
+
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Error marking project as completed',
+            error: error
+        });
+    }
+}
+
         
 
 module.exports = {
@@ -343,5 +389,6 @@ module.exports = {
     updateProject,
     deleteProject,
     assignUserProject,
-    getAllProjectEverAssigned
+    getAllProjectEverAssigned,
+    markProjectAsCompleted
 }
