@@ -144,3 +144,41 @@ const loadDashboardStats = async () => {
     )
 }
 
+
+const createNewProject = async (project_name, project_description, project_status, start_date, end_date) => {
+    const response = await fetch('http://127.0.0.1:8003/api/v1/projects', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization_token': `${token}`
+        },
+        body: JSON.stringify({
+            project_name,
+            project_description,
+            project_status,
+            start_date,
+            end_date
+        })
+    })
+    const data = await response.json()
+    return data
+}
+
+
+// submit new project
+const submitNewProject = async (e) => {
+    e.preventDefault()
+    const projectName = document.getElementById('newProjectName').value;
+    const projectDescription = document.getElementById('newProjectDescription').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+
+    const newProject = await createNewProject(projectName, projectDescription, 0, startDate, endDate)
+    if (newProject.status == 'success') {
+        alert('Project created successfully')
+        window.location.href = 'dashboard.html'
+    }
+    else {
+        alert('Project creation failed')
+    }
+}
