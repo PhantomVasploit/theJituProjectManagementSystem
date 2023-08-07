@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/postStyles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <section class="navbar">
+            <div class="logo">
+               <a href="dashboard.html"><img height="150px" width="150px" src="../assests/MicrosoftTeams-image (1).png" alt="logo"></a> 
+            </div>
+            <div class="logo-icons">
+                <div class="icon">
+                    <img height="20px" width="20px" src="../assests/search-interface-symbol.png" alt="">
+                </div>
+                <div class="icon">
+                    <img height="20px" width="20px" src="../assests/notification.png" alt="">
+                </div>
+            </div>
+        </section>
+        
+        <section class="content">
+            
+            <div class="sidebar">
+                
+                <div class="top-links">
+                    
+                    <div class="link">
+                        <div class="icon">
+                            <iconify-icon width="20px" height="20px" icon="clarity:dashboard-line"></iconify-icon>
+                        </div>
+                        <div class="url">
+                            <a href="./dashboard.html">Dashboard</a>
+                        </div>
+                    </div>
+
+                    <div class="link">
+                        <div class="icon">
+                            <img width="20px" height="20px" src="../assests/checked.png" alt="">
+                        </div>
+                        <div class="url">
+                            <a href="./complete-projects.html">Complte</a>
+                        </div>
+                    </div>
+
+                    <div class="link">
+                        <div class="icon">
+                            <img width="20px" height="20px" src="../assests/application-incomplete-outlined.svg" alt="">
+                        </div>
+                        <div class="url">
+                            <a href="./incomplete-projects.html">Incomplete</a>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+
+                <div class="bottom-links">
+                    
+                    
+
+                    <div class="link">
+                        <div class="icon">
+                            <img width="20px" height="20px" src="../assests/logout.svg" alt="">
+                        </div>
+                        <div class="url">
+                            <a href="#">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="project-section">
+                
+                <div class="error">
+                    <div class="error-sign">
+                    </div>
+                    <div class="error-info">
+                        <div class="error-icon">
+                            <img width="40px" height="40px" src="../assests/close.png" alt="">
+                        </div>
+                        <div class="error-text">
+                            <h4>Error</h4>
+                            <p class="error-message"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-info">
+                    
+
+                </div>
+
+                
+            </div>
+        </section>
+    </main>
+    <script src="../js/incomplete-project.js" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
+</body>
+</html>

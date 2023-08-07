@@ -5,7 +5,7 @@ const user = JSON.parse(localStorage.user)
 function loadData(){
     axios.get('http://127.0.0.1:3000/api/v1/projects', {
         headers: {
-            'Authorization': 'application/json',
+            'Content-Type': 'application/json',
             'authorization_token': token
         }
     })
@@ -45,10 +45,17 @@ function loadData(){
         projectInfo.innerHTML = projectHtml
     })
     .catch((e)=>{
-        const errorEl = document.querySelector('.error-message')
-        const projectInfo = document.querySelector('.project-info')
-        errorEl.innerHTML = e.response.data.error
-        projectInfo.style.display = "none"
+        if(e?.message){
+            const errorEl = document.querySelector('.error-message')
+            const projectInfo = document.querySelector('.project-info')
+            errorEl.innerHTML = e.message
+            projectInfo.style.display = "none"
+        }else if(e?.response.data.error){
+            const errorEl = document.querySelector('.error-message')
+            const projectInfo = document.querySelector('.project-info')
+            errorEl.innerHTML = e.message
+            projectInfo.style.display = "none"
+        }
     })
 }
 
