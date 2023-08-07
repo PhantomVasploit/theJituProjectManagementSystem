@@ -31,5 +31,3 @@ const loadAllProjects = async () => {
     })
 }
 
-
-loadAllProjects()
