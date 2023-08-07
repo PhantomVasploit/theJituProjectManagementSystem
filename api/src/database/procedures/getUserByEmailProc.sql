@@ -1,8 +1,11 @@
 USE ThejituProjectManagementDatabase;
 GO
 
-CREATE PROCEDURE fetchUserByEmailPROC(@email VARCHAR(255))
+CREATE OR ALTER PROCEDURE fetchUserByEmailPROC(@email VARCHAR(255))
 AS
 BEGIN
-    SELECT * FROM user_table WHERE email = @email
+    SELECT * FROM usersTable WHERE email = @email
 END
+GO
+
+EXEC fetchUserByEmailPROC 'devop047@gmail.com'

@@ -51,7 +51,7 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="all-projects-table">
                             <tr>
                                 <td>Project 1</td>
                                 <td>5</td>
@@ -101,5 +101,11 @@
             </div>
         </div>
     </div>
+    <script src="/client/assets/js/dashboard.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            loadAllProjects();
+        });
+    </script>
 </body>
 </html>

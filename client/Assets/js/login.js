@@ -25,7 +25,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     return;
   }else{
     axios.post(
-      'http://127.0.0.1:3000/api/v1/login', 
+      'http://127.0.0.1:8003/api/v1/login', 
       {
         email: email.value.trim(),
         password: password.value.trim()
@@ -41,7 +41,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
         localStorage.setItem('user', JSON.stringify(result.data.user))
         const successElement = document.getElementById('loginSuccessMessage');
         successElement.innerText = result.data.message;
-        window.location.href = result.data.user.is_admin == 0 ? '../employee/html/dashboard.html' : '../admin/html/dashboard.html';
+        window.location.href = result.data.user.is_admin == 0 ? '../employee/html/dashboard.html' : '../dashboard/dashboard.html';
       })
       .catch((e)=>{
         showError(e.response.data.error)
