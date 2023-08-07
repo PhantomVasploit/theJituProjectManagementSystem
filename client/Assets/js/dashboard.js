@@ -31,3 +31,34 @@ const loadAllProjects = async () => {
     })
 }
 
+// loading all users
+const fetchAllUsers = async () => {
+    const response = await fetch('http://127.0.0.1:8003/api/v1/employees', {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization_token': `${token}`
+        }
+    })
+    const data = await response.json()
+    return data
+}
+
+// load all users to the DOM
+const loadAllUsers = async () => {
+    const users_table = document.querySelector('#all-users-table')
+    const users = await fetchAllUsers()
+    const all_users = users.users
+    users_table.innerHTML = ''
+    all_users.forEach((user) => {
+        const tr = document.createElement('tr')
+        tr.innerHTML = `
+            <td>${user.first_name} ${user.last_name}</td>
+            <td>${user.email}</td>
+            <td>${user.role}</td>
+            <td><a href="user.html?id=${user.id}" class="btn btn-primary">View</a></td>
+        `
+        users_table.appendChild(tr)
+    }
+    )
+}
+

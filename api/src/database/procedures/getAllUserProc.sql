@@ -1,3 +1,6 @@
+USE ThejituProjectManagementDatabase;
+GO
+
 CREATE PROCEDURE fetchAllUser
 AS
 BEGIN
