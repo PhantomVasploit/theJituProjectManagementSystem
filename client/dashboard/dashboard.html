@@ -39,7 +39,7 @@
                         <div class="card-head">
                             <h3>Users</h3>
                         </div>
-                        <div class="stat-count">
+                        <div class="stat-count" id="users_count">
                             10
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <div class="card-head">
                             <h3>Total Projects</h3>
                         </div>
-                        <div class="stat-count">
+                        <div class="stat-count" id="projects_count">
                             7
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                         <div class="card-head">
                             <h3>Complete Projects</h3>
                         </div>
-                        <div class="stat-count">
+                        <div class="stat-count" id="completed_projects_count">
                             4
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                         <div class="card-head">
                             <h3>Pending Projects</h3>
                         </div>
-                        <div class="stat-count">
+                        <div class="stat-count" id="pending_projects_count">
                             3
                         </div>
                     </div>
@@ -75,13 +75,18 @@
                     <table>
                         <thead>
                             <tr>
+                                <th colspan="4">
+                                    <h4>Recent Projects</h4>
+                                </th>
+                            </tr>
+                            <tr>
                                 <th>Project Name</th>
                                 <th>Allocated Users</th>
                                 <th>Due Date</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="recent-projects-table">
                             <tr>
                                 <td>Project 1</td>
                                 <td>5</td>
@@ -131,12 +136,17 @@
                     <table>
                         <thead>
                             <tr>
+                                <th colspan="4">
+                                    <h4>New Users</h4>
+                                </th>
+                            <tr>
                                 <th>Name</th>
+                                <th>Email</th>
                                 <th>Description/Skills</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="unapproved-users-table">
                             <tr>
                                 <td>Jane Doe</td>
                                 <td>Web Developer</td>
@@ -167,7 +177,11 @@
             </div>
         </div>
     </div>
-    
    <script src="/client/assets/js/dashboard.js"></script>
+   <script>
+        window.addEventListener('load', () => {
+            loadDashboardStats();
+        });
+   </script>
 </body>
 </html>
