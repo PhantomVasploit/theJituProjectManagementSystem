@@ -22,7 +22,7 @@ router.delete('/project/:id', verifyToken, deleteProject)
 router.put('/project/:id/assign', verifyToken, assignUserProject)
 
 // employee routes
-router.get('/employees', getAllEmployees)
+router.get('/employees', adminAuthorization, getAllEmployees)
 router.get('/employee/:id', authorization, getEmployeeById)
 router.put('/employee/:id', authorization, updateEmployeeAccount)
 router.delete('/employee/:id', adminAuthorization, deleteEmployeeAccount)

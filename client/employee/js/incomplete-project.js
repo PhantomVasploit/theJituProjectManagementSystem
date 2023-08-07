@@ -1,11 +1,19 @@
-const token = localStorage.token
+const token = localStorage.token 
 const user = JSON.parse(localStorage.user)
+
+function checkData(){
+    if(!user || !token){
+        window.location.href = '../../index.html'
+    }
+}
+
+window.onload = checkData
 
 
 function loadData(){
     axios.get('http://127.0.0.1:3000/api/v1/projects', {
         headers: {
-            'Authorization': 'application/json',
+            'Content-Type': 'application/json',
             'authorization_token': token
         }
     })
@@ -45,16 +53,29 @@ function loadData(){
         projectInfo.innerHTML = projectHtml
     })
     .catch((e)=>{
-        const errorEl = document.querySelector('.error-message')
-        const projectInfo = document.querySelector('.project-info')
-        errorEl.innerHTML = e.response.data.error
-        projectInfo.style.display = "none"
+        if(e?.message){
+            const errorEl = document.querySelector('.error-message')
+            const projectInfo = document.querySelector('.project-info')
+            errorEl.innerHTML = e.message
+            projectInfo.style.display = "none"
+        }else if(e?.response.data.error){
+            const errorEl = document.querySelector('.error-message')
+            const projectInfo = document.querySelector('.project-info')
+            errorEl.innerHTML = e.message
+            projectInfo.style.display = "none"
+        }
     })
 }
 
 loadData()
 
 
-function toggleProjectDone(id){
-    axios.p
+function logOut(){
+    localStorage.setItem('user', '')
+    localStorage.setItem('token', '')
+    window.location.href='../../index.html'
 }
+
+document.querySelector('.logout').addEventListener('click', ()=>{
+    logOut()
+})
