@@ -262,15 +262,17 @@ const assignUserProject = async (req, res) => {
             });
         }
 
+        const proj_user_id = v4();
+
         // assign user to project
         const assigned_user_project = await pool.request()
+            .input('id', mssql.VarChar, proj_user_id)
             .input('user_id', mssql.VarChar, user_id)
             .input('project_id', mssql.VarChar, id)
-            .execute('sp_assignUserProject');
+            .execute('assignUserToProject');
 
         return res.status(200).json({
-            message: 'User assigned to project successfully',
-            user_project: assigned_user_project.recordset[0]
+            message: 'User assigned to project successfully'
         });
     } catch (error) {
         return res.status(500).json({

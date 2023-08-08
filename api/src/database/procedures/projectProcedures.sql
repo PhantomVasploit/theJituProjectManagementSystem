@@ -64,7 +64,7 @@ GO
 CREATE OR ALTER PROCEDURE assignUserToProject
     @id VARCHAR(255),
     @project_id VARCHAR(255),
-    @user_id INT
+    @user_id VARCHAR(255)
 AS
 BEGIN
     INSERT INTO projectUserTable (id, project_id, user_id)

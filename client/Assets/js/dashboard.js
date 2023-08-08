@@ -211,3 +211,37 @@ const loadAvailableUsers = async () => {
     })
 }
 
+const assignUserToProject = async (project_id, user_id) => {
+    const response = await fetch(`http://http://127.0.0.1:8003/api/v1/projects/${project_id}/${user_id}/assign`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization_token': `${token}`
+        }
+    })
+    const data = await response.json()
+    return data
+}
+
+const submitUserAllocation = async (e) => {
+    e.preventDefault()
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked')
+    const project_id = window.location.href.split('?id=')[1]
+    const user_ids = []
+    checkboxes.forEach((checkbox) => {
+        user_ids.push(checkbox.value)
+    }
+    )
+    const promises = user_ids.map((user_id) => assignUserToProject(project_id, user_id))
+    const results = await Promise.all(promises)
+    if (results[0].status == 'success') {
+        alert('User allocation successful')
+        window.location.href = './dashboard.html'
+    }
+    else {
+        alert('User allocation failed')
+    }
+}
+
+
+
