@@ -13,9 +13,9 @@
         </div>
         <div class="sidenav-body">
             <ul>
-                <li><a href="/client/dashboard/dashboard.html">Dashboard</a></li>
-                <li><a href="/client/dashboard/users.html">Users</a></li>
-                <li><a href="/client/dashboard/projects.html">Projects</a></li>
+                <li><a href="./dashboard.html">Dashboard</a></li>
+                <li><a href="./users.html">Users</a></li>
+                <li><a href="./projects.html">Projects</a></li>
             </ul>
         </div>
     </div>
@@ -51,43 +51,78 @@
                                 <input type="date" name="endDate" id="endDate">
                             </div>
                        </label>
-                       <button class="newProBtn">Next</button>
+                       <div class="message-container"></div>
+                       <button class="newProBtn" type="submit">Next</button>
                     </form>
                     
                 </div>
             </div>
                
-           
             
         </div>
   
 </div>
 
-      
+    <script src="../Assets/js/dashboard.js"></script>
+    <script>
+        const projectForm = document.querySelector('.newProjectForm');
+        const messageContainer = document.querySelector('.message-container');
 
-    <script src="/client/assets/js/dashboard.js"></script>
-   <script>
-    const projectForm = document.querySelector('.newProjectForm');
-    projectForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const projectName = document.querySelector('#newProjectName').value;
-        const projectDescription = document.querySelector('#newProjectDescription').value;
-        const startDate = document.querySelector('#startDate').value;
-        const endDate = document.querySelector('#endDate').value;
-        
-        const newProject = await createNewProject(
-            projectName,
-            projectDescription,
-            'pending',
-            startDate,
-            endDate
-        );
-        console.log(newProject);
-        if (newProject) {
-            window.location.href = '/client/dashboard/dashboard.html';
+        // saving project information in localStorage and display message
+        function saveProjectInformation() {
+            const projectName = document.querySelector('#newProjectName').value;
+            const projectDescription = document.querySelector('#newProjectDescription').value;
+            const startDate = new Date(document.querySelector('#startDate').value);
+            const endDate = new Date(document.querySelector('#endDate').value);
+            let isValid = true;
+
+            // Validate the form
+            if (!projectName || !projectDescription || !startDate || !endDate) {
+                showMessage('Please fill in all fields before proceeding.', 'error');
+                isValid = false;
+            }
+
+            if (startDate.getTime() > endDate.getTime()) {
+                showMessage('Start date cannot be after end date.', 'error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                const projectData = {
+                    projectName,
+                    projectDescription,
+                    status: 'pending',
+                    startDate: startDate.toISOString(),
+                    endDate: endDate.toISOString()
+                };
+
+                localStorage.setItem('newProject', JSON.stringify(projectData));
+                showMessage('Project information saved successfully.', 'success');
+                setTimeout(() => {
+                    window.location.href = './availableUsers.html';
+                }, 3000);
+            }
         }
-    });
 
-   </script>
+        function showMessage(message, messageType) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${messageType}`;
+            messageElement.textContent = message;
+
+            // Clear any previous messages
+            messageContainer.innerHTML = '';
+            messageContainer.appendChild(messageElement);
+
+            // Remove the message after 3 seconds (adjust the time as needed)
+            setTimeout(() => {
+                messageContainer.removeChild(messageElement);
+            }, 3000);
+        }
+
+        projectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            saveProjectInformation();
+        });
+    </script>
 </body>
 </html>

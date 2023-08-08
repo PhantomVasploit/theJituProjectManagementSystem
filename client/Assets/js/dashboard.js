@@ -25,7 +25,7 @@ const loadAllProjects = async () => {
             <td>${project.project_name}</td>
             <td>${project.project_status}</td>
             <td>${project.end_date.split('T')[0]}</td>
-            <td><a href="project.html?id=${project.id}" class="btn btn-primary">Mark Complete</a></td>
+            <td><a href="./project.html?id=${project.id}" class="btn btn-primary">Mark Complete</a></td>
         `
         projects_table.appendChild(tr)
     })
@@ -60,7 +60,7 @@ const loadAllUsers = async () => {
             </td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td><a href="user.html?id=${user.id}" class="btn btn-primary">View</a></td>
+            <td><a href=".user.html?id=${user.id}" class="btn btn-primary">View</a></td>
         `
         users_table.appendChild(tr)
     }
@@ -124,7 +124,7 @@ const loadDashboardStats = async () => {
             </td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td><a href="user.html?id=${user.id}" class="btn btn-primary">View</a></td>
+            <td><a href="./user.html?id=${user.id}" class="btn btn-primary">View</a></td>
         `
         unapproved_users_table.appendChild(tr)
     }
@@ -137,7 +137,7 @@ const loadDashboardStats = async () => {
             <td>${project.project_name}</td>
             <td>${project.project_status}</td>
             <td>${project.end_date.split('T')[0]}</td>
-            <td><a href="project.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
+            <td><a href="./project.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
         `
         recent_projects_table.appendChild(tr)
     }
@@ -176,7 +176,7 @@ const submitNewProject = async (e) => {
     const newProject = await createNewProject(projectName, projectDescription, 0, startDate, endDate)
     if (newProject.status == 'success') {
         alert('Project created successfully')
-        window.location.href = 'dashboard.html'
+        window.location.href = './dashboard.html'
     }
     else {
         alert('Project creation failed')

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Users</title>
+    <link rel="stylesheet" href="../Assets/css/dashboard.css">
+</head>
+<body>
+    <div class="sidenav">
+        <div class="sidenav-head">
+            <h2>Admin</h2>
+        </div>
+        <div class="sidenav-body">
+            <ul>
+                <li><a href="/client/dashboard/dashboard.html">Dashboard</a></li>
+                <li><a href="/client/dashboard/users.html">Users</a></li>
+                <li><a href="/client/dashboard/projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content-head">
+            <div class="content-head-left">
+                <h1>Available Users</h1>
+            </div>
+            <div class="content-head-right">
+                <img class="newProjectLogo" src="../Assets/images/TheJituPojectLogo__2_-removebg-preview (1).png" alt="">
+            </div>
+        </div>
+        <div class="content">
+            <div class="NewProstatistics">
+                <article class="headingTitle">
+                <h3>Create New Project(step1)</h3>
+                <p>Fill in the form below</p>
+                </article>
+            </div>
+        </div>
+            <table class="usersTable">
+               <thead class="userHead">
+                     <tr>
+                          <th>Select</th>
+                          <th>Name</th>
+                          <th>Skills/Description</th>
+                     </tr>
+               </thead>
+               <tbody class="userBody">
+                <tr>
+                    <td><input type="checkbox" name="select" id="select"></td>
+                    <td>John Doe</td>
+                    <td>Js, Node, ExpressJS, React</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" id="select"></td>
+                    <td>John Doe</td>
+                    <td>Js, Node, ExpressJS, React</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" id="select"></td>
+                    <td>John Doe</td>
+                    <td>Js, Node, ExpressJS, React</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" id="select"></td>
+                    <td>John Doe</td>
+                    <td>Js, Node, ExpressJS, React</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" id="select"></td>
+                    <td>John Doe</td>
+                    <td>Js, Node, ExpressJS, React</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" id="select"></td>
+                    <td>John Doe</td>
+                    <td>Js, Node, ExpressJS, React</td>
+                </tr>
+               </tbody>
+            </table>
+            <div class="message-container"></div>
+            <button class="newavaBtn" type="submit">Finish</button>
+        </div>
+        
+        <script src="../Assets/js/dashboard.js"></script>
+        <script>
+            const finishBtn = document.querySelector('.newavaBtn');
+            const messageContainer = document.querySelector('.message-container');
+    
+            // saving selected users' information in localStorage
+            function saveSelectedUsers() {
+                const selectedUsers = [];
+                const checkboxes = document.querySelectorAll('input[name="select"]:checked');
+    
+                if (checkboxes.length === 0) {
+                    showMessage('Please select at least one user before proceeding.', 'error');
+                    return;
+                }
+    
+                checkboxes.forEach(checkbox => {
+                    const row = checkbox.closest('tr');
+                    const name = row.querySelector('td:nth-child(2)').innerText;
+                    const skills = row.querySelector('td:nth-child(3)').innerText;
+                    selectedUsers.push({ name, skills });
+                });
+    
+                localStorage.setItem('selectedUsers', JSON.stringify(selectedUsers));
+                showMessage('Selected users information saved successfully.', 'success');
+                setTimeout(() => {
+                    window.location.href = '../dashboard/projects.html';
+                }, 3000);
+            }
+    
+            function showMessage(message, messageType) {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${messageType}`;
+                messageElement.textContent = message;
+    
+                // Clear any previous messages
+                messageContainer.innerHTML = '';
+                messageContainer.appendChild(messageElement);
+    
+                // Remove the message after 3 seconds 
+                setTimeout(() => {
+                    messageContainer.removeChild(messageElement);
+                }, 3000);
+            }
+    
+            finishBtn.addEventListener('click', () => {
+                saveSelectedUsers();
+            });
+        </script>
+</body>
+</html>
