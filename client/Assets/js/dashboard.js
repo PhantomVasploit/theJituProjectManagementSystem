@@ -228,19 +228,20 @@ const submitUserAllocation = async (e) => {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked')
     const project_id = window.location.href.split('?id=')[1]
     const user_ids = []
-    checkboxes.forEach((checkbox) => {
-        user_ids.push(checkbox.value)
-    }
-    )
-    const promises = user_ids.map((user_id) => assignUserToProject(project_id, user_id))
-    const results = await Promise.all(promises)
-    if (results[0].status == 'success') {
-        alert('User allocation successful')
-        window.location.href = './dashboard.html'
-    }
-    else {
-        alert('User allocation failed')
-    }
+    checkboxes.forEach(checkbox => {
+        const row = checkbox.closest('tr');
+        const user_id = row.querySelector('td:nth-child(1)').innerText;
+        user_ids.push(user_id)
+    })
+    user_ids.forEach(async user_id => {
+        const response = await assignUserToProject(project_id, user_id)
+        if (response.status === 'success') {
+            showMessage('Users assigned successfully', 'success')
+            window.location.href = './dashboard.html'
+        } else {
+            showMessage('Error assigning users', 'error')
+        }
+    })
 }
 
 

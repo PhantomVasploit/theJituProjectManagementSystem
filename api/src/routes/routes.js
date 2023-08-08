@@ -19,9 +19,9 @@ router.post('/projects', verifyToken, createProject)
 router.get('/project/:id', verifyToken, projectDetails)
 router.put('/project/:id', verifyToken, updateProject)
 router.delete('/project/:id', verifyToken, deleteProject)
-router.put('/project/:id/assign', verifyToken, assignUserProject)
 router.put('/project/:id/mark-complete', verifyToken, markProjectAsCompleted)
 router.get('/projects/get-free-employees', verifyToken, getAllFreeUsers)
+router.post('/projects/:id/:user_id/assign', verifyToken, assignUserProject)
 
 // employee routes
 router.get('/employees', adminAuthorization, getAllEmployees)

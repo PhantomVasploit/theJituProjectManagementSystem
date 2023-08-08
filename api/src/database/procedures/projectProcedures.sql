@@ -69,6 +69,8 @@ AS
 BEGIN
     INSERT INTO projectUserTable (id, project_id, user_id)
     VALUES (@id, @project_id, @user_id)
+
+    UPDATE usersTable SET is_assigned = 1 WHERE id = @user_id
 END
 GO
 

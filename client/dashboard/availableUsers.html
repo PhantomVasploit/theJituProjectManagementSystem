@@ -126,10 +126,8 @@
                 }, 3000);
             }
     
-            finishBtn.addEventListener('click', () => {
-                saveSelectedUsers();
-                submitUserAllocation();
-            });
+            finishBtn.addEventListener('click', submitUserAllocation);
+            
             
             
         </script>
