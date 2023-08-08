@@ -137,7 +137,7 @@ const loadDashboardStats = async () => {
             <td>${project.project_name}</td>
             <td>${project.project_status}</td>
             <td>${project.end_date.split('T')[0]}</td>
-            <td><a href="./project.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
+            <td><a href="/client/dashboard/availableUsers.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
         `
         recent_projects_table.appendChild(tr)
     }
@@ -182,3 +182,32 @@ const submitNewProject = async (e) => {
         alert('Project creation failed')
     }
 }
+
+const fetchAvailableUsers = async () => {
+    const response = await fetch('http://127.0.0.1:8003/api/v1/projects/get-free-employees', {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization_token': `${token}`
+        }
+    })
+    const data = await response.json()
+    return data
+}
+
+const loadAvailableUsers = async () => {
+    const available_users_table = document.getElementById('available-users-table')
+    const available_users = await fetchAvailableUsers()
+    const users = available_users.free_users
+    available_users_table.innerHTML = ''
+    users.forEach((user) => {
+        const tr = document.createElement('tr')
+        tr.innerHTML = `
+        <td><input type="checkbox" name="select" id="select" value="${user.id}"></td>
+        <td>${user.first_name} ${user.last_name}<td>
+        <td>Js, Node, ExpressJS, React</td>
+        
+        `
+        available_users_table.appendChild(tr)
+    })
+}
+

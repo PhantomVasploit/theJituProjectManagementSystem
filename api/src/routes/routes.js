@@ -4,7 +4,7 @@ const { adminAuthorization } = require('../middleware/admin.authorization');
 const { authorization } = require('../middleware/authorization.middleware');
 const { getAllEmployees, getEmployeeById, updateEmployeeAccount, deleteEmployeeAccount } = require('../controller/employee.controller');
 const { employeeRegister, adminRegister, login } = require('../controller/auth.controller');
-const { get_projects, createProject, projectDetails, updateProject, deleteProject, assignUserProject, markProjectAsCompleted } = require('../controller/projectsController');
+const { get_projects, createProject, projectDetails, updateProject, deleteProject, assignUserProject, markProjectAsCompleted, getAllFreeUsers } = require('../controller/projectsController');
 const { verifyToken } = require('../middleware/verifyToken');
 
 const router = Router();
@@ -21,6 +21,7 @@ router.put('/project/:id', verifyToken, updateProject)
 router.delete('/project/:id', verifyToken, deleteProject)
 router.put('/project/:id/assign', verifyToken, assignUserProject)
 router.put('/project/:id/mark-complete', verifyToken, markProjectAsCompleted)
+router.get('/projects/get-free-employees', verifyToken, getAllFreeUsers)
 
 // employee routes
 router.get('/employees', adminAuthorization, getAllEmployees)

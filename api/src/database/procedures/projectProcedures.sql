@@ -97,6 +97,13 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE checkAllFreeUsers
+AS
+BEGIN
+    SELECT * FROM usersTable WHERE is_assigned = 0 AND is_admin = 0
+END
+GO
+
 
 CREATE OR ALTER PROCEDURE markProjectAsCompleted
     @id VARCHAR(255)
