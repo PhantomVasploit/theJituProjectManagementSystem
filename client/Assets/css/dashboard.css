@@ -164,11 +164,11 @@ body {
     cursor: pointer;
 }
 
-thead {
+.new-users thead {
     background-color: #c6caca;
 }
 
-tbody tr:nth-child(odd) {
+.new-users tbody tr:nth-child(odd) {
     background-color: #f5f5f5;
 }
 
@@ -276,3 +276,61 @@ tbody tr:nth-child(odd) {
     font-size: 16px;
     cursor: pointer;
 }
+
+
+/* Available Users */
+
+.usersTable {
+        margin-bottom: 10px; /* Adds 10px spacing below the table */
+        border-collapse: separate; /* Use separate border model to enable border-spacing */
+        border-spacing: 10px; /* Adds 10px spacing between columns */
+      }
+  
+  
+ 
+  .usersTable table {
+    /* border-collapse: separate; */
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  .usersTable th,
+  .usersTable td {
+    padding: 10px; 
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    justify-items: space-between;
+  }
+  
+  .usersTable thead {
+    font-size: 16px;
+    font-weight: bold;
+
+  }
+  
+  .usersTable th {
+    font-weight: bold;
+  }
+  
+  
+  .usersTable input[type="checkbox"] {
+    margin-right: 5px;
+
+   
+  }
+  
+  .newavaBtn{
+    width: 20%;
+    height: 40px;
+    margin: 20px 0;
+    align-self: center;
+    border: none;
+    outline: none;
+    background-color: #330be2;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .newavaBtn:hover, .newProBtn:hover{
+    background-color: #0B63F8;
+  }
