@@ -224,7 +224,7 @@ body {
     border: 2px solid #8f8888;
     padding: 20px;
     width: 75%;
-    gap: 10px;
+    /* gap: 10px; */
     padding-bottom: 5px;
 }
 .newProjectForm input{
@@ -321,8 +321,8 @@ body {
   
   .newavaBtn{
     width: 20%;
-    height: 40px;
-    margin: 20px 0;
+    height: 30px;
+    /* margin: 10px 0; */
     align-self: center;
     border: none;
     outline: none;
@@ -333,4 +333,28 @@ body {
   }
   .newavaBtn:hover, .newProBtn:hover{
     background-color: #0B63F8;
+  }
+
+  /* the error message */
+  .message-container {
+    /* position: fixed; */
+    /* top: 10px; */
+    left: 20%;
+    /* transform: translateX(-50%); */
+    /* z-index: 9999; */
+  }
+  
+  .message {
+    font-size: 10px;
+    color: red;
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 3px;
+    border: 1px solid red;
+    border-radius: 5px;
+  }
+  
+  .message.success {
+    color: green;
+    border-color: green;
   }
