@@ -64,11 +64,13 @@ GO
 CREATE OR ALTER PROCEDURE assignUserToProject
     @id VARCHAR(255),
     @project_id VARCHAR(255),
-    @user_id INT
+    @user_id VARCHAR(255)
 AS
 BEGIN
     INSERT INTO projectUserTable (id, project_id, user_id)
     VALUES (@id, @project_id, @user_id)
+
+    UPDATE usersTable SET is_assigned = 1 WHERE id = @user_id
 END
 GO
 
@@ -94,6 +96,13 @@ AS
 BEGIN
     SELECT * FROM usersTable WHERE id NOT IN (
         SELECT user_id FROM projectUserTable WHERE project_id = @project_id)
+END
+GO
+
+CREATE OR ALTER PROCEDURE checkAllFreeUsers
+AS
+BEGIN
+    SELECT * FROM usersTable WHERE is_assigned = 0 AND is_admin = 0
 END
 GO
 

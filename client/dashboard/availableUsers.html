@@ -44,7 +44,7 @@
                           <th>Skills/Description</th>
                      </tr>
                </thead>
-               <tbody class="userBody">
+               <tbody class="userBody" id="available-users-table">
                 <tr>
                     <td><input type="checkbox" name="select" id="select"></td>
                     <td>John Doe</td>
@@ -83,6 +83,7 @@
         
         <script src="../Assets/js/dashboard.js"></script>
         <script>
+            loadAvailableUsers();
             const finishBtn = document.querySelector('.newavaBtn');
             const messageContainer = document.querySelector('.message-container');
     
@@ -125,9 +126,10 @@
                 }, 3000);
             }
     
-            finishBtn.addEventListener('click', () => {
-                saveSelectedUsers();
-            });
+            finishBtn.addEventListener('click', submitUserAllocation);
+            
+            
+            
         </script>
 </body>
 </html>
