@@ -163,6 +163,9 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
+.btn:hover{
+    background-color: #84aff8;
+}
 
 .new-users thead {
     background-color: #c6caca;

@@ -182,3 +182,21 @@ const submitNewProject = async (e) => {
         alert('Project creation failed')
     }
 }
+
+
+//logout button
+function handleLogout() {
+    localStorage.removeItem('authToken');
+    window.location.href = '../index.html'; 
+}
+const logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('click', () => {
+    handleLogout();
+    history.pushState({ isLogout: true }, null, '../index.html');
+});
+window.addEventListener('popstate', (event) => {
+   
+    if (event.state && event.state.isLogout) {
+        window.location.href = '../Auth/login.html'; 
+    }
+});
