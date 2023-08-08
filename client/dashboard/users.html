@@ -42,23 +42,18 @@
                     <table>
                         <thead>
                             <tr id="upper-table-head">
-                                <th>
+                                <th colspan="4">
                                     <h4>New Users</h4>
-                                </th>
-                                <th>
-                                    <input type="search" name="" id="">
-                                </th>
-                                <th>
-                                    <button class="btn add-user">Add User</button>
                                 </th>
                             </tr>
                             <tr>
                                 <th>Name</th>
+                                <th>Email</th>
                                 <th>Description/Skills</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="all-users-table">
                             <tr>
                                 <td>Jane Doe <br>
                                     <span class="small-uid">
@@ -101,5 +96,11 @@
             </div>
         </div>
     </div>
+    <script src="/client/assets/js/dashboard.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            loadAllUsers();
+        });
+    </script>
 </body>
 </html>

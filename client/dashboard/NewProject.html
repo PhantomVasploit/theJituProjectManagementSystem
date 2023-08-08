@@ -65,7 +65,29 @@
 
       
 
-    
-   
+    <script src="/client/assets/js/dashboard.js"></script>
+   <script>
+    const projectForm = document.querySelector('.newProjectForm');
+    projectForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const projectName = document.querySelector('#newProjectName').value;
+        const projectDescription = document.querySelector('#newProjectDescription').value;
+        const startDate = document.querySelector('#startDate').value;
+        const endDate = document.querySelector('#endDate').value;
+        
+        const newProject = await createNewProject(
+            projectName,
+            projectDescription,
+            'pending',
+            startDate,
+            endDate
+        );
+        console.log(newProject);
+        if (newProject) {
+            window.location.href = '/client/dashboard/dashboard.html';
+        }
+    });
+
+   </script>
 </body>
 </html>

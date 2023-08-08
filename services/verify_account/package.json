@@ -17,5 +17,8 @@
     "mssql": "^9.1.2",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.9.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

@@ -85,7 +85,11 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href('../employee/html/dashboard.html')
       })
       .catch((e)=>{
-        showError(e.response.data.error)
+        if(e?.message){
+            showError(e.message)
+        }else if(e?.response.data.error){
+            showError(e.response.data.error)
+        }
       })
       form.reset();
     }

@@ -5,7 +5,6 @@ document.querySelector('form').addEventListener('submit', function(event) {
   const email = document.getElementById('email');
   const password = document.getElementById('password');
 
-  const userData = JSON.parse(localStorage.getItem('user'));
 
   //Checking the error message
   function showError(message) {
@@ -44,7 +43,11 @@ document.querySelector('form').addEventListener('submit', function(event) {
         window.location.href = result.data.user.is_admin == 0 ? '../employee/html/dashboard.html' : '../dashboard/dashboard.html';
       })
       .catch((e)=>{
-        showError(e.response.data.error)
+        if(e?.message){
+            showError(e.message)
+        }else if(e?.response.data.error){
+            showError(e.response.data.error)
+        }
       }) 
   }
 });
