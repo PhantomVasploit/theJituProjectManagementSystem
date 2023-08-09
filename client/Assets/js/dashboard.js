@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.user)
 
 // load all projects
 const fetchAllProjects = async () => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/projects', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects', {
         headers: {
             'Content-Type': 'application/json',
             'authorization_token': `${token}`
@@ -33,7 +33,7 @@ const loadAllProjects = async () => {
 
 // loading all users
 const fetchAllUsers = async () => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/employees', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/employees', {
         headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${token}`
@@ -53,14 +53,13 @@ const loadAllUsers = async () => {
         const tr = document.createElement('tr')
         tr.innerHTML = `
             <td>${user.first_name} ${user.last_name}<br>
-            <span class="small-uid">
-                <small>123456789</small>
-            </span>
-            
+                <span class="small-uid">
+                    <small>123456789</small>
+                </span>
             </td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td><a href=".user.html?id=${user.id}" class="btn btn-primary">View</a></td>
+            <td><a href="/client/dashboard/dashboatd_user_detail.html?id=${user.id}" class="btn btn-primary">View</a></td>
         `
         users_table.appendChild(tr)
     }
@@ -140,13 +139,12 @@ const loadDashboardStats = async () => {
             <td><a href="/client/dashboard/availableUsers.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
         `
         recent_projects_table.appendChild(tr)
-    }
-    )
+    })
 }
 
 
 const createNewProject = async (project_name, project_description, project_status, start_date, end_date) => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/projects', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -183,27 +181,8 @@ const submitNewProject = async (e) => {
     }
 }
 
-<<<<<<< HEAD
-
-//logout button
-function handleLogout() {
-    localStorage.removeItem('authToken');
-    window.location.href = '../index.html'; 
-}
-const logoutButton = document.getElementById('logoutButton');
-logoutButton.addEventListener('click', () => {
-    handleLogout();
-    history.pushState({ isLogout: true }, null, '../index.html');
-});
-window.addEventListener('popstate', (event) => {
-   
-    if (event.state && event.state.isLogout) {
-        window.location.href = '../Auth/login.html'; 
-    }
-});
-=======
 const fetchAvailableUsers = async () => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/projects/get-free-employees', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects/get-free-employees', {
         headers: {
             'Content-Type': 'application/json',
             'authorization_token': `${token}`
@@ -231,7 +210,7 @@ const loadAvailableUsers = async () => {
 }
 
 const assignUserToProject = async (project_id, user_id) => {
-    const response = await fetch(`http://http://127.0.0.1:8003/api/v1/projects/${project_id}/${user_id}/assign`, {
+    const response = await fetch(`http://http://127.0.0.1:3000/api/v1/projects/${project_id}/${user_id}/assign`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -265,4 +244,3 @@ const submitUserAllocation = async (e) => {
 
 
 
->>>>>>> c41f69c190e7d3295d703581105c1d6a3f14927e
