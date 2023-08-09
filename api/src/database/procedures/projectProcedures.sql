@@ -1,31 +1,28 @@
 USE ThejituProjectManagementDatabase;
 GO
 
--- procedure to create a new project
-
-CREATE OR ALTER PROCEDURE sp_createProject
+CREATE OR ALTER PROCEDURE sp_createProjectProc
     @id VARCHAR(255),
     @project_name VARCHAR(255),
     @project_description VARCHAR(255),
     @project_status VARCHAR(255),
-    @is_allocated BIT,
-    @is_completed BIT,
     @start_date DATETIME,
     @end_date DATETIME
 AS
 BEGIN
-    INSERT INTO projectsTable (id, project_name, project_description, project_status, is_allocated, is_completed, start_date, end_date)
-    VALUES (@id, @project_name, @project_description, @project_status, @is_allocated, @is_completed, @start_date, @end_date)
+    INSERT INTO projectsTable (id, project_name, project_description, project_status, start_date, end_date)
+    VALUES (@id, @project_name, @project_description, @project_status, @start_date, @end_date)
 END
 GO
 
 -- procedure to get all projects
-CREATE OR ALTER PROCEDURE sp_getAllProjects
+CREATE OR ALTER PROCEDURE sp_getAllProjectsProc
 AS
 BEGIN
     SELECT * FROM projectsTable
 END
 GO
+
 
 -- procedure to get a project by id
 CREATE OR ALTER PROCEDURE getProjectById
@@ -37,7 +34,7 @@ END
 GO
 
 -- procedure to update a project
-CREATE OR ALTER PROCEDURE sp_updateProject
+CREATE OR ALTER PROCEDURE sp_updateProjectProc
     @id VARCHAR(255),
     @project_name VARCHAR(255),
     @project_description VARCHAR(255),
@@ -65,10 +62,13 @@ GO
 -- procedure to allocate a user to a project
 CREATE OR ALTER PROCEDURE assignUserToProject
     @project_id VARCHAR(255),
-    @user_id INT
+    @user_id VARCHAR(255)
 AS
 BEGIN
-    INSERT INTO projectUserTable (project_id, user_id) VALUES (@project_id, @user_id)
+    INSERT INTO projectUserTable (id, project_id, user_id)
+    VALUES (@id, @project_id, @user_id)
+
+    UPDATE usersTable SET is_assigned = 1 WHERE id = @user_id
 END
 GO
 
@@ -118,3 +118,18 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE checkAllFreeUsers
+AS
+BEGIN
+    SELECT * FROM usersTable WHERE is_assigned = 0 AND is_admin = 0
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE markProjectAsCompleted
+    @id VARCHAR(255)
+AS
+BEGIN
+    UPDATE projectsTable SET is_completed = 1, project_status = 'Completed' WHERE id = @id
+END
+GO

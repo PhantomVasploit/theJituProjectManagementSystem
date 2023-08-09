@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Project</title>
+    <link rel="stylesheet" href="../Assets/css/dashboard.css">
+</head>
+<body>
+    <div class="sidenav">
+        <div class="sidenav-head">
+            <h2>Admin</h2>
+        </div>
+        <div class="sidenav-body">
+            <ul>
+                <li><a href="./dashboard.html">Dashboard</a></li>
+                <li><a href="./users.html">Users</a></li>
+                <li><a href="./projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content-head">
+            <div class="content-head-left">
+            </div>
+            <div class="content-head-right" id="newProjectnav">
+               <img class="newProjectLogo" src="../Assets/images/TheJituPojectLogo__2_-removebg-preview (1).png" alt="">
+            </div>
+        </div>
+            <div class="content">
+                <div class="NewProstatistics">
+                    <article class="headingTitle">
+                    <h3>Create New Project(step1)</h3>
+                    <p>Fill in the form below</p>
+                    </article>
+
+                    <form class="newProjectForm">
+                        <label for="projectName">Project Name
+                        <input type="text" name="newProjectName" id="newProjectName">
+                    </label>
+                        <label for="newProjectDescription">Project Description
+                        <textarea name="newProjectDescription" id="newProjectDescription" cols="30" rows="10"></textarea>
+                    </label>
+                       <label class="newDates" for="dates">
+                             <div class="newInnerDates">
+                                <span>Start Date</span>
+                             <input type="date" name="startDate" id="startDate">
+                             </div>
+                            <div class="newInnerDates">
+                                <span>End Date</span>
+                                <input type="date" name="endDate" id="endDate">
+                            </div>
+                       </label>
+                       <div class="message-container"></div>
+                       <button class="newProBtn" type="submit">Next</button>
+                    </form>
+                    
+                </div>
+            </div>
+               
+            
+        </div>
+  
+</div>
+
+    <script src="../Assets/js/dashboard.js"></script>
+    <script>
+        const projectForm = document.querySelector('.newProjectForm');
+        const messageContainer = document.querySelector('.message-container');
+
+        // saving project information in localStorage and display message
+        function saveProjectInformation() {
+            const projectName = document.querySelector('#newProjectName').value;
+            const projectDescription = document.querySelector('#newProjectDescription').value;
+            const startDate = new Date(document.querySelector('#startDate').value);
+            const endDate = new Date(document.querySelector('#endDate').value);
+            let isValid = true;
+
+            // Validate the form
+            if (!projectName || !projectDescription || !startDate || !endDate) {
+                showMessage('Please fill in all fields before proceeding.', 'error');
+                isValid = false;
+            }
+
+            if (startDate.getTime() > endDate.getTime()) {
+                showMessage('Start date cannot be after end date.', 'error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                const projectData = {
+                    projectName,
+                    projectDescription,
+                    status: 'pending',
+                    startDate: startDate.toISOString(),
+                    endDate: endDate.toISOString()
+                };
+
+                localStorage.setItem('newProject', JSON.stringify(projectData));
+                showMessage('Project information saved successfully.', 'success');
+                setTimeout(() => {
+                    window.location.href = './availableUsers.html';
+                }, 3000);
+            }
+        }
+
+        function showMessage(message, messageType) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${messageType}`;
+            messageElement.textContent = message;
+
+            // Clear any previous messages
+            messageContainer.innerHTML = '';
+            messageContainer.appendChild(messageElement);
+
+            // Remove the message after 3 seconds (adjust the time as needed)
+            setTimeout(() => {
+                messageContainer.removeChild(messageElement);
+            }, 3000);
+        }
+
+        projectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            saveProjectInformation();
+        });
+    </script>
+</body>
+</html>

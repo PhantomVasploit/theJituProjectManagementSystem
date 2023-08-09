@@ -10,7 +10,7 @@ module.exports.getAllEmployees = (req, res)=>{
         .execute('fetchAllUser')
         .then((result)=>{
             const {password, is_admin, ...employees} = result.recordset[0]
-            return res.status(200).json({employees})
+            return res.status(200).json({employees: result.recordset})
         })
         .catch((e)=>{
             return res.status(500).json({error: e.message})
@@ -67,7 +67,16 @@ module.exports.updateEmployeeAccount = (req, res)=>{
                     .input('email', email)
                     .execute('updateUserAccountPROC')
                     .then((update)=>{
-                        return res.status(200).json({message: 'Update successful', update})
+                        pool.request()
+                        .input('email', email)
+                        .execute('fetchUserByEmailPROC')
+                        .then((result)=>{
+                            const {password, is_verified, is_assigned, ...user} = result.recordset[0]
+                            return res.status(200).json({message: 'Update successful',user})
+                        })
+                        .catch((e)=>{
+                            return res.status(500).json({error: e.message})    
+                        })
                     })
                     .catch((e)=>{
                         return res.status(500).json({error: e.message})
@@ -100,7 +109,7 @@ module.exports.deleteEmployeeAccount = (req, res)=>{
                 .input('id', id)
                 .execute('deleteUserAccount')
                 .then((result)=>{
-                    res.status(200).json({})
+                    res.status(200).json({message: `Account deleted successfully`})
                 })
                 .catch((e)=>{
                     return res.status(500).json({error: e.message})        

@@ -1,0 +1,363 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidenav {
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    padding: 20px 0;
+    border-right: 1px solid #463535;
+}
+
+.sidenav-head {
+    display: flex;
+    padding: 10px 20px;
+}
+
+.sidenav ul {
+    list-style: none;
+}
+
+.sidenav ul li {
+    padding: 10px 20px
+}
+
+.sidenav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+
+.main-content {
+    width: 80%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 20px 30px;
+}
+
+.content-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #bbb0b0;
+}
+
+.statistics {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    width: 30%;
+    height: 120px;
+    background-color: #91bebb;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.stat-count {
+    font-size: 40px;
+    color: #fff;
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+}
+
+.recent-projects {
+    margin-top: 20px;
+}
+
+.recent-projects table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recent-projects table thead tr th {
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #000;
+}
+
+.recent-projects table tbody tr td {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #000;
+}
+
+.recent-projects table tbody tr td a {
+    text-decoration: none;
+    color: #000;
+}
+
+.recent-projects table tbody tr td a:hover {
+    color: #91bebb;
+}
+
+
+.new-users {
+    margin-top: 20px;
+}
+
+.new-users table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.new-users table thead tr th {
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #000;
+}
+
+.new-users table tbody tr td {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #000;
+}
+
+.new-users table tbody tr td a {
+    text-decoration: none;
+    color: #000;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #006eff;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btn:hover{
+    background-color: #84aff8;
+}
+
+.new-users thead {
+    background-color: #c6caca;
+}
+
+.new-users tbody tr:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+.recent-projects thead tr th button {
+    float: right;
+}
+
+
+/* NewProject Page */
+.Newmain-content{
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 20px 30px;
+}
+.newProjectLogo{
+    width: 120px;
+    height: 65px;
+    justify-self: flex-end;
+}
+.navimg{
+    width: 100%;
+    display: flex;
+   border-bottom: 2px solid #0B63F8;
+}
+.NewProstatistics{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.headingTitle{
+    display: flex;
+    flex-direction: column;
+    flex-direction: flex-start;
+    padding-bottom: 50px;
+}
+.headingTitle h3{
+    font-size: 15px;
+    color: #000;
+    font-weight: 900;
+}
+.headingTitle p{
+    font-size: 8px;
+    color: #8f8888;
+}
+.newProjectForm{
+    display: flex;
+    flex-direction: column;
+    margin-right:20%;
+    border: 2px solid #8f8888;
+    padding: 20px;
+    width: 75%;
+    /* gap: 10px; */
+    padding-bottom: 5px;
+}
+.newProjectForm input{
+    width: 100%;
+    height: 30px;
+    gap: 30px;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+    border: 2px solid #3b7df0;
+}
+.newProjectForm textarea{
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 2px solid #3b7df0;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+}
+.newProjectForm label{
+    font-size: 12px;
+    color: #000;
+    margin-bottom: 0;
+    font-weight: 700;
+    padding: 5px;
+}
+.newDates{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+
+}
+.newInnerDates{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.newProBtn{
+    width: 30%;
+    height: 40px;
+    margin: 20px 0;
+    align-self: center;
+    border: none;
+    outline: none;
+    background-color: #330be2;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+/* Available Users */
+
+.usersTable {
+        margin-bottom: 10px; /* Adds 10px spacing below the table */
+        border-collapse: separate; /* Use separate border model to enable border-spacing */
+        border-spacing: 10px; /* Adds 10px spacing between columns */
+      }
+  
+  
+ 
+  .usersTable table {
+    /* border-collapse: separate; */
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  .usersTable th,
+  .usersTable td {
+    padding: 10px; 
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    justify-items: space-between;
+  }
+  
+  .usersTable thead {
+    font-size: 16px;
+    font-weight: bold;
+
+  }
+  
+  .usersTable th {
+    font-weight: bold;
+  }
+  
+  
+  .usersTable input[type="checkbox"] {
+    margin-right: 5px;
+
+   
+  }
+  
+  .newavaBtn{
+    width: 20%;
+    height: 30px;
+    /* margin: 10px 0; */
+    align-self: center;
+    border: none;
+    outline: none;
+    background-color: #330be2;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .newavaBtn:hover, .newProBtn:hover{
+    background-color: #0B63F8;
+  }
+
+  /* the error message */
+  .message-container {
+    /* position: fixed; */
+    /* top: 10px; */
+    left: 20%;
+    /* transform: translateX(-50%); */
+    /* z-index: 9999; */
+  }
+  
+  .message {
+    font-size: 10px;
+    color: red;
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 3px;
+    border: 1px solid red;
+    border-radius: 5px;
+  }
+  
+  .message.success {
+    color: green;
+    border-color: green;
+  }

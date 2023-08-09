@@ -20,7 +20,7 @@ module.exports.adminAuthorization = (req, res, next)=>{
                     if(decodedToken.is_admin == 1){
                         next()
                     }else{
-                        res.status(401).json({error: 'Restricted access'})
+                        return res.status(401).json({error: 'Restricted access'})
                     }
                 })
             }

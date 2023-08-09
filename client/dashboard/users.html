@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Assets/css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidenav">
+            <div class="sidenav-head">
+                <h2>Admin</h2>
+            </div>
+            <div class="sidenav-body">
+                <ul>
+                    <li><a href="./dashboard.html">Dashboard</a></li>
+                    <li><a href="./users.html">Users</a></li>
+                    <li><a href="./projects.html">Projects</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="main-content">
+            <div class="content-head">
+                <div class="content-head-left">
+                    <h1>Users</h1>
+                </div>
+                <div class="content-head-right">
+                    <button class="btn" id="logoutButton">Logout</button>
+                </div>
+            </div>
+            <div class="content">
+                
+
+                
+
+                <div class="new-users">
+                    <table>
+                        <thead>
+                            <tr id="upper-table-head">
+                                <th colspan="4">
+                                    <h4>New Users</h4>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Description/Skills</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-users-table">
+                            <tr>
+                                <td>Jane Doe <br>
+                                    <span class="small-uid">
+                                        <small>123456789</small>
+                                    </span>
+                                </td>
+                                <td>Web Developer</td>
+                                <td>
+                                    <button class="btn btn-success">Approve</button>
+                                    <button class="btn">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jane Doe <br>
+                                    <span class="small-uid">
+                                        <small>123456789</small>
+                                    </span>
+                                </td>
+                                <td>Web Developer</td>
+                                <td>
+                                    <button class="btn btn-success">Approve</button>
+                                    <button class="btn">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jane Doe <br>
+                                    <span class="small-uid">
+                                        <small>123456789</small>
+                                    </span>
+                                </td>
+                                <td>Web Developer</td>
+                                <td>
+                                    <button class="btn btn-success">Approve</button>
+                                    <button class="btn">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../Assets/js/dashboard.js"></script>
+</body>
+</html>

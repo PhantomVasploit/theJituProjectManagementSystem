@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        
+        <section class="navbar">
+            <div class="logo">
+                <img height="150px" width="150px" src="../assests/MicrosoftTeams-image (1).png" alt="logo">
+            </div>
+            <div class="logo-icons">
+                <div class="icon">
+                    <img height="20px" width="20px" src="../assests/search-interface-symbol.png" alt="">
+                </div>
+                <div class="icon">
+                    <img height="20px" width="20px" src="../assests/notification.png" alt="">
+                </div>
+            </div>
+        </section>
+        
+        <section class="content">
+            
+            <div class="sidebar">
+                
+                <div class="top-links">
+                    
+                    <div class="link">
+                        <div class="icon">
+                            <iconify-icon width="20px" height="20px" icon="clarity:dashboard-line"></iconify-icon>
+                        </div>
+                        <div class="url">
+                            <a href="./dashboard.html">Dashboard</a>
+                        </div>
+                    </div>
+
+                    <div class="link">
+                        <div class="icon">
+                            <img width="20px" height="20px" src="../assests/checked.png" alt="">
+                        </div>
+                        <div class="url">
+                            <a href="./complete-projects.html">Complte</a>
+                        </div>
+                    </div>
+
+                    <div class="link">
+                        <div class="icon">
+                            <img width="20px" height="20px" src="../assests/application-incomplete-outlined.svg" alt="">
+                        </div>
+                        <div class="url">
+                            <a href="./incomplete-projects.html">Incomplete</a>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+
+                <div class="bottom-links">
+                    
+                    
+
+                    <div class="link">
+                        <div class="icon">
+                            <img width="20px" height="20px" src="../assests/logout.svg" alt="">
+                        </div>
+                        <div class="url">
+                            <a class="logout" href="#">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info">
+                <div class="profile">
+
+                    <div class="profile-card">
+
+                        <div class="profile-image">
+                            <img src="../assests//user (1).png" alt="profile-pic">
+                        </div>
+                        <div class="profile-info">
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                        </div>
+                        <div class="social-media">
+                            <div class="icon">
+                                <img width="25px" height="25px" src="../assests//linkedin.svg" alt="">
+                            </div>
+                            <div class="icon">
+                                <img width="25px" height="25px" src="../assests//twitter.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edit-profile">
+                        <form action="" class="edit-profile-form">
+                            
+                                <h4>Edit Profile</h4>
+                                <div class="name">
+                                    <div class="fname">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" name="firstName" id="firstName">
+                                    </div>
+                                    <div class="lname">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" name="lastName" id="lastName">
+                                    </div>
+                                </div>
+
+                                <div class="email">
+                                    <div class="email-field">
+                                        <label for="email">Email</label>
+                                        <input type="text" name="email" id="email">
+                                    </div>
+                                </div>
+
+                                <div class="email">
+                                    <div class="email-field">
+                                        <label for="profile-pic">Profile Picture</label>
+                                        <input type="file" name="profile-pic" id="profile-pic">
+                                    </div>
+                                </div>
+
+                                <div class="submit-btn">
+                                    <input type="submit" value="Save">
+                                </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                
+
+                <div class="projects">
+                    <div class="title">
+                        <h4>Projects</h4>
+                        <p>View all</p>
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <h5>Name</h5>
+                            <h5>Description</h5>
+                            <h5>Status</h5>
+                            <h5>Start Date</h5>
+                            <h5>End Date</h5>
+                        </div>
+                        <div class="record">
+                            
+                            <div class="records">
+                                <p>Building bridge</p>
+                                <p>May 20 2021</p>
+                                <p>May 20 2023</p>
+                            </div>
+                            <div class="records">
+                                <p>Building bridge</p>
+                                <p>May 20 2021</p>
+                                <p>May 20 2023</p>
+                            </div>
+                            <div class="records">
+                                <p>Building bridge</p>
+                                <p>May 20 2021</p>
+                                <p>May 20 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="no-project"></div>
+
+            </div>
+        </section>
+
+    </main>
+    <script src="../js/app.js" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
+</body>
+</html>

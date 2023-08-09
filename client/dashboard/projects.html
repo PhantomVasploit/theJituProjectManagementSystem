@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Assets/css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidenav">
+            <div class="sidenav-head">
+                <h2>Admin</h2>
+            </div>
+            <div class="sidenav-body">
+                <ul>
+                    <li><a href="./dashboard.html">Dashboard</a></li>
+                    <li><a href="./users.html">Users</a></li>
+                    <li><a href="./projects.html">Projects</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="main-content">
+            <div class="content-head">
+                <div class="content-head-left">
+                    <h1>Projects</h1>
+                </div>
+                <div class="content-head-right">
+                    <button class="btn" id="logoutButton">Logout</button>
+                </div>
+            </div>
+            <div class="content">
+                
+
+                <div class="recent-projects">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                   <a href="./NewProject.html">
+                                    <button class="btn align-right">New Project</button>
+                                   </a>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Project Name</th>
+                                <th>Status</th>
+                                <th>Due Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-projects-table">
+                            <tr>
+                                <td>Project 1</td>
+                                <td>5</td>
+                                <td>12/12/2020</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>Project 2</td>
+                                <td>5</td>
+                                <td>12/12/2020</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>Project 3</td>
+                                <td>5</td>
+                                <td>12/12/2020</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>Project 4</td>
+                                <td>5</td>
+                                <td>12/12/2020</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>Project 5</td>
+                                <td>5</td>
+                                <td>12/12/2020</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>Project 6</td>
+                                <td>5</td>
+                                <td>12/12/2020</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>Project 7</td>
+                                <td>5</td>
+                                <td>12/12/2020</td>
+                                <td>Completed</td>
+                            </tr>
+                    </table>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+    <script src="../Assets/js/dashboard.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            loadAllProjects();
+        });
+    </script>
+</body>
+</html>

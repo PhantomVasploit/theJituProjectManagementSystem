@@ -15,7 +15,7 @@ module.exports.authorization = (req, res, next)=>{
                     if(error){
                         return res.status(401).json({error: error.message})
                     }
-                    if(decodedToken){
+                    if(decodedToken.is_admin == 1 ?? decodedToken.is_admin == 0){
                         next()
                     }else{
                         res.status(401).json({message: 'Restricted access'})

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management System</title>
+    <link rel="stylesheet" href="../Assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="loginContainer">
+        <div class="loginContainer1">
+                <span class="nav">
+                    <a href="../index.html">Home Page</a>
+                    <img class="loginlogo" src="../Assets/images/TheJituPojectLogo__2_-removebg-preview (1).png" alt="">
+                </span>      
+
+            <article>
+                <h1>Welcome Back!</h1>
+                <p>Track, Manage and forecast your projects</p>
+            </article>
+             <form action="">
+                <label for="email">
+                 <p class="aste">Email</p>
+                 <input type="email" name="email" id="email" placeholder="Enter your Email address">
+                </label>
+             <label for="text"> 
+                 <p class="aste">Password</p>
+                 <input type="password" name="password" id="password" placeholder="Enter your Password">
+             </label>
+             <label for="ForgotPWD">
+                 <a class="ForgotPWD" href="../Auth/forgotpwd.html">Forgot Your Password?</a>
+             </label>
+             <div class="error-message" id="loginErrorMessage"></div>
+             <div class="success-message" id="loginSuccessMessage"></div>
+             <label for="login"> 
+                 <button class="loginBtn" type="submit">Log in</button>
+             </label>
+             <label class="registerHere"  for="registerHere"> <p>Don't have an account? <a href="../Auth/signup.html">register Here</a></p></label>
+             </form>
+         </div>
+         <div class="loginContainer2">
+             <img src="../Assets/images/MicrosoftTeams-image.png" alt="">
+         </div>
+    </div>
+    <script src="../Assets/js/login.js"></script>
+</body>
+</html>
