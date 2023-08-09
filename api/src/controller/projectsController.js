@@ -283,6 +283,19 @@ const getAllProjectEverAssigned = async (req, res) => {
     try {
         // user can view all projects assigned to him/her
         const { user_id } = req.params;
+        const {is_admin} = req.user;
+        const authenticated_user_id = req.user;
+
+        if (is_admin === false) {
+            if (authenticated_user_id !== user_id) {
+                {
+                    return res.status(401).json({
+                        message: 'Access denied'
+                    });
+                }
+            }
+        }
+
 
         const pool = await mssql.connect(sqlConfig);
 
@@ -298,6 +311,8 @@ const getAllProjectEverAssigned = async (req, res) => {
         }
 
         const queried_user = user.recordset[0];
+
+
 
         // check if user is assigned to project
         const get_user_projects = await pool.request()
@@ -345,6 +360,8 @@ const markProjectAsCompleted = async (req, res) => {
                 message: 'Project not found'
             });
         }
+
+        const queried_project = project.recordset[0];
 
         const updated_project = await pool.request()
             .input('id', mssql.VarChar, id)
