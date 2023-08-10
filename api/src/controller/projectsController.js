@@ -16,27 +16,13 @@ const createProject = async (req, res) => {
 
         const { project_name, project_description, project_status, start_date, end_date } = req.body;
 
-        // validate if project name is not empty
-        if (project_name === '') {
+        // validate if all required fields are provided
+        if (!project_name || !project_description || !project_status || !start_date || !end_date) {
             return res.status(400).json({
-                message: 'Project name is required'
+                message: 'All fields are required'
             });
         }
-
-        // validate if project description is not empty
-        if (project_description === '') {
-            return res.status(400).json({
-                message: 'Project description is required'
-            });
-        }
-
-        // validate if project status is not empty
-        if (project_status === '') {
-            return res.status(400).json({
-                message: 'Project status is required'
-            });
-        }
-
+        
         const id = v4();
 
         const pool = await mssql.connect(sqlConfig);
@@ -66,8 +52,7 @@ const get_projects = async (req, res) => {
         const { is_admin } = req.user;
         if (is_admin === false) {
             return res.status(401).json({
-                message: 'Access denied',
-                status: 401
+                message: 'Access denied'
             });
         }
 
@@ -106,15 +91,13 @@ const projectDetails = async (req, res) => {
 
         if (project.recordset.length === 0) {
             return res.status(404).json({
-                message: 'Project not found',
-                status: 404
+                message: 'Project not found'
             });
         }
 
         return res.status(200).json({
             message: 'Project retrieved successfully',
-            project: project.recordset[0],
-            status: 200
+            project: project.recordset[0]
         });
     } catch (error) {
         return res.status(500).json({
@@ -144,24 +127,10 @@ const updateProject = async (req, res) => {
             end_date
         } = req.body;
 
-        // validate if project name is not empty
-        if (project_name === '') {
+        // validate all required fields are provided
+        if (!project_name || !project_description || !project_status || !start_date || !end_date) {
             return res.status(400).json({
-                message: 'Project name is required'
-            });
-        }
-
-        // validate if project description is not empty
-        if (project_description === '') {
-            return res.status(400).json({
-                message: 'Project description is required'
-            });
-        }
-
-        // validate if project status is not empty
-        if (project_status === '') {
-            return res.status(400).json({
-                message: 'Project status is required'
+                message: 'Missing required fields'
             });
         }
 
@@ -175,9 +144,19 @@ const updateProject = async (req, res) => {
             .input('end_date', mssql.Date, end_date)
             .execute('sp_updateProjectProc');
 
+        if (updated_project.rowsAffected[0] === 0) {
+            return res.status(404).json({
+                message: 'Project not found'
+            });
+        }
+
+        // get updated project
+        const project = await pool.request()
+            .input('id', mssql.VarChar, id)
+            .execute('getProjectById');
+
         return res.status(200).json({
-            message: 'Project updated successfully',
-            project: updated_project.recordset[0]
+            message: 'Project updated successfully'
         });
     } catch (error) {
         return res.status(500).json({
@@ -199,9 +178,25 @@ const deleteProject = async (req, res) => {
         const { id } = req.params;
 
         const pool = await mssql.connect(sqlConfig);
+        const get_project = await pool.request()
+            .input('id', mssql.VarChar, id)
+            .execute('getProjectById');
+
+        if (get_project.recordset.length === 0) {
+            return res.status(404).json({
+                message: 'Project not found'
+            });
+        }
+
         const deleted_project = await pool.request()
             .input('id', mssql.VarChar, id)
-            .execute('sp_deleteProject');
+            .execute('sp_deleteProjectProc');
+
+        if (deleted_project.rowsAffected[0] === 0) {
+            return res.status(404).json({
+                message: 'Project not found'
+            });
+        }
 
         return res.status(200).json({
             message: 'Project deleted successfully'
@@ -209,7 +204,7 @@ const deleteProject = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             message: 'Error deleting project',
-            error: error
+            error: error.message
         });
     }
 }
