@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.user)
 
 // load all projects
 const fetchAllProjects = async () => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/projects', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects', {
         headers: {
             'Content-Type': 'application/json',
             'authorization_token': `${token}`
@@ -33,7 +33,7 @@ const loadAllProjects = async () => {
 
 // loading all users
 const fetchAllUsers = async () => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/employees', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/employees', {
         headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${token}`
@@ -146,7 +146,7 @@ const loadDashboardStats = async () => {
 
 
 const createNewProject = async (project_name, project_description, project_status, start_date, end_date) => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/projects', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -183,7 +183,6 @@ const submitNewProject = async (e) => {
     }
 }
 
-<<<<<<< HEAD
 
 //logout button
 function handleLogout() {
@@ -201,9 +200,8 @@ window.addEventListener('popstate', (event) => {
         window.location.href = '../Auth/login.html'; 
     }
 });
-=======
 const fetchAvailableUsers = async () => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/projects/get-free-employees', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects/get-free-employees', {
         headers: {
             'Content-Type': 'application/json',
             'authorization_token': `${token}`
@@ -231,7 +229,7 @@ const loadAvailableUsers = async () => {
 }
 
 const assignUserToProject = async (project_id, user_id) => {
-    const response = await fetch(`http://http://127.0.0.1:8003/api/v1/projects/${project_id}/${user_id}/assign`, {
+    const response = await fetch(`http://http://127.0.0.1:3000/api/v1/projects/${project_id}/${user_id}/assign`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -265,4 +263,3 @@ const submitUserAllocation = async (e) => {
 
 
 
->>>>>>> c41f69c190e7d3295d703581105c1d6a3f14927e

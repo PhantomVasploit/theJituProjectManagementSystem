@@ -24,7 +24,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     return;
   }else{
     axios.post(
-      'http://127.0.0.1:8003/api/v1/login', 
+      'http://127.0.0.1:3000/api/v1/login', 
       {
         email: email.value.trim(),
         password: password.value.trim()
