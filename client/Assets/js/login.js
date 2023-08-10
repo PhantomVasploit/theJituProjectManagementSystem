@@ -43,8 +43,9 @@ document.querySelector('form').addEventListener('submit', function(event) {
         window.location.href = result.data.user.is_admin == 0 ? '../employee/html/dashboard.html' : '../dashboard/dashboard.html';
       })
       .catch((e)=>{
+        console.log(e)
         if(e?.message){
-            showError(e.message)
+            showError('Uups! You entered wrong credentials')
         }else if(e?.response.data.error){
             showError(e.response.data.error)
         }

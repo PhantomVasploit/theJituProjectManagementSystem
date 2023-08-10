@@ -1,5 +1,6 @@
 const mssql = require('mssql');
-const {getAllEmployees, getEmployeeById, updateEmployeeAccount} = require('../controller/employee.controller');
+const { getAllEmployees, getEmployeeById} = require('../src/controller/employee.controller');
+
 
 describe('Getting all Employees Test', () => {
     it ('should return all employees', async () => {

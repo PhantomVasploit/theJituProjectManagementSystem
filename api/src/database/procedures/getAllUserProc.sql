@@ -1,7 +1,7 @@
 USE ThejituProjectManagementDatabase;
 GO
 
-CREATE PROCEDURE fetchAllUser
+CREATE PROCEDURE fetchAllUsers
 AS
 BEGIN
     SELECT * FROM usersTable WHERE is_admin = 0;
