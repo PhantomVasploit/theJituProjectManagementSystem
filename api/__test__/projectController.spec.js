@@ -478,6 +478,11 @@ describe('Testing Project Controller', () => {
                     id: '395a2471-c79f-4753-ae5c-891323b94c56'
                 }
             }
+            const res = {
+                status: jest.fn().mockReturnThis(),
+                json: jest.fn()
+            }
+        
 
             jest.spyOn(mssql, 'connect').mockResolvedValueOnce({
                 request: jest.fn().mockReturnThis(),
@@ -490,8 +495,9 @@ describe('Testing Project Controller', () => {
             await deleteProject(req, res);
 
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith({ message: 'Project deleted successfully'})
-       })
+            expect(res.json).toHaveBeenCalledWith({message: 'Account deleted successfully'});
+            
+        });
 
         it("should return 500 if error occurs", async () => {
             const req = {

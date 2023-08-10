@@ -8,7 +8,7 @@ const { createToken } = require('../utils/token.gen')
 
 
 
-module.exports.employeeRegister= async(req, res)=>{
+module.exports.employeeRegister = async(req, res)=>{
     try {
         
         if(!req.body){
