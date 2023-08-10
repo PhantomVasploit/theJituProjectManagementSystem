@@ -82,6 +82,7 @@ module.exports.deleteEmployeeAccount = async (req, res) => {
         await executeQuery(request => request.input('id', id).execute('deleteUserAccount'));
         return res.status(200).json({ message: `Account deleted successfully` });
     } catch (error) {
-        return res.status(500).json({ error: error.message });
+        console.error(error);
+        return res.status(500).json({ error});
     }
 };
