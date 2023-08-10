@@ -1,6 +1,7 @@
 USE ThejituProjectManagementDatabase;
 GO
 
+
 CREATE OR ALTER PROCEDURE sp_createProjectProc
     @id VARCHAR(255),
     @project_name VARCHAR(255),

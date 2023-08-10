@@ -35,19 +35,23 @@ module.exports.employeeRegister=(req, res)=>{
                             return res.status(201).json({message: 'Account created successfully', token, user: {firstName, lastName, email, is_admin: 0}})
                         })
                         .catch((e)=>{
+                            console.log(e.message);
                             return res.status(500).json({error: `Internal server error, ${e.message}`})
                         })
                     })
                     .catch((e)=>{
+                        console.log(e.message);
                         return res.status(500).json({error: `Internal server error, ${e.message}`})
                     })
                 }
             })
             .catch((e)=>{
+                console.log(e.message);
                 return res.status(500).json({error: `Internal server error, ${e.message}`})
             })
        })
        .catch((e)=>{
+        console.log(e.message);
         return res.status(500).json({error: `Internal server error, ${e}`})
        })
     }   

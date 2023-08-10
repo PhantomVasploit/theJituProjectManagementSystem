@@ -14,3 +14,8 @@ CREATE TABLE usersTable(
     is_assigned BIT DEFAULT 0,
     is_admin BIT DEFAULT 0
 );
+
+USE ThejituProjectManagementDatabase;
+SELECT * FROM usersTable;
+
+DELETE FROM usersTable WHERE id =  9;
