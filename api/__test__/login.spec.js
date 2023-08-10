@@ -66,7 +66,7 @@ describe("User login controller test suite", ()=>{
             execute: jest.fn().mockResolvedValueOnce({rowsAffected: [ 1 ]})
         })
         
-        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true); // Mocking bcrypt.compare
+        jest.spyOn(bcrypt, 'compare').mockImplementationOnce(true); // Mocking bcrypt.compare
 
         // bcrypt.compare.mockResolvedValueOnce(false)
 

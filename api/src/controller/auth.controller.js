@@ -76,9 +76,7 @@ module.exports.login = async(req, res)=>{
             if(checkEmailQuery.rowsAffected[0] == 0){
                 return res.status(400).json({error: 'This email is not registred'})
             }else{
-                console.log(valid);
                 const valid = await bcrypt.compare(password, checkEmailQuery.recordset[0].password)
-                console.log(valid);
                 if(!valid){
                     return res.status(400).json({error: 'Invalid login credentials'})
                 }else{
