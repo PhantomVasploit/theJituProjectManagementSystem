@@ -1,5 +1,5 @@
 const mssql = require('mssql');
-const {updateEmployeeAccount} = require('../src/controller/employee.controller');
+const { updateEmployeeAccount } = require('../src/controller/employee.controller');
 
 describe('Update Employee Account', () => { 
     it('should delete employee successfully', async () => {

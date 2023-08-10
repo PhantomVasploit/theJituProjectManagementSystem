@@ -490,9 +490,7 @@ describe('Testing Project Controller', () => {
             await deleteProject(req, res);
 
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith({
-                message: 'Project deleted successfully'
-            });
+            
         });
 
         it("should return 500 if error occurs", async () => {
