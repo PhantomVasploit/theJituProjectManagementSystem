@@ -62,7 +62,7 @@ module.exports.login = async(req, res)=>{
         const {error} = loginSchema.validate({email, password})
         if(error){
             return res.status(422).json({error: error.message})
-        }else{
+        }
             // check if email is registered
     
             const pool = await mssql.connect(sqlConfig)
@@ -76,20 +76,18 @@ module.exports.login = async(req, res)=>{
             if(checkEmailQuery.rowsAffected[0] == 0){
                 return res.status(400).json({error: 'This email is not registred'})
             }else{
-                console.log(valid);
                 const valid = await bcrypt.compare(password, checkEmailQuery.recordset[0].password)
-                console.log(valid);
-                if(!valid){
-                    return res.status(400).json({error: 'Invalid login credentials'})
-                }else{
+                if(valid){
                     const token = jwt.sign({email: checkEmailQuery.recordset[0].email, is_admin: checkEmailQuery.recordset[0].password}, process.env.SECRET_KEY, {
                         expiresIn: 24*60*60
                     })
                     const {password, is_verified, is_assigned, ...user} = checkEmailQuery.recordset[0]
                     return res.status(200).json({message: 'Login successful', token, user})
+                }else{
+                    return res.status(400).json({error: 'Invalid login credentials'})
                 }
             }
-        }
+        
     } catch (error) {
         return res.status(500).json({error: `Internal server error, ${error.message}`})   
     }
