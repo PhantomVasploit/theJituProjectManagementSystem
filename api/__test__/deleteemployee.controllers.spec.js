@@ -2,7 +2,7 @@ const mssql = require('mssql');
 const {updateEmployeeAccount} = require('../src/controller/employee.controller');
 
 describe('Update Employee Account', () => { 
-    it('should delete employee successfully', async () => {
+    it('should update employee successfully', async () => {
         const updateEmployee ={
             id: 10,
             first_name: 'emma',
@@ -19,16 +19,19 @@ describe('Update Employee Account', () => {
             status: jest.fn().mockReturnThis(),
             json: jest.fn().mockReturnThis()
         }
-
-        jest.spyOn(mssql, 'ConnectionPool').mockResolvedValue({
+        mssql.connect = jest.fn().mockResolvedValue({
             request: jest.fn().mockReturnThis(),
             execute: jest.fn().mockResolvedValue({
-                rowsAffected: [1]
+                recordset: updateEmployee
             })
-        })
+        });
+
         await updateEmployeeAccount(req, res);
+
         expect(res.status).toHaveBeenCalledWith(200);
     })
+
+    // it('should return 404 if employee is not found', async () => {})
 })
 
     
