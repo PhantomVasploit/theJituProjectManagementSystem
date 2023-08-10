@@ -8,9 +8,10 @@ function checkData(){
 }
 
 window.onload = checkData
+
 user = JSON.parse(localStorage.user)
 function loadData(){
-    axios.get('http://127.0.0.1:3000/api/v1/projects', {
+    axios.get(`http://127.0.0.1:3000/api/v1/projects/user/${user.id}`, {
         headers: {
             'Content-Type': 'application/json',
             'authorization_token': token
@@ -21,43 +22,59 @@ function loadData(){
         const projectInfo = document.querySelector('.project-info')
         let projectHtml = ''
         errorEl.style.display = "none"
-        response.data.projects.forEach((project)=>{
-            projectHtml += `
-                <div class="project-card">
-                    <div class="top">
-                        <h4>${project.project_name}</h4>
-                        <div class="btn">
-                            
+        let complete = response.data.user_projects.filter((project)=>{
+            return project.is_completed == 1
+        })
+
+        if(complete.length <= 0){
+            const errorEl = document.querySelector('.error-message')
+            const projectInfo = document.querySelector('.project-info')
+            errorEl.innerHTML = "No projects"
+            projectInfo.style.display = "none"
+        }else{
+
+            complete.forEach((project)=>{
+                projectHtml += `
+                    <div class="project-card">
+                        <div class="top">
+                            <h4>${project.project_name}</h4>
+                            <div class="btn">
+                                
+                            </div>
+                        </div>
+                        <div class="middle">
+                            <p>
+                                ${project.project_description}
+                            </p>
+                        </div>
+                        <div class="bottom">
+                        <div class="right">
+                            <small>${new Date(project.start_date).toLocaleDateString()}</small>
+                        </div>
+                        
                         </div>
                     </div>
-                    <div class="middle">
-                        <p>
-                            ${project.project_description}
-                        </p>
-                    </div>
-                    <div class="bottom">
-                    <div class="right">
-                        <small>${new Date(project.start_date).toLocaleDateString()}</small>
-                    </div>
-                    
-                    </div>
-                </div>
-            `
-        })
-        projectInfo.innerHTML = projectHtml
+                `
+            })
+            projectInfo.innerHTML = projectHtml
+        }
+        
     })
     .catch((e)=>{
-        if(e?.message){
+        
+        console.log(e);
+        if(e){
             const errorEl = document.querySelector('.error-message')
             const projectInfo = document.querySelector('.project-info')
-            errorEl.innerHTML = e.message
-            projectInfo.style.display = "none"
-        }else if(e?.response.data.error){
-            const errorEl = document.querySelector('.error-message')
-            const projectInfo = document.querySelector('.project-info')
-            errorEl.innerHTML = e.message
+            errorEl.innerHTML = e.response.data.error ?? e.message
             projectInfo.style.display = "none"
         }
+        else if(e?.message){
+            const errorEl = document.querySelector('.error-message')
+            const projectInfo = document.querySelector('.project-info')
+            errorEl.innerHTML = e.message
+            projectInfo.style.display = "none"
+        } 
     })
 }
 

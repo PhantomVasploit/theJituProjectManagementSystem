@@ -90,12 +90,12 @@ const get_projects = async (req, res) => {
 const projectDetails = async (req, res) => {
     try {
 
-        const { is_admin } = req.user;
-        if (is_admin === false) {
-            return res.status(401).json({
-                message: 'Access denied'
-            });
-        }
+        // const { is_admin } = req.user;
+        // if (is_admin === false) {
+        //     return res.status(401).json({
+        //         message: 'Access denied'
+        //     });
+        // }
 
         const { id } = req.params;
 

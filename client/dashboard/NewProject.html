@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Project</title>
     <link rel="stylesheet" href="../Assets/css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="sidenav">
@@ -78,7 +79,7 @@
     <script>
         const projectForm = document.querySelector('.newProjectForm');
         const messageContainer = document.querySelector('.message-container');
-
+        // const token = localStorage.token
         // saving project information in localStorage and display message
         function saveProjectInformation() {
             const projectName = document.querySelector('#newProjectName').value;
@@ -99,6 +100,7 @@
             }
 
             if (isValid) {
+                console.log(token);
                 const projectData = {
                     projectName,
                     projectDescription,
@@ -107,11 +109,34 @@
                     endDate: endDate.toISOString()
                 };
 
-                localStorage.setItem('newProject', JSON.stringify(projectData));
-                showMessage('Project information saved successfully.', 'success');
-                setTimeout(() => {
-                    window.location.href = './availableUsers.html';
-                }, 3000);
+                axios.post('http://127.0.0.1:3000/api/v1/project', 
+                
+                {
+                    project_name: projectName,
+                    project_description: projectDescription,
+                    project_status: 'pending',
+                    start_date: startDate.toISOString(),
+                    end_date: endDate.toISOString()
+                },
+
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then((result)=>{
+                    console.log(result);
+                    showMessage('Project information saved successfully.', 'success');
+                    setTimeout(() => {
+                        window.location.href = './availableUsers.html';
+                    }, 3000);
+                })
+                .catch((e)=>{
+                    console.log(e);
+                })
+
+                
             }
         }
 
