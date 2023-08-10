@@ -4,7 +4,11 @@
   "description": "The API for the project management system.",
   "main": "app.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "jest --watchAll",
+=======
+    "test": "jest --watch",
+>>>>>>> frontend
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
   },
