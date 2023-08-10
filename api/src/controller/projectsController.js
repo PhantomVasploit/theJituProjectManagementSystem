@@ -74,12 +74,22 @@ const get_projects = async (req, res) => {
 
 const projectDetails = async (req, res) => {
     try {
+<<<<<<< HEAD
         const { is_admin } = req.user;
         if (is_admin === false) {
             return res.status(401).json({
                 message: 'Access denied'
             });
         }
+=======
+
+        // const { is_admin } = req.user;
+        // if (is_admin === false) {
+        //     return res.status(401).json({
+        //         message: 'Access denied'
+        //     });
+        // }
+>>>>>>> 4016f133b0611b2ea3df510d53cf06476f1acf1f
 
         const { id } = req.params;
 
