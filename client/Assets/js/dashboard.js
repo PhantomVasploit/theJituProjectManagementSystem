@@ -53,14 +53,13 @@ const loadAllUsers = async () => {
         const tr = document.createElement('tr')
         tr.innerHTML = `
             <td>${user.first_name} ${user.last_name}<br>
-            <span class="small-uid">
-                <small>123456789</small>
-            </span>
-            
+                <span class="small-uid">
+                    <small>123456789</small>
+                </span>
             </td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td><a href=".user.html?id=${user.id}" class="btn btn-primary">View</a></td>
+            <td><a href="/client/dashboard/dashboatd_user_detail.html?id=${user.id}" class="btn btn-primary">View</a></td>
         `
         users_table.appendChild(tr)
     }
@@ -140,8 +139,7 @@ const loadDashboardStats = async () => {
             <td><a href="/client/dashboard/availableUsers.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
         `
         recent_projects_table.appendChild(tr)
-    }
-    )
+    })
 }
 
 

@@ -33,7 +33,6 @@ BEGIN
     SELECT * FROM projectsTable WHERE id = @id
 END
 GO
-
 -- procedure to update a project
 CREATE OR ALTER PROCEDURE sp_updateProjectProc
     @id VARCHAR(255),
@@ -107,11 +106,30 @@ BEGIN
 END
 GO
 
+USE ThejituProjectManagementDatabase;
+GO
 
 CREATE OR ALTER PROCEDURE markProjectAsCompleted
     @id VARCHAR(255)
 AS
 BEGIN
     UPDATE projectsTable SET is_completed = 1, project_status = 'Completed' WHERE id = @id
+END
+GO
+
+CREATE OR ALTER PROCEDURE markProjectAsNotCompleted
+    @id VARCHAR(255)
+AS
+BEGIN
+    UPDATE projectsTable SET is_completed = 0, project_status = 'In Progress' WHERE id = @id
+END
+GO
+
+CREATE OR ALTER PROCEDURE AllProjectsByUserProc
+    @user_id VARCHAR(255)
+AS
+BEGIN
+    SELECT * FROM projectsTable WHERE id IN (
+        SELECT project_id FROM projectUserTable WHERE user_id = @user_id)
 END
 GO
