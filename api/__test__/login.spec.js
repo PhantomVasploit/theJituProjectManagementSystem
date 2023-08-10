@@ -24,8 +24,8 @@ describe("User login controller test suite", ()=>{
         
         const req = {
             body: {
-                email: "rachaelmuga1@gmail.com",
-                password: "Test1234."
+                email: "paul@gmail.com",
+                password: "pajoy9903"
             }
         }
 
@@ -42,7 +42,7 @@ describe("User login controller test suite", ()=>{
 
         await login(req, res)
 
-        // expect(res.status).toHaveBeenCalledWith(400)
+        expect(res.status).toHaveBeenCalledWith(400)
         expect(res.json).toHaveBeenCalledWith({error: 'This email is not registred'})
     })
 
