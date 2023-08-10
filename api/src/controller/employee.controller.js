@@ -1,133 +1,85 @@
-const mssql = require('mssql')
-const { sqlConfig } = require('../config/database.connection.config')
-const { updateSchema } = require('../utils/validator')
+const mssql = require('mssql');
+const { sqlConfig } = require('../config/database.connection.config');
+const { updateSchema } = require('../utils/validator');
 
-module.exports.getAllEmployees = (req, res)=>{
-   const {id} = req.user
-    mssql.connect(sqlConfig)
-    .then((pool)=>{
-        
-    })
-}
-
-module.exports.getAllEmployees = (req, res)=>{
-    mssql.connect(sqlConfig)
-    .then((pool)=>{
-        pool.request()
-        .execute('fetchAllUser')
-        .then((result)=>{
-            const {password, is_admin, ...employees} = result.recordset[0]
-            return res.status(200).json({employees: result.recordset})
-        })
-        .catch((e)=>{
-            return res.status(500).json({error: e.message})
-        })
-    })
-    .catch((e)=>{
-        return res.status(500).json({error: e.message})
-    })
-}
-
-module.exports.getEmployeeById = (req, res)=>{
-    const {id} = req.params
-
-    mssql.connect(sqlConfig)
-    .then((pool)=>{
-        pool.request()
-        .input('id', id)
-        .execute('fetchUserByIdPROC')
-        .then((result)=>{
-            const { password, is_admin, ...employee } = result.recordset[0]
-            return res.status(200).json({message: 'Fetch successful', employee})
-        })
-        .catch((e)=>{
-            return res.status(500).json({error: e.message})    
-        })
-    })
-    .catch((e)=>{
-        return res.status(500).json({error: e.message})
-    })
-}
-
-
-module.exports.updateEmployeeAccount = (req, res)=>{
-    const {id} = req.params
-    const {firstName, lastName, email} = req.body
-    const {error} = updateSchema.validate({firstName, lastName, email})
-
-    if(error){
-        return res.status(422).json({error: error.message})
-    }else{
-        mssql.connect(sqlConfig)
-        .then((pool)=>{
-            pool.request()
-            .input('id', id)
-            .execute('fetchUserByIdPROC')
-            .then((result)=>{
-                if(result.recordset.length <= 0){
-                    return res.status(404).json({error: `User not found`})
-                }else{
-                    pool.request()
-                    .input('id', id)
-                    .input('first_name', firstName)
-                    .input('last_name', lastName)
-                    .input('email', email)
-                    .execute('updateUserAccountPROC')
-                    .then((update)=>{
-                        pool.request()
-                        .input('email', email)
-                        .execute('fetchUserByEmailPROC')
-                        .then((result)=>{
-                            const {password, is_verified, is_assigned, ...user} = result.recordset[0]
-                            return res.status(200).json({message: 'Update successful',user})
-                        })
-                        .catch((e)=>{
-                            return res.status(500).json({error: e.message})    
-                        })
-                    })
-                    .catch((e)=>{
-                        return res.status(500).json({error: e.message})
-                    })
-                }
-            })
-            .catch((e)=>{
-                return res.status(500).json({error: e.message})    
-            })
-        })
-        .catch((e)=>{
-            return res.status(500).json({error: e.message})
-        })
+//should help in executing the queries and errors
+const executeQuery = async (query) => {
+    try {
+        const pool = await mssql.connect(sqlConfig);
+        const request = pool.request();
+        return await query(request);
+    } catch (error) {
+        throw 'Internal server error';
     }
 }
 
+module.exports.getAllEmployees = async (req, res) => {
+    try {
+        const result = await executeQuery(request => request.execute('fetchAllUser'));
+        const employees = result.recordset.map(record => {
+            const { password, is_admin, ...employee } = record;
+            return employee;
+        });
+        return res.status(200).json({ employees });
+    } catch (error) {
+        return res.status(500).json({ error});
+    }
+};
 
-module.exports.deleteEmployeeAccount = (req, res)=>{
-    const {id} = req.params
-    mssql.connect(sqlConfig)
-    .then((pool)=>{
-        pool.request()
-        .input('id', id)
-        .execute('fetchUserByIdPROC')
-        .then((result)=>{
-            if(result.recordset.length <= 0){
-                res.status(404).json({error: 'Account to delete not found'})
-            }else{
-                pool.request()
-                .input('id', id)
-                .execute('deleteUserAccount')
-                .then((result)=>{
-                    res.status(200).json({message: `Account deleted successfully`})
-                })
-                .catch((e)=>{
-                    return res.status(500).json({error: e.message})        
-                })
-            }
-        })
-        .catch((e)=>{
-            return res.status(500).json({error: e.message})    
-        })
-    })  
-    .catch((e)=>{
-        return res.status(500).json({error: e.message})
-    }) 
-}
+module.exports.getEmployeeById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await executeQuery(request => request.input('id', id).execute('fetchUserByIdPROC'));
+        const { password, is_admin, ...employee } = result.recordset[0];
+        return res.status(200).json({ message: 'Fetch successful', employee });
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+};
+
+module.exports.updateEmployeeAccount = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { firstName, lastName, email } = req.body;
+        const { error } = updateSchema.validate({ firstName, lastName, email });
+
+        if (error) {
+            return res.status(422).json({ error: error.message });
+        }
+
+        const result = await executeQuery(request => request.input('id', id).execute('fetchUserByIdPROC'));
+
+        if (result.recordset.length <= 0) {
+            return res.status(404).json({ error: `User not found` });
+        }
+
+        await executeQuery(request => request
+            .input('id', id)
+            .input('first_name', firstName)
+            .input('last_name', lastName)
+            .input('email', email)
+            .execute('updateUserAccountPROC'));
+
+        const userResult = await executeQuery(request => request.input('email', email).execute('fetchUserByEmailPROC'));
+        const { password, is_verified, is_assigned, ...user } = userResult.recordset[0];
+        return res.status(200).json({ message: 'Update successful', user });
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+};
+
+module.exports.deleteEmployeeAccount = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await executeQuery(request => request.input('id', id).execute('fetchUserByIdPROC'));
+
+        if (result.recordset.length <= 0) {
+            return res.status(404).json({ error: 'Account to delete not found' });
+        }
+
+        await executeQuery(request => request.input('id', id).execute('deleteUserAccount'));
+        return res.status(200).json({ message: `Account deleted successfully` });
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+};
