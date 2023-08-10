@@ -50,6 +50,7 @@ const config = {
 
   // Make calling deprecated APIs throw helpful error messages
   // errorOapi/src/controller/employee.controller.spec.jsnDeprecated: false,
+  // errorOnDeprecated: false,
 
   // The default configuration for fake timers
   // fakeTimers: {
@@ -162,6 +163,7 @@ const config = {
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   testPathIgnorePatterns: [
     "/node_modules/"
+    "\\\\node_modules\\\\"
   ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
@@ -180,6 +182,8 @@ const config = {
   // transformIgnorePatterns: [
   //   "/node_modules/",
   //   "\\.pnp\\.[^\\/]+$"
+  //   "\\\\node_modules\\\\",
+  //   "\\.pnp\\.[^\\\\]+$"
   // ],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them

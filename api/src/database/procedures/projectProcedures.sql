@@ -33,19 +33,18 @@ BEGIN
     SELECT * FROM projectsTable WHERE id = @id
 END
 GO
+
 -- procedure to update a project
 CREATE OR ALTER PROCEDURE sp_updateProjectProc
     @id VARCHAR(255),
     @project_name VARCHAR(255),
     @project_description VARCHAR(255),
     @project_status VARCHAR(255),
-    @is_allocated BIT,
-    @is_completed BIT,
     @start_date DATETIME,
     @end_date DATETIME
 AS
 BEGIN
-    UPDATE projectsTable SET project_name = @project_name, project_description = @project_description, project_status = @project_status, is_allocated = @is_allocated, is_completed = @is_completed, start_date = @start_date, end_date = @end_date WHERE id = @id
+    UPDATE projectsTable SET project_name = @project_name, project_description = @project_description, project_status = @project_status, start_date = @start_date, end_date = @end_date WHERE id = @id
 END
 GO
 
