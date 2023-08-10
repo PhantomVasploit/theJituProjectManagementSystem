@@ -12,23 +12,10 @@ const config = {
   // bail: 0,
 
   // The directory where Jest should store its cached dependency information
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4016f133b0611b2ea3df510d53cf06476f1acf1f
-  // cacheDirectory: "/tmp/jest_rs",
-
-  // Automatically clear mock calls, instances, contexts and results before every test
-  clearMocks: true,
-<<<<<<< HEAD
-=======
   // cacheDirectory: "C:\\Users\\Admin\\AppData\\Local\\Temp\\jest",
 
   // Automatically clear mock calls, instances, contexts and results before every test
   // clearMocks: false,
->>>>>>> frontend
-=======
->>>>>>> 4016f133b0611b2ea3df510d53cf06476f1acf1f
 
   // Indicates whether the coverage information should be collected while executing the test
   // collectCoverage: false,
@@ -41,15 +28,7 @@ const config = {
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns: [
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "/node_modules/"
-=======
     "\\\\node_modules\\\\"
->>>>>>> frontend
-=======
-    "/node_modules/"
->>>>>>> 4016f133b0611b2ea3df510d53cf06476f1acf1f
   ],
 
   // Indicates which provider should be used to instrument code for coverage
@@ -70,11 +49,7 @@ const config = {
   // dependencyExtractor: undefined,
 
   // Make calling deprecated APIs throw helpful error messages
-  // errorOapi/src/controller/employee.controller.spec.jsnDeprecated: false,
-<<<<<<< HEAD
-=======
   // errorOnDeprecated: false,
->>>>>>> 4016f133b0611b2ea3df510d53cf06476f1acf1f
 
   // The default configuration for fake timers
   // fakeTimers: {
@@ -186,16 +161,7 @@ const config = {
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   testPathIgnorePatterns: [
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "/node_modules/"
-=======
     "\\\\node_modules\\\\"
->>>>>>> frontend
-=======
-    "/node_modules/"
-    "\\\\node_modules\\\\"
->>>>>>> 4016f133b0611b2ea3df510d53cf06476f1acf1f
   ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
@@ -212,20 +178,8 @@ const config = {
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
-<<<<<<< HEAD
-<<<<<<< HEAD
-  //   "/node_modules/",
-  //   "\\.pnp\\.[^\\/]+$"
-=======
   //   "\\\\node_modules\\\\",
   //   "\\.pnp\\.[^\\\\]+$"
->>>>>>> frontend
-=======
-  //   "/node_modules/",
-  //   "\\.pnp\\.[^\\/]+$"
-  //   "\\\\node_modules\\\\",
-  //   "\\.pnp\\.[^\\\\]+$"
->>>>>>> 4016f133b0611b2ea3df510d53cf06476f1acf1f
   // ],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
