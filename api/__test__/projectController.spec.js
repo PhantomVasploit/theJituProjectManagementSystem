@@ -1,7 +1,7 @@
 const mssql = require('mssql');
 const { v4 } = require('uuid');
-const { sqlConfig } = require('../config/database.connection.config');
-const { createProject, get_projects, projectDetails, updateProject, deleteProject } = require('../controller/projectsController');
+const { sqlConfig } = require('../src/controller/projectsController');
+const { createProject, get_projects, projectDetails, updateProject, deleteProject } = require('../src/controller/projectsController');
 
 // Mocking Express Request and Response
 const req = {
