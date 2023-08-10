@@ -11,7 +11,7 @@ window.onload = checkData
 user = JSON.parse(localStorage.user)
 
 function loadData(){
-    axios.get('http://127.0.0.1:3000/api/v1/projects', {
+    axios.get(`http://127.0.0.1:3000/api/v1/projects/user/${user.id}`, {
         headers: {
             'Content-Type': 'application/json',
             'authorization_token': token
@@ -22,13 +22,17 @@ function loadData(){
         const projectInfo = document.querySelector('.project-info')
         let projectHtml = ''
         errorEl.style.display = "none"
-        response.data.projects.forEach((project)=>{
+        let incomplete = response.data.user_projects.filter((project)=>{
+            return project.is_completed == 0
+        })
+        
+        incomplete.forEach((project)=>{
             projectHtml += `
                 <div class="project-card">
                     <div class="top">
                         <h4>${project.project_name}</h4>
                         <div class="btn">
-                            <button>Done</button>
+                            <button onclick="${()=>{markComplete(project.id)}}" class="${project.id}" >Done</button>
                         </div>
                     </div>
                     <div class="middle">
@@ -74,6 +78,23 @@ function logOut(){
     localStorage.setItem('user', '')
     localStorage.setItem('token', '')
     window.location.href='../../index.html'
+}
+
+function markComplete(id){
+    console.log(id);
+    // axios.put(`http://127.0.0.1:3000/api/v1/project/complete/${id}`, {
+    //     headers: {
+    //         "Content-Type": 'application/json',
+    //         "Authorization": `Bearer ${token}`
+    //     }
+    // })
+    // .then((response)=>{
+    //     console.log(response);
+    //     // window.location.reload();
+    // })
+    // .catch((e)=>{
+    //     console.log(e.message);
+    // })
 }
 
 document.querySelector('.logout').addEventListener('click', ()=>{

@@ -82,14 +82,14 @@ document.addEventListener('DOMContentLoaded', function () {
       .then((response)=>{
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('user', JSON.stringify(response.data.user))
-        window.location.href('../employee/html/dashboard.html')
+        window.location.href = './login.html'
       })
       .catch((e)=>{
-        if(e?.message){
-            showError(e.message)
-        }else if(e?.response.data.error){
-            showError(e.response.data.error)
-        }
+        if(e?.response.data.error){
+          showError(e.response.data.error)
+        } else if(e?.message){
+          showError(e.message)
+      } 
       })
       form.reset();
     }

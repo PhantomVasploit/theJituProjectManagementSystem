@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.user)
 
 // load all projects
 const fetchAllProjects = async () => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/projects', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects', {
         headers: {
             'Content-Type': 'application/json',
             'authorization_token': `${token}`
@@ -33,7 +33,7 @@ const loadAllProjects = async () => {
 
 // loading all users
 const fetchAllUsers = async () => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/employees', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/employees', {
         headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${token}`
@@ -124,7 +124,7 @@ const loadDashboardStats = async () => {
             </td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td><a href="./user.html?id=${user.id}" class="btn btn-primary">View</a></td>
+            <td><a href="./users.html?id=${user.id}" class="btn btn-primary">View</a></td>
         `
         unapproved_users_table.appendChild(tr)
     }
@@ -137,7 +137,7 @@ const loadDashboardStats = async () => {
             <td>${project.project_name}</td>
             <td>${project.project_status}</td>
             <td>${project.end_date.split('T')[0]}</td>
-            <td><a href="./project.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
+            <td><a href="./availableUsers.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
         `
         recent_projects_table.appendChild(tr)
     }
@@ -146,7 +146,7 @@ const loadDashboardStats = async () => {
 
 
 const createNewProject = async (project_name, project_description, project_status, start_date, end_date) => {
-    const response = await fetch('http://127.0.0.1:8003/api/v1/projects', {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

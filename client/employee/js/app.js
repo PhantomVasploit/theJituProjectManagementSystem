@@ -57,20 +57,23 @@ const recordHolder = document.querySelector('.record')
 const projects = document.querySelector('.projects')
 const noProject = document.querySelector('.no-project')
     function loadData(){
-        axios.get(`http://127.0.0.1:3000/api/v1/projects/${user.id}`,{
+        axios.get(`http://127.0.0.1:3000/api/v1/projects/user/${user.id}`,{
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.token}`
         }
     })
     .then((response)=>{
-        if(response.data.userProjects.length <= 0){
+        
+        if(response.data.user_projects.length <= 0){
             noProject.innerHTML = 'You are yet to be assigned a project'
             projects.style.display = "none"
         }else{
             
+            
+
             let records = ``
-            response.data.userProjects.forEach((project)=>{
+            response.data.user_projects.forEach((project)=>{
                 console.log(project);
                 records += `
                     <div class="records">
