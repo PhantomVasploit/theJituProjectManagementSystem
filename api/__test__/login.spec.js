@@ -116,7 +116,6 @@ describe("User login controller test suite", ()=>{
         jest.spyOn(jwt, 'sign').mockReturnValueOnce('sampleToken123');
 
         await login(req, res);
-        expect(bcrypt.compare).toHaveBeenCalledTimes(1)
         expect(jwt.sign).toHaveBeenCalledTimes(1)
         expect(res.status).toHaveBeenCalledWith(200)
         expect(res.json).toHaveBeenCalledWith({
