@@ -31,9 +31,11 @@ module.exports.getEmployeeById = async (req, res) => {
         const { id } = req.params;
         const result = await executeQuery(request => request.input('id', id).execute('fetchUserByIdPROC'));
         const { password, is_admin, ...employee } = result.recordset[0];
-        return res.status(200).json({ message: 'Fetch successful', employee });
+        return res.status(200).json({ 
+            message: 'Fetch successful', employee
+         });
     } catch (error) {
-        return res.status(500).json({ error: error.message });
+        return res.status(500).json({ error});
     }
 };
 
