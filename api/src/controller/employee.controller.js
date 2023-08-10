@@ -2,6 +2,13 @@ const mssql = require('mssql')
 const { sqlConfig } = require('../config/database.connection.config')
 const { updateSchema } = require('../utils/validator')
 
+module.exports.getAllEmployees = (req, res)=>{
+   const {id} = req.user
+    mssql.connect(sqlConfig)
+    .then((pool)=>{
+        
+    })
+}
 
 module.exports.getAllEmployees = (req, res)=>{
     mssql.connect(sqlConfig)

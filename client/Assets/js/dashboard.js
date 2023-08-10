@@ -53,14 +53,13 @@ const loadAllUsers = async () => {
         const tr = document.createElement('tr')
         tr.innerHTML = `
             <td>${user.first_name} ${user.last_name}<br>
-            <span class="small-uid">
-                <small>123456789</small>
-            </span>
-            
+                <span class="small-uid">
+                    <small>123456789</small>
+                </span>
             </td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td><a href=".user.html?id=${user.id}" class="btn btn-primary">View</a></td>
+            <td><a href="/client/dashboard/dashboatd_user_detail.html?id=${user.id}" class="btn btn-primary">View</a></td>
         `
         users_table.appendChild(tr)
     }
@@ -140,13 +139,12 @@ const loadDashboardStats = async () => {
             <td><a href="./availableUsers.html?id=${project.id}" class="btn btn-primary">Allocate</a></td>
         `
         recent_projects_table.appendChild(tr)
-    }
-    )
+    })
 }
 
 
 const createNewProject = async (project_name, project_description, project_status, start_date, end_date) => {
-    const response = await fetch('http://127.0.0.1:3000/api/v1/projects', {
+    const response = await fetch('http://127.0.0.1:8003/api/v1/projects', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -182,3 +180,84 @@ const submitNewProject = async (e) => {
         alert('Project creation failed')
     }
 }
+
+
+//logout button
+function handleLogout() {
+    localStorage.removeItem('authToken');
+    window.location.href = '../index.html'; 
+}
+const logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('click', () => {
+    handleLogout();
+    history.pushState({ isLogout: true }, null, '../index.html');
+});
+window.addEventListener('popstate', (event) => {
+   
+    if (event.state && event.state.isLogout) {
+        window.location.href = '../Auth/login.html'; 
+    }
+});
+const fetchAvailableUsers = async () => {
+    const response = await fetch('http://127.0.0.1:3000/api/v1/projects/get-free-employees', {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization_token': `${token}`
+        }
+    })
+    const data = await response.json()
+    return data
+}
+
+const loadAvailableUsers = async () => {
+    const available_users_table = document.getElementById('available-users-table')
+    const available_users = await fetchAvailableUsers()
+    const users = available_users.free_users
+    available_users_table.innerHTML = ''
+    users.forEach((user) => {
+        const tr = document.createElement('tr')
+        tr.innerHTML = `
+        <td><input type="checkbox" name="select" id="select" value="${user.id}"></td>
+        <td>${user.first_name} ${user.last_name}<td>
+        <td>Js, Node, ExpressJS, React</td>
+        
+        `
+        available_users_table.appendChild(tr)
+    })
+}
+
+const assignUserToProject = async (project_id, user_id) => {
+    const response = await fetch(`http://http://127.0.0.1:3000/api/v1/projects/${project_id}/${user_id}/assign`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization_token': `${token}`
+        }
+    })
+    const data = await response.json()
+    return data
+}
+
+const submitUserAllocation = async (e) => {
+    e.preventDefault()
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked')
+    const project_id = window.location.href.split('?id=')[1]
+    const user_ids = []
+    checkboxes.forEach(checkbox => {
+        const row = checkbox.closest('tr');
+        const user_id = row.querySelector('td:nth-child(1)').innerText;
+        user_ids.push(user_id)
+    })
+    user_ids.forEach(async user_id => {
+        const response = await assignUserToProject(project_id, user_id)
+        if (response.status === 'success') {
+            showMessage('Users assigned successfully', 'success')
+            window.location.href = './dashboard.html'
+        } else {
+            showMessage('Error assigning users', 'error')
+        }
+    })
+}
+
+
+

@@ -43,13 +43,10 @@ module.exports.employeeRegister= async(req, res)=>{
                 expiresIn: 24*60*60
             })
 
-            return res.status(201).json({
-                message: 'Account created successfully',
-                token,
-                user: { firstName, lastName, email, is_admin: 0 }
-            });
+            res.status(201).json({message: 'Account created successfully', token, user: {firstName, lastName, email, is_admin: 0}})
         }   
-    } catch (error) {
+    }   
+    catch(error){
         return res.status(500).json({error: error.message})
     }
 }
@@ -79,6 +76,7 @@ module.exports.login = async(req, res)=>{
             if(checkEmailQuery.rowsAffected[0] == 0){
                 return res.status(400).json({error: 'This email is not registred'})
             }else{
+                console.log(valid);
                 const valid = await bcrypt.compare(password, checkEmailQuery.recordset[0].password)
                 console.log(valid);
                 if(!valid){

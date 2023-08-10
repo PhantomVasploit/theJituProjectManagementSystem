@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 const { login } = require("../src/controller/auth.controller")
 
+// jest.mock("bcrypt")
+
 describe("User login controller test suite", ()=>{
     
     it('should fail when the request body is missing', async()=>{
@@ -45,6 +47,7 @@ describe("User login controller test suite", ()=>{
     })
 
     it('should fail if the password is invalid', async()=>{
+        const hashedPwd = 'trdsfgchjgb;gjihkmn.klhj;k'
         const req = {
             body: {
                 email: "paul@gmail.com",
@@ -63,10 +66,13 @@ describe("User login controller test suite", ()=>{
             execute: jest.fn().mockResolvedValueOnce({rowsAffected: [ 1 ]})
         })
         
-        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false)
+        jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true); // Mocking bcrypt.compare
 
-        await login(req, res)
+        // bcrypt.compare.mockResolvedValueOnce(false)
 
+        await login(req, res);
+
+        // expect(bcrypt.compare).toHaveBeenCalledWith("pajoy9903", hashedPwd);
         expect(res.status).toHaveBeenCalledWith(400)
     })
 })

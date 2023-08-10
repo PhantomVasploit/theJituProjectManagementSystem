@@ -13,3 +13,5 @@ module.exports.sqlConfig = {
         trustServerCertificate: true
     }
 }
+
+

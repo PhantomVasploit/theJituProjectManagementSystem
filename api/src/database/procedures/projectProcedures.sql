@@ -1,6 +1,7 @@
 USE ThejituProjectManagementDatabase;
 GO
 
+
 CREATE OR ALTER PROCEDURE sp_createProjectProc
     @id VARCHAR(255),
     @project_name VARCHAR(255),
@@ -32,7 +33,6 @@ BEGIN
     SELECT * FROM projectsTable WHERE id = @id
 END
 GO
-
 -- procedure to update a project
 CREATE OR ALTER PROCEDURE sp_updateProjectProc
     @id VARCHAR(255),
@@ -64,11 +64,13 @@ GO
 CREATE OR ALTER PROCEDURE assignUserToProject
     @id VARCHAR(255),
     @project_id VARCHAR(255),
-    @user_id INT
+    @user_id VARCHAR(255)
 AS
 BEGIN
     INSERT INTO projectUserTable (id, project_id, user_id)
     VALUES (@id, @project_id, @user_id)
+
+    UPDATE usersTable SET is_assigned = 1 WHERE id = @user_id
 END
 GO
 
@@ -97,11 +99,37 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE checkAllFreeUsers
+AS
+BEGIN
+    SELECT * FROM usersTable WHERE is_assigned = 0 AND is_admin = 0
+END
+GO
+
+USE ThejituProjectManagementDatabase;
+GO
 
 CREATE OR ALTER PROCEDURE markProjectAsCompleted
     @id VARCHAR(255)
 AS
 BEGIN
     UPDATE projectsTable SET is_completed = 1, project_status = 'Completed' WHERE id = @id
+END
+GO
+
+CREATE OR ALTER PROCEDURE markProjectAsNotCompleted
+    @id VARCHAR(255)
+AS
+BEGIN
+    UPDATE projectsTable SET is_completed = 0, project_status = 'In Progress' WHERE id = @id
+END
+GO
+
+CREATE OR ALTER PROCEDURE AllProjectsByUserProc
+    @user_id VARCHAR(255)
+AS
+BEGIN
+    SELECT * FROM projectsTable WHERE id IN (
+        SELECT project_id FROM projectUserTable WHERE user_id = @user_id)
 END
 GO

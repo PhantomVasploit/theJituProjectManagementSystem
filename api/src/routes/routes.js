@@ -18,7 +18,7 @@ router.post('/admin/register', adminRegister)
 
 router.get('/projects', verifyToken, get_projects)
 router.post('/projects', verifyToken, createProject)
-router.get('/project/:id', verifyToken, projectDetails)
+router.get('/project/:id',  projectDetails)
 router.put('/project/:id', verifyToken, updateProject)
 router.delete('/project/:id', verifyToken, deleteProject)
 router.put('/project/:id/mark-complete', verifyToken, markProjectAsCompleted)

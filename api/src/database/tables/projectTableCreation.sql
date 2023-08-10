@@ -30,12 +30,13 @@ BEGIN TRY
         user_id INT NOT NULL,
         date_allocated DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (project_id) REFERENCES projectsTable(id),
-        FOREIGN KEY (user_id) REFERENCES user_table(id)
+        FOREIGN KEY (user_id) REFERENCES usersTable(id)
     )
 END TRY
 BEGIN CATCH
     PRINT 'Error while creating projectUserTable';
 END CATCH;
+GO
 
 
 

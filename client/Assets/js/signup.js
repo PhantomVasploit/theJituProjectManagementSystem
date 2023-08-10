@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then((response)=>{
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('user', JSON.stringify(response.data.user))
-        window.location.href = './login.html'
+        window.location.href='../Auth/login.html'
       })
       .catch((e)=>{
         if(e?.response.data.error){
