@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "cypress": "^12.17.3",
     "vitest": "^0.34.1"
   }
 }
