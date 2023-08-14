@@ -44,7 +44,6 @@ module.exports.updateEmployeeAccount = async (req, res) => {
         const { id } = req.params;
         const { firstName, lastName, email } = req.body;
         const { error } = updateSchema.validate({ firstName, lastName, email });
-
         if (error) {
             return res.status(422).json({ error: error.message });
         }
@@ -62,12 +61,14 @@ module.exports.updateEmployeeAccount = async (req, res) => {
             .input('email', email)
             .execute('updateUserAccountPROC'));
 
-        const userResult = await executeQuery(request => request.input('email', email).execute('fetchUserByEmailPROC'));
-        const { password, is_verified, is_assigned, ...user } = userResult.recordset[0];
-        return res.status(200).json({ message: 'Update successful', user });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+      const updatedResult = await executeQuery(request => request.input('id', id).execute('fetchUserByIdPROC'));
+        const { password, is_admin, ...employee } = updatedResult.recordset[0];
+        return res.status(200).json({
+            message: 'Update successful', employee
+        })
+        } catch (error) {
+        return res.status(500).json({ error });
+        }
 };
 
 module.exports.deleteEmployeeAccount = async (req, res) => {
@@ -80,10 +81,10 @@ module.exports.deleteEmployeeAccount = async (req, res) => {
         }
 
         await executeQuery(request => request.input('id', id).execute('deleteUserAccount'));
-        return res.status(200).json({ message: `Account deleted successfully` });
+        return res.status(200).json({ message: `Account deleted successfully` }); 
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error});
+        // console.error(error);
+        return res.status(500).json({ error });
     }
 };
 
