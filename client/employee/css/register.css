@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+   justify-content: center;
+}
+
+.title{
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../assests/20944201.jpg');
+}
+
+.login-form{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-left: 1px solid black; */
+}
+
+.login-form form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form .title-logo{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.login-form .title-logo .logo{
+    height: 10rem;
+    width: 10rem;
+}
+
+
+.login-form .title-logo .logo img{
+    height: 100%;
+    width: 100%;
+}
+
+.fieldset{
+    width: 80%;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 1px solid black; */
+}
+
+.fieldset .heading{
+    width: 100%;
+    padding: 20px;
+}
+
+.fieldset .fields{
+    width: 100%;
+}
+
+.fieldset .fields .field{
+    width: 100%;
+    padding: 10px;
+}
+
+.fieldset .fields .field input[type="text"], input[type="email"], input[type="password"]{
+    width: 100%;
+    padding: 10px;
+}
+
+.fieldset .submision{
+    width: 100%;
+    padding: 20px;
+}
+
+
+.fieldset .submision input[type="submit"]{
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #0B63F8;
+}
+
+.first-name-error{
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .title{
+        display: none;
+        
+    }
+    .login-form{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
