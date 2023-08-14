@@ -9,7 +9,6 @@ body{
     height: 100vh;
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
 }
 
@@ -22,258 +21,275 @@ main{
     justify-content: center;
 }
 
-.navbar{
+main .navbar{
     width: 100%;
     height: 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
 }
+ .navbar .left .logo img{
+    margin-top: -20px;
+ }
 
-.navbar .logo-icons{
-    width: 7%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-
-.content{
-    height: 90%;
-    width: 100%;
+.navbar .right .profile{
+    gap: 20px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.content .sidebar{
+.navbar .right .profile .image{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.navbar .right .profile .image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.location{
+    color: gray;
+}
+
+ main .content{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ .content .sidebar{
     width: 15%;
     height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-between;
-}
+    border-right: 1px solid lightgray;
+ }
 
-
- .top-links{
-    width: 100%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.content .sidebar .top-links .link{
-    width: 100%;
-    padding: 20px;
+ .content .projects{
+    width: 85%;
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-}
+    flex-direction: column;
+    justify-content: center;
+    background-color: lightgray;
+ }
 
-.content .sidebar .link .url a{
-    color: black;
+ .content .sidebar .links{
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+ }
+
+ .content .sidebar .link{
+    gap: 0px;
+    color: gray;
+    display: grid;
+    padding-left: 20px;
+    align-items: center;
+    padding-right: 20px;
+    justify-content: center;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+ }
+
+ .sidebar .link a{
+    color: gray;
     text-decoration: none;
 }
 
-.bottom-links{
+#active-link{
+    color: #0B63F8;
+}
+
+.content .projects .title{
     width: 100%;
-    height: 50%;
+    color: gray;
+    padding: 20px;  
+}
+
+.content .projects .info{
+    width: 90%;
+    height: 85%;
     display: flex;
+    align-items: center;
+    border-radius: 10px;
     flex-direction: column;
-    justify-content: center;
-    border-top: 1px solid black;
+    background-color: white;
+    justify-content: space-between;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
-.bottom-links .link{
-    
+.projects .info .title{
+    padding: 30px;
+}
+
+.projects .info .tasks{
+    gap: 30px;
     width: 100%;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.content .info{
-    gap: 20px;
-    width: 85%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #D9D9D9;
-}
-
-.info .profile{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.profile .profile-card{
-    gap: 10px;
-    width: 20rem;
+    height: 80%;
     padding: 10px;
     display: flex;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.projects .info .tasks .in-progress{
+    width: 50%;
+    height: 100%;
+    display: flex;
     border-radius: 10px;
     align-items: center;
     flex-direction: column;
-    background-color: white;
-    border: 1px solid black;
-    justify-content: space-evenly;
+    border: 1px solid gray;
 }
 
-.profile-card .social-media{
-    gap: 10px;
-    display: flex;
-}
-
-.profile-card .profile-image{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid pink;
-}
-
-.profile-card .profile-image img{
+.projects .info .tasks .complete{
+    width: 50%;
     height: 100%;
-    width: 100%;
-    border-radius: 50%;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid gray;
 }
 
-.edit-profile{
-    width: 40rem;
-    padding: 20px;
+.projects .info .tasks .in-progress .project-cards, .complete .project-cards{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow-y: scroll;
+    border-radius: 10px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.projects .info .tasks .in-progress .top{
+    width: 100%;
+    height: 10%;
+    color: gray;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #F0F6FF;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.projects .info .tasks .complete .top{
+    width: 100%;
+    height: 10%;
+    color: gray;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #F0F6FF;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.projects .info .tasks .in-progress .search, .complete .search{
+    width: 87%;
+    padding: 10px;
+}
+
+.search input[type="text"]{
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.project-item{
+    width: 85%;
+    margin-top: 10px;
     border-radius: 10px;
     border: 1px solid black;
-    background-color: white;
 }
 
-.edit-profile h4{
-    padding: 15px;
-}
-.edit-profile .name{
-    width: 100%;
-    padding: 15px;
+.project-item .project-top{
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.name .fname, .lname{
-    gap: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.edit-profile .email{
-    width: 45%;
-    padding: 15px;
-}
-
-.submit-btn{
-    width: 100%;
+.project-middle{
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-input[type="submit"]{
+.btn button{
     border: none;
     color: white;
     padding: 10px 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #0B63F8;
 }
 
-.email .email-field{
-    gap: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-input[type="text"]{
-    padding: 10px 30px;
-}
-
-.projects{
-    width: 75rem;
-    display: flex;
-    border-radius: 10px;
-    flex-direction: column;
-    border: 1px solid black;
-    background-color: white;
-}
-
-.projects .title{
-    width: 100%;
-    padding: 10px;
+.project-bottom{
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.projects .title p{
-    color: #ED2590;
+.project-bottom .left{
+    gap: 15px;
+    color: red;
+    display: flex;
 }
 
-.projects .content{
-    width: 100%;
+.progress-no-data, .completed-no-data{
+    height: 7rem;
+    width: 20rem;
+    margin: 20px;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    
+    border-radius: 10px;
+    border: 1px solid black;
+    justify-content: space-between;
 }
 
-.projects .content .title{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    /* border-bottom: 1px solid black; */
+
+.progress-no-data .no-data-left, .completed-no-data .no-data-left{
+    width: 1rem;
+    height: 100%;
+    border-radius: 10px 0px 0px 10px;
+    background-color: hsl(41.23,100%,61.76%);
 }
 
-.projects .records{
-    width: 100%;
-    display: flex;
-    padding: 20px;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.project-section{
-    gap: 20px;
-    width: 85%;
+.progress-no-data .content, .completed-no-data .content{
+    width: 95%;
     height: 100%;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #D9D9D9;   
+    justify-content: space-around;
 }
 
-.project-info{
-    display: grid;
-
-    justify-content: center;
-    grid-template-columns: repeat(auto-fill, 300px);
+.progress-no-data .content .image, .completed-no-data .content .image{
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
 }
 
-.project-card{
-    width: 30rem;
-    background-color: white;
-}
-
-.record{
+.progress-no-data .content .image img, .completed-no-data .content .image img{
     width: 100%;
+    height: 100%;
+    
 }
 
-.no-project{
-    font-size: 20px;
-    font-weight: lighter;
+.progress-no-data .content .text, .completed-no-data .content .text{
+    margin-right: 10px ;
 }

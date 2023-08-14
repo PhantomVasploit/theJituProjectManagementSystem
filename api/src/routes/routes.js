@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const { adminAuthorization } = require('../middleware/admin.authorization');
 const { authorization } = require('../middleware/authorization.middleware');
-const { getAllEmployees, getEmployeeById, updateEmployeeAccount, deleteEmployeeAccount } = require('../controller/employee.controller');
+const { getAllEmployees, getEmployeeById, updateEmployeeAccount, deleteEmployeeAccount, getEmployeeProjects } = require('../controller/employee.controller');
 const { employeeRegister, adminRegister, login } = require('../controller/auth.controller');
 const { get_projects, createProject, projectDetails, updateProject, deleteProject, 
         assignUserProject, markProjectAsCompleted, getAllFreeUsers, getAllProjectEverAssigned 
@@ -30,6 +30,7 @@ router.get('/projects/:user_id/all', verifyToken, getAllProjectEverAssigned)
 // employee routes
 router.get('/employees', adminAuthorization, getAllEmployees)
 router.get('/employee/:id', authorization, getEmployeeById)
+router.get('/employee/projects/:id', authorization, getEmployeeProjects)
 router.put('/employee/:id', authorization, updateEmployeeAccount)
 router.delete('/employee/:id', adminAuthorization, deleteEmployeeAccount)
 
