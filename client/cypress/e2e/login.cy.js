@@ -23,11 +23,11 @@ describe('Checking if all features exists', () => {
   })
   it('should have a link to the register page', () => {
     cy.visit('http://127.0.0.1:5500/client/Auth/login.html');
-    cy.get('a[href="../Auth/signup.html"]').should('exist');
+    cy.get('#registerHere').should('exist');
   })
   it('should have a link to the forgot password page', () => {
     cy.visit('http://127.0.0.1:5500/client/Auth/login.html');
-    cy.get('a[href="../Auth/forgotpwd.html"]').should('exist');
+    cy.get('#ForgotPWD').should('exist');
   })
 })
 
