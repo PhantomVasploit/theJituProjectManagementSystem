@@ -86,3 +86,26 @@ module.exports.deleteEmployeeAccount = async (req, res) => {
         return res.status(500).json({ error});
     }
 };
+
+
+module.exports.getEmployeeProjects = async(req, res)=>{
+    
+    try {
+        const {id} = req.params
+        const pool = await mssql.connect(sqlConfig)
+
+        const projects = await pool
+        .request()
+        .input('user_id', id)
+        .execute('sp_getUserProjects')
+
+        if(projects.rowsAffected[0] >= 1){
+            res.status(200).json({message: 'Fetch successful', projects: projects.recordset})
+        }else{
+            res.status(404).json({message: 'No assigned projects'})
+        }
+
+    } catch (error) {
+        
+    }
+}
