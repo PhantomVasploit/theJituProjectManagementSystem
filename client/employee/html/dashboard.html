@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Document</title>
 </head>
 <body>
@@ -72,34 +74,17 @@
                             <input type="text" name="search" id="search" placeholder="search">
                         </div>
 
-                        <div class="project-cards">
-                            <div class="project-item">
-                                
-                                <div class="project-top">
-                                    <p><strong>Project Title</strong></p>
-                                    <div class="btn">
-                                        <button>Done</button>
+                        <div class="project-cards" id="in-progress-projects">
+                            <div class="progress-no-data">
+                                <div class="no-data-left"></div>
+                                <div class="content">
+                                    <div class="image">
+                                        <img width="30px" height="30px" src="../assests/done.png" alt="">
+                                    </div>
+                                    <div class="text">
+                                        <p>No pending projects<p>
                                     </div>
                                 </div>
-    
-                                <div class="project-middle">
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto autem neque voluptate voluptatibus quisquam facilis debitis, ab rem! Maiores nulla odit ea quaerat ratione sapiente quos? Architecto pariatur labore magni.
-                                    </p>
-                                </div>
-    
-                                <div class="project-bottom">
-                                    <div class="right">
-                                        <small>2023/08/14</small>
-                                    </div>
-                                    <div class="left">
-                                            <div class="icon">
-                                                <iconify-icon icon="eos-icons:hourglass"></iconify-icon>
-                                            </div>
-                                            <small class="icon-text">2025/08/14</small>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -108,52 +93,27 @@
                         
                         <div class="top">
                             <p> <strong>Complete</strong></p>
+                            
                         </div>
                         
                         <div class="search">
                             <input type="text" name="search" id="search" placeholder="search">
                         </div>
 
-                        <div class="project-cards">
-                            <div class="project-item">
-                                
-                                <div class="project-top">
-                                    <p><strong>Project Title</strong></p>
-                                </div>
-    
-                                <div class="project-middle">
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto autem neque voluptate voluptatibus quisquam facilis debitis, ab rem! Maiores nulla odit ea quaerat ratione sapiente quos? Architecto pariatur labore magni.
-                                    </p>
-                                </div>
-    
-                                <div class="project-bottom">
-                                    <div class="right">
-                                        <small>2023/08/14</small>
+                        <div class="project-cards" id="completed-projects">
+                            
+                            <div class="completed-no-data">
+                                <div class="no-data-left"></div>
+                                <div class="content">
+                                    <div class="image">
+                                        <img width="30px" height="30px" src="../assests/work-in-progress.png" alt="">
+                                    </div>
+                                    <div class="text">
+                                        <p>No completed tasks yet<p>
                                     </div>
                                 </div>
-                                
                             </div>
-    
-                            <div class="project-item">
-                                
-                                <div class="project-top">
-                                    <p><strong>Project Title</strong></p>
-                                </div>
-    
-                                <div class="project-middle">
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto autem neque voluptate voluptatibus quisquam facilis debitis, ab rem! Maiores nulla odit ea quaerat ratione sapiente quos? Architecto pariatur labore magni.
-                                    </p>
-                                </div>
-    
-                                <div class="project-bottom">
-                                    <div class="right">
-                                        <small>2023/08/14</small>
-                                    </div>
-                                </div>
-                                
-                            </div>
+
                         </div>
 
 
@@ -167,6 +127,7 @@
        </section> 
     </main>
     <script src="../js/app.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
 </body>
 </html>

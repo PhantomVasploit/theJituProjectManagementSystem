@@ -102,6 +102,7 @@ document.querySelector('#jitu-login').addEventListener('submit', (e)=>{
                 gravity: "top",
                 position: "success",
               }).showToast();
+              window.location.href = './login.html'
         })
         .catch((e)=>{
             if(!e.response){

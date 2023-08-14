@@ -65,6 +65,10 @@ document.querySelector('#jitu-login').addEventListener('submit', (e)=>{
                 gravity: "top",
                 position: "success",
               }).showToast();
+              console.log(response);
+              localStorage.setItem('user', JSON.stringify(response.data.user))
+              localStorage.setItem('token', response.data.token)
+              window.location.href = './dashboard.html'
         })
         .catch((e)=>{
             if(!e.response){
