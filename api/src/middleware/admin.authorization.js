@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 
 module.exports.adminAuthorization = (req, res, next)=>{
     try {
-        
         const bearerHeader = req.headers['authorization']
         if(!bearerHeader){
             return res.status(401).json({error: 'Authentication headers not set'})
