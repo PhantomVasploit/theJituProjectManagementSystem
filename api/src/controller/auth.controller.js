@@ -78,7 +78,7 @@ module.exports.login = async(req, res)=>{
             }else{
                 const valid = await bcrypt.compare(password, checkEmailQuery.recordset[0].password)
                 if(valid){
-                    const token = jwt.sign({email: checkEmailQuery.recordset[0].email, is_admin: checkEmailQuery.recordset[0].password}, process.env.SECRET_KEY, {
+                    const token = jwt.sign({email: checkEmailQuery.recordset[0].email, is_admin: checkEmailQuery.recordset[0].is_admin}, process.env.SECRET_KEY, {
                         expiresIn: 24*60*60
                     })
                     const {password, is_verified, is_assigned, ...user} = checkEmailQuery.recordset[0]
