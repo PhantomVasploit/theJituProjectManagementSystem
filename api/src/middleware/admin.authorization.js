@@ -17,7 +17,6 @@ module.exports.adminAuthorization = (req, res, next)=>{
                     if(error){
                         return res.status(401).json({error: error.message})
                     }
-                    console.log(decodedToken);
                     if(decodedToken.is_admin == 1){
                         next()
                     }else{
