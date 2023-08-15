@@ -71,8 +71,11 @@ document.querySelector('#jitu-login').addEventListener('submit', (e)=>{
               window.location.href = './dashboard.html'
         })
         .catch((e)=>{
+            
             if(!e.response){
                 handleSubmissionError(e.message)
+            }else if(e.response.status == 403){
+                window.location.href = `./reactivateAccount.html?email=${email.value}`
             }else{
                 handleSubmissionError(e.response.data.error)
             }

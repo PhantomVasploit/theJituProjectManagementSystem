@@ -58,7 +58,7 @@ module.exports.loginSchema = Joi.object({
     .required()
     .messages({
         'string.min': `password should contain at least 8 characters`,
-        'any.required': `passowrd field is required`
+        'any.required': `password field is required`
     })
 })
 
