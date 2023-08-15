@@ -41,7 +41,7 @@
                     <h1>Dashboard</h1>
                 </div>
                 <div class="content-head-right">
-                    <button class="btn">Logout</button>
+                    <button id="logoutButton" class="btn">Logout</button>
                 </div>
             </div>
             <div class="content">
@@ -51,7 +51,7 @@
                             <h3>Users</h3>
                         </div>
                         <div class="stat-count" id="users_count">
-                            10
+                            0
                         </div>
                     </div>
                     
@@ -60,7 +60,7 @@
                             <h3>Total Projects</h3>
                         </div>
                         <div class="stat-count" id="projects_count">
-                            7
+                            0
                         </div>
                     </div>
 
@@ -69,7 +69,7 @@
                             <h3>Complete Projects</h3>
                         </div>
                         <div class="stat-count" id="completed_projects_count">
-                            4
+                            0
                         </div>
                     </div>
                     <div class="card">
@@ -77,11 +77,13 @@
                             <h3>Pending Projects</h3>
                         </div>
                         <div class="stat-count" id="pending_projects_count">
-                            3
+                            0
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="content-tables">
                 <div class="recent-projects">
                     <table>
                         <thead>
@@ -123,8 +125,47 @@
                 </div>
             </div>
         </div>
+        <div class="recent-projects">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="4">
+                            <h4>Unallocated Projects</h4>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="recent-projects-table">
+                    
+            </table>
+        </div>
+
+        <div class="new-users">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="4">
+                            <h4>New/Unapproved Users</h4>
+                        </th>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Description/Skills</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="unapproved-users-table">
+                   
+                </tbody>
+            </table>
+        </div>
     </div>
-   <script src="../Assets/js/dashboard.js"></script>
+   <script src="/client/assets/js/dashboard.js"></script>
    <script>
         window.addEventListener('load', () => {
             loadDashboardStats();

@@ -95,10 +95,6 @@ module.exports.login = async(req, res)=>{
     }
 }
 
-
-
-
-
 module.exports.adminRegister = (req, res)=>{
     const { firstName, lastName, email, password } = req.body
     const { error } = registrationSchema.validate({ firstName, lastName, email, password })

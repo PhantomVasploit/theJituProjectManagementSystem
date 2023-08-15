@@ -15,7 +15,7 @@
         </div>
         <div class="signupContainer2">
            <span class="nav">
-            <a href="../index.html">Home Page</a>
+            <a href="../index.html" id="homepage">Home Page</a>
            <img class="signuplogo" src="../Assets/images/TheJituPojectLogo__2_-removebg-preview (1).png" alt="logo">
            </span>
         <article>
@@ -23,14 +23,14 @@
         <p>Start managing your products faster and better</p>
         </article>
         <form action="" id="signupForm">
-            <input  type="text" id="fullname" placeholder="Full Name" >
-            <input  type="email"  id="email" placeholder="Email">
-            <input  type="password"  id="password" placeholder="Password">
-            <input  type="password" id="re-enterpassword" placeholder="Re-enter Password">
+            <input  type="text" name="fullname" id="fullname" placeholder="Full Name" >
+            <input  type="email" name="email"  id="email" placeholder="Email">
+            <input  type="password" name="password"  id="password" placeholder="Password">
+            <input  type="password" name="re-enterpassword" id="re-enterpassword" placeholder="Re-enter Password">
             <button class="createaccBtn" type="submit" id="signupBtn">Create an Account</button>
             <div class="error-message" id="errorMessage"></div>
             <div class="success-message" id="successMessage"></div>
-            <p class="loginhere">Already have an Account?<a href="../Auth/login.html"> Login here</a></p>
+            <p class="loginhere" id="loginhere">Already have an Account?<a href="../Auth/login.html"> Login here</a></p>
         </form>
         </div>
     </div>

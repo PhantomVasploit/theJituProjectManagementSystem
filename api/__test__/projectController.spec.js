@@ -406,7 +406,7 @@ describe('Testing Project Controller', () => {
                 },
                 body: {
                     project_name: 'UI project Update',
-                    project_description: 'We will be wirking on The UI of the assigned project',
+                    project_description: 'We will be working on The UI of the assigned project',
                     project_status: 'Active',
                     is_allocated: false,
                     is_completed: false,
@@ -469,15 +469,20 @@ describe('Testing Project Controller', () => {
             });
         });
 
-        it("should delete project", async () => {
+       it("should delete project", async () => {
             const req = {
                 user: {
                     is_admin: 1
                 },
                 params: {
-                    id: '395a2471-c79f-4753-ae5c-8913b94c56'
+                    id: '395a2471-c79f-4753-ae5c-891323b94c56'
                 }
             }
+            const res = {
+                status: jest.fn().mockReturnThis(),
+                json: jest.fn()
+            }
+        
 
             jest.spyOn(mssql, 'connect').mockResolvedValueOnce({
                 request: jest.fn().mockReturnThis(),
