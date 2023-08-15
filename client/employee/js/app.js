@@ -29,6 +29,9 @@ profileInfo.innerHTML = `
     <p class="name">${user.first_name ?? user.firstName} ${user.lastName ?? user.last_name}</p>
     <small class="location">Nyeri Kenya</small>
 `
+
+
+
 // fetch data
 axios.get(`http://127.0.0.1:3000/api/v1/employee/projects/${user.id}`, 
 {
@@ -56,7 +59,7 @@ axios.get(`http://127.0.0.1:3000/api/v1/employee/projects/${user.id}`,
         </div>
     `
     let inProgressNoData = document.querySelector('.progress-no-data')
-    let inProgressContent = inProgressNoData
+    let inProgressContent = ''
   response.data.projects.forEach((project)=>{
     project.is_complete == true ? completed.push(project) : inProgress.push(project)
   })
@@ -66,13 +69,14 @@ axios.get(`http://127.0.0.1:3000/api/v1/employee/projects/${user.id}`,
   }else{
     inProgressNoData.style.display='none'
       inProgress.forEach((project)=>{
+
         inProgressContent += `
         <div class="project-item">
                                     
             <div class="project-top">
                 <p><strong>${project.project_name}</strong></p>
                 <div class="btn">
-                    <button>Done</button>
+                    <button id=${project.id} >Done</button>
                 </div>
             </div>
     
@@ -97,8 +101,9 @@ axios.get(`http://127.0.0.1:3000/api/v1/employee/projects/${user.id}`,
         </div>
         `
       })
-      
+
       inProgressHtml.innerHTML = inProgressContent
+      
   }
 
 
@@ -134,7 +139,6 @@ axios.get(`http://127.0.0.1:3000/api/v1/employee/projects/${user.id}`,
 
 })
 .catch((e)=>{
-    console.log(e);
     if(!e.response){
         handleSubmissionError(e.message)
     }else{
