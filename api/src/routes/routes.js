@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const { adminAuthorization } = require('../middleware/admin.authorization');
 const { authorization } = require('../middleware/authorization.middleware');
-const { getAllEmployees, getEmployeeById, updateEmployeeAccount, deleteEmployeeAccount, getEmployeeProjects } = require('../controller/employee.controller');
+const { getAllEmployees, getEmployeeById, updateEmployeeAccount, deleteEmployeeAccount, getEmployeeProjects, approveEmployeeAccount } = require('../controller/employee.controller');
 const { employeeRegister, adminRegister, login, deactivateAccount, reactivateAccount } = require('../controller/auth.controller');
 const { get_projects, createProject, projectDetails, updateProject, deleteProject, 
         assignUserProject, markProjectAsCompleted, getAllFreeUsers, getAllProjectEverAssigned 
@@ -36,5 +36,6 @@ router.get('/employee/projects/:id', authorization, getEmployeeProjects)
 router.delete('/employee/:id', adminAuthorization, deleteEmployeeAccount)
 router.post('/employee/deactivate-account', authorization, deactivateAccount)
 router.post('/employee/reactivate-account', reactivateAccount)
+router.put('/employee/approve-account/:id', adminAuthorization, approveEmployeeAccount)
 
 module.exports = router;

@@ -110,3 +110,30 @@ module.exports.getEmployeeProjects = async(req, res)=>{
         
     }
 }
+
+module.exports.approveEmployeeAccount = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const pool  = await mssql.connect(sqlConfig);
+
+        const result = await pool.request()
+        .input('id', id)
+        .execute('fetchUserByIdPROC');
+
+        if (result.recordset.length <= 0) {
+            return res.status(404).json({ error: `User not found` });
+        }
+
+        const approve_user = await pool.request()
+        .input('id', id)
+        .execute('approveUserAccountPROC');
+
+        if(approve_user.rowsAffected[0] >= 1){
+            return res.status(200).json({message: 'Account approved successfully'})
+        }else{
+            return res.status(500).json({error: 'Internal server error'})
+        }
+    } catch (error) {
+        return res.status(500).json({ error });
+    }
+};

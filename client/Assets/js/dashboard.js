@@ -1,5 +1,6 @@
 const token = localStorage.token
 const user = JSON.parse(localStorage.user)
+const baseUrl = 'http://127.0.0.1:3000/api/v1'
 
 // load all projects
 const fetchAllProjects = async () => {
@@ -123,7 +124,10 @@ const loadDashboardStats = async () => {
             </td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td><a href="./users.html?id=${user.id}" class="btn btn-primary">View</a></td>
+            <td>
+                <a href="?id=${user.id}" id="custom-success-btn approve_user" onclick="approveUserAccount(event)" class="btn btn-success">Approve</a>
+                <a href="/client/dashboard/dashboatd_user_detail.html?id=${user.id}" class="btn btn-primary">View</a>
+            </td>
         `
         unapproved_users_table.appendChild(tr)
     }
@@ -227,7 +231,7 @@ const loadAvailableUsers = async () => {
 }
 
 const assignUserToProject = async (project_id, user_id) => {
-    const response = await fetch(`http://http://127.0.0.1:3000/api/v1/projects/${project_id}/${user_id}/assign`, {
+    const response = await fetch(`${baseUrl}/projects/${project_id}/${user_id}/assign`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -245,7 +249,7 @@ const submitUserAllocation = async (e) => {
     const user_ids = []
     checkboxes.forEach(checkbox => {
         const row = checkbox.closest('tr');
-        const user_id = row.querySelector('td:nth-child(1)').innerText;
+        const user_id = row.querySelector('input[type="checkbox"]').value
         user_ids.push(user_id)
     })
     user_ids.forEach(async user_id => {
@@ -260,8 +264,98 @@ const submitUserAllocation = async (e) => {
 }
 
 
-// const fetchUserProfile (id) => {
-//     const response = await fetch(`http://
+const fetchUserProfile = async (id) => {
+    const response = await fetch(`${baseUrl}/employee/${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`
+        }
+    })
+    const data = await response.json()
+    console.log(data);
+    return data
+}
+
+const fetchUserProjects = async (id) => {
+    const response = await fetch(`${baseUrl}/projects/${id}/all`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization_token': `${token}`
+        }
+    })
+    const data = await response.json()
+    console.log(data);
+    return data
+}
+
+const loadUserProfile = async () => {
+    const profile_div = document.querySelector('.profile_details_name')
+
+    const user_id = window.location.href.split('?id=')[1]
+    const user = await fetchUserProfile(user_id)
+    const projects = await fetchUserProjects(user_id)
+
+    profile_div.innerHTML = `
+        <h2>${user.employee.first_name} ${user.employee.last_name}</h2>
+        <small>${user.employee.email}</small>
+    `
+
+    const projects_table = document.getElementById('user_detail_projects')
+    if (projects.user_projects) {
+        projects_table.innerHTML = ''
+        projects.user_projects.forEach((project) => {
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td>${project.project_name}</td>
+                <td>${project.project_description}</td>
+                <td>${project.project_status}</td>
+                <td>${project.end_date.split('T')[0]}</td>
+                <td><a href="./project.html?id=${project.id}" class="btn btn-primary">View</a></td>
+            `
+            projects_table.appendChild(tr)
+        })
+    } else {
+        projects_table.innerHTML = `
+            <tr>
+                <td colspan="5">No projects assigned</td>
+            </tr>
+        `
+    }
+}
+
+const approveEmployeeUserAccount = async (id) => {
+    const response = await fetch(`${baseUrl}/employee/approve-account/3`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`
+        }
+    })
+    const data = await response.json()
+    return data
+}
+
+const approveUserAccount = async (e) => {
+    e.preventDefault()
+    const user_id = window.location.href.split('?id=')[1]
+    const response = await approveEmployeeUserAccount(user_id)
+    console.log(response);
+    if (response.message == "Account approved successfully") {
+        showMessage('User account approved successfully', 'success')
+        window.location.href = './dashboard.html'
+    }
+    else {
+        showMessage('Error approving user account', 'error')
+    }
+}
+
+showMessage = (message) =>{
+    let notification = document.getElementById("toast")
+    notification.innerHTML = message
+    notification.className = "show";
+    setTimeout(() => { 
+        notification.className = notification.className.replace("show", ""); }, 4000);
+}
 
 
 

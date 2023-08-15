@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Assets/css/dashboard.css">
+    <link rel="stylesheet" href="/client/Assets/css/toast.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -44,6 +45,11 @@
                     <button id="logoutButton" class="btn">Logout</button>
                 </div>
             </div>
+            <div id="toast">
+                
+            </div>
+            
+            
             <div class="content">
                 <div class="statistics">
                     <div class="card">
@@ -166,6 +172,7 @@
         </div>
     </div>
    <script src="/client/assets/js/dashboard.js"></script>
+   <script src="/client/Assets/js/toast.js"></script>
    <script>
         window.addEventListener('load', () => {
             loadDashboardStats();

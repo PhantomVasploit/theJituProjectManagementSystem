@@ -72,7 +72,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="user_detail_projects">
                                 <tr>
                                     <td>Project 1</td>
                                     <td>Project 1 Description</td>
@@ -111,7 +111,9 @@
     </div>
     <script src="../Assets/js/dashboard.js"></script>
     <script>
-       
+       window.addEventListener('load', () => {
+            loadUserProfile()
+       })
     </script>
 </body>
 </html>
