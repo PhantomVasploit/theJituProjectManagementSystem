@@ -80,65 +80,82 @@
         const projectForm = document.querySelector('.newProjectForm');
         const messageContainer = document.querySelector('.message-container');
         // const token = localStorage.token
-        // saving project information in localStorage and display message
-        function saveProjectInformation() {
-            const projectName = document.querySelector('#newProjectName').value;
-            const projectDescription = document.querySelector('#newProjectDescription').value;
-            const startDate = new Date(document.querySelector('#startDate').value);
-            const endDate = new Date(document.querySelector('#endDate').value);
-            let isValid = true;
 
-            // Validate the form
-            if (!projectName || !projectDescription || !startDate || !endDate) {
-                showMessage('Please fill in all fields before proceeding.', 'error');
-                isValid = false;
+        projectForm.addEventListener('submit', async(e) => {
+            e.preventDefault();
+
+            const formData = new FormData(projectForm);
+            const project_name = formData.get('newProjectName');
+            const project_description = formData.get('newProjectDescription');
+            const project_status = "pending"
+            const start_date = formData.get('startDate');
+            const end_date = formData.get('endDate');
+
+            const project = {
+                project_name,
+                project_description,
+                project_status,
+                start_date,
+                end_date
             }
 
-            if (startDate.getTime() > endDate.getTime()) {
-                showMessage('Start date cannot be after end date.', 'error');
-                isValid = false;
-            }
+            const isValid = validate_project(
+                project_name,
+                project_description,
+                project_status,
+                start_date,
+                end_date
+            );
 
-            if (isValid) {
-                console.log(token);
-                const projectData = {
-                    projectName,
-                    projectDescription,
-                    status: 'pending',
-                    startDate: startDate.toISOString(),
-                    endDate: endDate.toISOString()
-                };
+            if(isValid){
+                const token = localStorage.token
 
-                axios.post('http://127.0.0.1:3000/api/v1/project', 
-                
-                {
-                    project_name: projectName,
-                    project_description: projectDescription,
-                    project_status: 'pending',
-                    start_date: startDate.toISOString(),
-                    end_date: endDate.toISOString()
-                },
-
-                {
+                const response = await fetch("http://127.0.0.1:3000/api/v1/projects", {
+                    method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
-                .then((result)=>{
-                    console.log(result);
-                    showMessage('Project information saved successfully.', 'success');
-                    setTimeout(() => {
-                        window.location.href = './availableUsers.html';
-                    }, 3000);
-                })
-                .catch((e)=>{
-                    console.log(e);
-                })
+                        'authorization_token': `${token}`
+                    },
+                    body: JSON.stringify(project)
+                });
+                const data = await response.json();
+                console.log(data);
 
-                
+                if (data.status === 201) {
+                    showMessage(data.message, 'success');
+                    setTimeout(() => {
+                        window.location.href = "./projects.html";
+                    }, 3000);
+
+                } else {
+                    showMessage(data.message, 'error');
+                }
+            } else {
+                showMessage('Please fill in all fields', 'error');
             }
+        })
+
+        function validate_project(
+            project_name,
+            project_description,
+            project_status,
+            start_date,
+            end_date
+        ) {
+            if (
+                project_name === '' ||
+                project_description === '' ||
+                project_status === '' ||
+                start_date === '' ||
+                end_date === ''
+            ) {
+                showMessage('Please fill in all fields', 'error');
+                return false;
+            }
+            return true;
         }
+
+
 
         function showMessage(message, messageType) {
             const messageElement = document.createElement('div');
@@ -154,11 +171,6 @@
                 messageContainer.removeChild(messageElement);
             }, 3000);
         }
-
-        projectForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            saveProjectInformation();
-        });
     </script>
 </body>
 </html>

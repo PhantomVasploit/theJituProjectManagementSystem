@@ -473,7 +473,15 @@ td a
     cursor: pointer;
 }
 
-
+#user-action {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
 
 /* Add a media query for mobile devices */
 @media (max-width: 768px) {

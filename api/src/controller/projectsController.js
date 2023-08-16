@@ -13,7 +13,6 @@ const createProject = async (req, res) => {
             });
         }
 
-
         const { project_name, project_description, project_status, start_date, end_date } = req.body;
 
         // validate if all required fields are provided
@@ -36,7 +35,8 @@ const createProject = async (req, res) => {
             .execute('sp_createProjectProc');
 
         return res.status(201).json({
-            message: 'Project created successfully'
+            message: 'Project created successfully',
+            status: 201
         });
     } catch (error) {
         return res.status(500).json({

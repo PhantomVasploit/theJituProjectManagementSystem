@@ -52,6 +52,7 @@ const loadAllUsers = async () => {
     users_table.innerHTML = ''
     all_users.forEach((user) => {
         const tr = document.createElement('tr')
+        const verification_Status = user.is_verified == 1 ? 'Verified' : 'Unverified'
         tr.innerHTML = `
             <td>${user.first_name} ${user.last_name}<br>
                 <span class="small-uid">
@@ -59,7 +60,8 @@ const loadAllUsers = async () => {
                 </span>
             </td>
             <td>${user.email}</td>
-            <td>${user.role}</td>
+            <td>${user.email}</td>
+            <td>${verification_Status}</td>
             <td><a href="/client/dashboard/dashboatd_user_detail.html?id=${user.id}" class="btn btn-primary">View</a></td>
         `
         users_table.appendChild(tr)
@@ -124,7 +126,7 @@ const loadDashboardStats = async () => {
             </td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td>
+            <td id="user-action">
                 <a href="?id=${user.id}" id="custom-success-btn approve_user" onclick="approveUserAccount(event)" class="btn btn-success">Approve</a>
                 <a href="/client/dashboard/dashboatd_user_detail.html?id=${user.id}" class="btn btn-primary">View</a>
             </td>
@@ -191,17 +193,24 @@ function handleLogout() {
     localStorage.removeItem('authToken');
     window.location.href = '../index.html'; 
 }
-const logoutButton = document.getElementById('logoutButton');
-logoutButton.addEventListener('click', () => {
-    handleLogout();
-    history.pushState({ isLogout: true }, null, '../index.html');
-});
-window.addEventListener('popstate', (event) => {
-   
-    if (event.state && event.state.isLogout) {
-        window.location.href = '../Auth/login.html'; 
-    }
-});
+
+try {
+    const logoutButton = document.getElementById('logoutButton');
+    logoutButton.addEventListener('click', () => {
+        handleLogout();
+        history.pushState({ isLogout: true }, null, '../index.html');
+    });
+    window.addEventListener('popstate', (event) => {
+    
+        if (event.state && event.state.isLogout) {
+            window.location.href = '../Auth/login.html'; 
+        }
+    });
+} catch (error) {
+    // skip
+}
+
+
 const fetchAvailableUsers = async () => {
     const response = await fetch('http://127.0.0.1:3000/api/v1/projects/get-free-employees', {
         headers: {
